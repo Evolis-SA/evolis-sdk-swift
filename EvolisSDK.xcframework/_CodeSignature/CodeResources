@@ -6,7 +6,7 @@
 	<dict>
 		<key>ios-arm64/EvolisSDK.framework/EvolisSDK</key>
 		<data>
-		AOOCDiRgU0Ky6WzTxguPZblbDJc=
+		HRZGqvy9JpZ4KEnTQlcJ7aeonvA=
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/ava-printers.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evo-printers.h</key>
 		<data>
-		PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+		t08Nz0W950UEQM5ZnTdbXes5QF8=
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evolis-unstable.h</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evolis.h</key>
 		<data>
-		hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+		FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<data>
-		xx8QfAHzlWwkhcxRSD+jBqxtv0g=
+		bMZJBQ6SSiAGYvEpypK35KR4OeM=
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evosettings.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Info.plist</key>
 		<data>
-		xYZR5nJoYmbKyxVeRIJ6F35A7Uk=
+		o36FzBvVrB+WCiVNTODf+XieEx4=
 		</data>
 		<key>ios-arm64/EvolisSDK.framework/Modules/module.modulemap</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/EvolisSDK</key>
 		<data>
-		jsICJQYglefmd+VJqtKhPoPAk50=
+		PpaWdLbyfzLJ1/jSKz8oNt9Naso=
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/ava-printers.h</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evo-printers.h</key>
 		<data>
-		PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+		t08Nz0W950UEQM5ZnTdbXes5QF8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evolis-unstable.h</key>
 		<data>
@@ -78,11 +78,11 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evolis.h</key>
 		<data>
-		hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+		FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<data>
-		xx8QfAHzlWwkhcxRSD+jBqxtv0g=
+		bMZJBQ6SSiAGYvEpypK35KR4OeM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evosettings.h</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Info.plist</key>
 		<data>
-		eFLwin7v5kBnpFSdP/QjIdiLRWs=
+		5mRzoXrlnv4iwXUCMdrflvkThfs=
 		</data>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Modules/module.modulemap</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/EvolisSDK</key>
 		<data>
-		6aA0woTRvTM+UeHC+Ec8x9Q+2Ro=
+		4ogrHs5FozGnNiVnW/L3WDJMthM=
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/ava-printers.h</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evo-printers.h</key>
 		<data>
-		PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+		t08Nz0W950UEQM5ZnTdbXes5QF8=
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evolis-unstable.h</key>
 		<data>
@@ -126,11 +126,11 @@
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evolis.h</key>
 		<data>
-		hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+		FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<data>
-		teYfm75peVEXRkNzuRxnlYkWnx0=
+		MyBLdqSr158zT5kQeKHIJD0EVTE=
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evosettings.h</key>
 		<data>
@@ -142,7 +142,7 @@
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Info.plist</key>
 		<data>
-		D71dJc5jy4Ua+gwLp8UAqtnK1Bo=
+		ZzX7F4j641fNviLYmNKSUciQDzM=
 		</data>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Modules/module.modulemap</key>
 		<data>
@@ -155,11 +155,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AOOCDiRgU0Ky6WzTxguPZblbDJc=
+			HRZGqvy9JpZ4KEnTQlcJ7aeonvA=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ce3WQRVXcWX4ELaP4nJHXnvlnDAbHvfRWeVHWQHiRaA=
+			LAL1H9S2JSlwpOdmg9ZeACs9XRo865Om3XikdtQ7v38=
 			</data>
 		</dict>
 		<key>ios-arm64/EvolisSDK.framework/Headers/ava-printers.h</key>
@@ -199,11 +199,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+			t08Nz0W950UEQM5ZnTdbXes5QF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			r4fxAgPbdjXlBbpWPE2/mVV3Gg7QPxl8nZgu4iDcLpA=
+			q3pXA27AgNJnxZsoQhlNPxpt6nroiYR7b7TwTdleb9U=
 			</data>
 		</dict>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evolis-unstable.h</key>
@@ -221,22 +221,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+			FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 			</data>
 			<key>hash2</key>
 			<data>
-			uXqwDOaGoGBg0sHTmejviHSwvDNVFYXWSnVjsJCdeWU=
+			mCXzoU3Hx4z1krzRNDTCtgexS9hEQ/xqFogN9QObYbc=
 			</data>
 		</dict>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xx8QfAHzlWwkhcxRSD+jBqxtv0g=
+			bMZJBQ6SSiAGYvEpypK35KR4OeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			y38IamG6bJOrP0fw6s/znNEA0nqOuC77VC1iLb9uDpI=
+			YXupRGXAJ25H79H1xzOTgNHSsHkkzBVPi9APlyKA7UU=
 			</data>
 		</dict>
 		<key>ios-arm64/EvolisSDK.framework/Headers/evosettings.h</key>
@@ -265,11 +265,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xYZR5nJoYmbKyxVeRIJ6F35A7Uk=
+			o36FzBvVrB+WCiVNTODf+XieEx4=
 			</data>
 			<key>hash2</key>
 			<data>
-			OeHkIcPpYHtXCbrIYBTeF0MvMxaNuJyp+rcYnAK33Hs=
+			Pa1MZdOiS058TEJKzqXaV5XZgmhNILYOu8m6Juqdndk=
 			</data>
 		</dict>
 		<key>ios-arm64/EvolisSDK.framework/Modules/module.modulemap</key>
@@ -287,11 +287,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jsICJQYglefmd+VJqtKhPoPAk50=
+			PpaWdLbyfzLJ1/jSKz8oNt9Naso=
 			</data>
 			<key>hash2</key>
 			<data>
-			UZYp7ZsNArWcS4kbrvjM15jllk/8x+pv1JXroiKaugw=
+			t/Yefs3vchz1GwqRBto+z+FBX0WL5IxTu2b7xUKThy4=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/ava-printers.h</key>
@@ -331,11 +331,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+			t08Nz0W950UEQM5ZnTdbXes5QF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			r4fxAgPbdjXlBbpWPE2/mVV3Gg7QPxl8nZgu4iDcLpA=
+			q3pXA27AgNJnxZsoQhlNPxpt6nroiYR7b7TwTdleb9U=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evolis-unstable.h</key>
@@ -353,22 +353,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+			FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 			</data>
 			<key>hash2</key>
 			<data>
-			uXqwDOaGoGBg0sHTmejviHSwvDNVFYXWSnVjsJCdeWU=
+			mCXzoU3Hx4z1krzRNDTCtgexS9hEQ/xqFogN9QObYbc=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xx8QfAHzlWwkhcxRSD+jBqxtv0g=
+			bMZJBQ6SSiAGYvEpypK35KR4OeM=
 			</data>
 			<key>hash2</key>
 			<data>
-			y38IamG6bJOrP0fw6s/znNEA0nqOuC77VC1iLb9uDpI=
+			YXupRGXAJ25H79H1xzOTgNHSsHkkzBVPi9APlyKA7UU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Headers/evosettings.h</key>
@@ -397,11 +397,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eFLwin7v5kBnpFSdP/QjIdiLRWs=
+			5mRzoXrlnv4iwXUCMdrflvkThfs=
 			</data>
 			<key>hash2</key>
 			<data>
-			OJicJpNJuqdxz5P49IA+wDk5Tcvct8j3foaMmsOazEw=
+			AN2UL4jB7fRXqAg4pbSbimBw3DePLFd311tvqI78cmo=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/EvolisSDK.framework/Modules/module.modulemap</key>
@@ -419,11 +419,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6aA0woTRvTM+UeHC+Ec8x9Q+2Ro=
+			4ogrHs5FozGnNiVnW/L3WDJMthM=
 			</data>
 			<key>hash2</key>
 			<data>
-			+oVmmG60vPBu11Zp7Ui/7qpJuKREYkhQn4DTXzP8fDA=
+			6K8+kvs/JO/g6vx3xoToGd/ZsZ6BsCjyt+ObRdF2CA4=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/ava-printers.h</key>
@@ -463,11 +463,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrKRLK2JI5MOIL8ov4dZ+OlON8Y=
+			t08Nz0W950UEQM5ZnTdbXes5QF8=
 			</data>
 			<key>hash2</key>
 			<data>
-			r4fxAgPbdjXlBbpWPE2/mVV3Gg7QPxl8nZgu4iDcLpA=
+			q3pXA27AgNJnxZsoQhlNPxpt6nroiYR7b7TwTdleb9U=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evolis-unstable.h</key>
@@ -485,22 +485,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hrZ/srO+Nxrjjq4LraiPrZDSxXw=
+			FxmqZ7AZsES6bSY+QqiRQUe5FCY=
 			</data>
 			<key>hash2</key>
 			<data>
-			uXqwDOaGoGBg0sHTmejviHSwvDNVFYXWSnVjsJCdeWU=
+			mCXzoU3Hx4z1krzRNDTCtgexS9hEQ/xqFogN9QObYbc=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evolis_version.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			teYfm75peVEXRkNzuRxnlYkWnx0=
+			MyBLdqSr158zT5kQeKHIJD0EVTE=
 			</data>
 			<key>hash2</key>
 			<data>
-			wXDSaYP9mwiBhGIM0ZolMPz1DbSVN5gxoq2MSEQzhME=
+			Ha5lX386AtzbEZC78WaY7gvAa6aEobBVmLAV6tUzoWA=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Headers/evosettings.h</key>
@@ -529,11 +529,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D71dJc5jy4Ua+gwLp8UAqtnK1Bo=
+			ZzX7F4j641fNviLYmNKSUciQDzM=
 			</data>
 			<key>hash2</key>
 			<data>
-			KXBSNhEkd4OzemFlUFxG4fO4eQRhLqy2pcsfSKhPQ70=
+			QX3jh+PeZGLvF7yTaKzzvNGOoVv0Bg90iMzFG53Dzis=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/EvolisSDK.framework/Modules/module.modulemap</key>
