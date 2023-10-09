@@ -191,7 +191,7 @@ typedef enum evolis_ratio_e {
 typedef void evolis_image_t;
 
 /// Create a new instance of the image builder.
-EVOLIS_LIB evolis_image_t* evolis_image_new();
+EVOLIS_LIB evolis_image_t* evolis_image_new(void);
 
 /// Clone the image.
 EVOLIS_LIB evolis_image_t* evolis_image_clone(evolis_image_t* img);

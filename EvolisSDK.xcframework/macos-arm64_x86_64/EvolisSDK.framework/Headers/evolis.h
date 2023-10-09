@@ -144,7 +144,7 @@ extern "C" {
 ///
 
 /// Get library version at runtime.
-EVOLIS_WRA const char* evolis_version();
+EVOLIS_WRA const char* evolis_version(void);
 
 /// Convert error code to a c-string.
 EVOLIS_LIB const char* evolis_get_error_name(int r);
@@ -278,10 +278,6 @@ typedef enum evolis_model_e {
     EVOLIS_MO_IDENTISYS_PRIMACY_2_SE = 32,
     EVOLIS_MO_EVOLIS_AVANSIA = 33,
     EVOLIS_MO_EVOLIS_AGILIA = 34,
-    EVOLIS_MO_EVOLIS_EXCELIO = 35,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 36,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 37,
-    EVOLIS_MO_EVOLIS_QUANTUM2 = 38,
 } evolis_model_t;
 
 typedef enum evolis_link_e {
@@ -1317,16 +1313,16 @@ EVOLIS_WRA bool evolis_print_get_auto_eject(evolis_t* ctx);
 ///
 
 /// Start Evolis service (Windows and Mac)
-EVOLIS_WRA bool evolis_service_start();
+EVOLIS_WRA bool evolis_service_start(void);
 
 /// Stop Evolis service (Windows and Mac)
-EVOLIS_WRA bool evolis_service_stop();
+EVOLIS_WRA bool evolis_service_stop(void);
 
 /// Restart Evolis service (Windows and Mac)
-EVOLIS_WRA bool evolis_service_restart();
+EVOLIS_WRA bool evolis_service_restart(void);
 
 /// Returns true if Evolis service is running (Windows and Mac).
-EVOLIS_WRA bool evolis_service_is_running();
+EVOLIS_WRA bool evolis_service_is_running(void);
 
 /// The service url is the entry point address of Evolis Service software.
 /// Can be a named pipe (default on Windows), local socket (UNIX) or TCP/IP
@@ -1334,7 +1330,7 @@ EVOLIS_WRA bool evolis_service_is_running();
 EVOLIS_LIB void evolis_service_set_url(const char* url);
 
 /// Returns the current setting for connecting to Evolis Service software.
-EVOLIS_LIB const char* evolis_service_get_url();
+EVOLIS_LIB const char* evolis_service_get_url(void);
 
 /// Send a request to Evolis Service software. Returns `0` on success
 /// or an error code (see Premium SDK's documentation for details).
@@ -1374,7 +1370,7 @@ typedef enum evolis_scan_image_e {
 EVOLIS_WRA int evolis_scan_set_library_path(const char* path);
 
 /// Get scanner's library path.
-EVOLIS_WRA const char* evolis_scan_get_library_path();
+EVOLIS_WRA const char* evolis_scan_get_library_path(void);
 
 /// Initialize a new scan session.
 EVOLIS_WRA int evolis_scan_init(evolis_t* printer);
@@ -1431,7 +1427,7 @@ typedef void (*evolis_discovery_cb)(evolis_netdevice_t* dev, void* data);
 
 EVOLIS_WRA int evolis_discovery_start(evolis_discovery_cb cb, void* data);
 
-EVOLIS_WRA void evolis_discovery_stop();
+EVOLIS_WRA void evolis_discovery_stop(void);
 
 ///
 /// ToC/LOGGING
