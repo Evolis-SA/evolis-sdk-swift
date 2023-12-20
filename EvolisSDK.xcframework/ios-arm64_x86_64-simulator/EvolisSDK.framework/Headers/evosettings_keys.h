@@ -904,7 +904,7 @@ typedef enum evosettings_key_e {
     EVOSETTINGS_KE_IPipeDefinition,
     /**
      * EVOSETTINGS_KE_IPostSmoothing
-     * Usable in PrintSessions: false
+     * Usable in PrintSessions: true
      * Type: LIST
      * Possible values: STDSMOOTH, ADVSMOOTH, NOSMOOTH
      */

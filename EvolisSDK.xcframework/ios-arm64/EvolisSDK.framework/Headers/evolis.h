@@ -508,6 +508,7 @@ typedef enum evolis_ribbon_type_e {
     EVOLIS_RT_KSIGNATURE     = 114,
     EVOLIS_RT_KWAX           = 112,
     EVOLIS_RT_KPREMIUM       = 115,
+    EVOLIS_RT_KRMS           = 116,
     EVOLIS_RT_HOLO           = 91,
     EVOLIS_RT_SOKO           = 12,
     EVOLIS_RT_YMCFK          = 1002,

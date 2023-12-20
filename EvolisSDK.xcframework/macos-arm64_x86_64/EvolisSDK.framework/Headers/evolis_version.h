@@ -17,6 +17,7 @@ extern "C" {
 /* #undef EVOLIS_WITH_IMAGEPROC */
 /* #undef EVOLIS_WITH_NISCASDK */
 /* #undef EVOLIS_WITH_WISECUBESDK */
+/* #undef EVOLIS_WITH_SSL */
 
 ///
 /// LibEvolis's version macros.
@@ -32,8 +33,8 @@ extern "C" {
 
 #define EVOLIS_VERSION_MAJOR 8
 #define EVOLIS_VERSION_MINOR 2
-#define EVOLIS_VERSION_PATCH 0
-#define EVOLIS_VERSION_BUILD 22002
+#define EVOLIS_VERSION_PATCH 1
+#define EVOLIS_VERSION_BUILD 24231
 
 #define EVOLIS_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 
