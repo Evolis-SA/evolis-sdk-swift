@@ -10,58 +10,60 @@ extern "C" {
 #include "evolis.h"
 #include "evosettings_keys.h"
 
-#define EVOSETTINGS_CONNECTORS(X)                                   \
-    X(UNKNOWN,      0x0000)         /* No connector */              \
-    X(COMPOSITE,    0x0001)         /* Internal use only. */        \
-                                                                    \
-    /* Connectors aliases: */                                       \
-    X(PRINTER,      0x0002)         /* Alias for PRN. */            \
-    X(DRIVER,       0x0004)         /* Windows: Alias for DRV, DRVP, DEV, REG, PC1. */\
-                                    /* Linux: Alias for CUPS, CONF, SOLO */\
-                                    /* Android, iOS or settings disabled: Alias for DEFAULTS */\
-    /* Common connectors: */                                        \
-    X(PRN,          0x0008)         /* Printer connector. */        \
-                                                                    \
-    /* Windows connectors: */                                       \
-    X(DRV,          0x0010)         /* Print settings. */           \
-    X(DRVP,         0x0020)         /* Print settings for job. */   \
-    X(DEV,          0x0040)         /* Current user's DEVMODE. */   \
-    X(DEVG,         0x0080)         /* All users DEVMODE. */        \
-    X(REG,          0x0100)         /* Big data key/value storage (images). */\
-    X(REG2,         0x0200)         /* Simple key/value storage in registry. */\
-    X(PC1,          0x0400)         /* Printer Manager storage. */  \
-                                                                    \
-    /* Linux/Mac connectors: */                                     \
-    X(CUPS,         0x0800)         /* CUPS storage. */             \
-    X(CONF,         0x1000)         /* Conf file storage. */        \
-    X(SOLO,         0x2000)         /* Individual file storage. */  \
+#define EVOSETTINGS_CONNECTORS(X)                                                  \
+    X(UNKNOWN, 0x0000)   /* No connector */                                        \
+    X(COMPOSITE, 0x0001) /* Internal use only. */                                  \
+                                                                                   \
+    /* Connectors aliases: */                                                      \
+    X(PRINTER, 0x0002) /* Alias for PRN. */                                        \
+    X(DRIVER, 0x0004)  /* Windows: Alias for DRV, DRVP, DEV, REG, PC1. */          \
+                       /* Linux: Alias for CUPS, CONF, SOLO */                     \
+                       /* Android, iOS or settings disabled: Alias for DEFAULTS */ \
+    /* Common connectors: */                                                       \
+    X(PRN, 0x0008) /* Printer connector. */                                        \
+                                                                                   \
+    /* Windows connectors: */                                                      \
+    X(DRV, 0x0010)  /* Print settings. */                                          \
+    X(DRVP, 0x0020) /* Print settings for job. */                                  \
+    X(DEV, 0x0040)  /* Current user's DEVMODE. */                                  \
+    X(DEVG, 0x0080) /* All users DEVMODE. */                                       \
+    X(REG, 0x0100)  /* Big data key/value storage (images). */                     \
+    X(REG2, 0x0200) /* Simple key/value storage in registry. */                    \
+    X(PC1, 0x0400)  /* Printer Manager storage. */                                 \
+                                                                                   \
+    /* Linux/Mac connectors: */                                                    \
+    X(CUPS, 0x0800) /* CUPS storage. */                                            \
+    X(CONF, 0x1000) /* Conf file storage. */                                       \
+    X(SOLO, 0x2000) /* Individual file storage. */
 
-
-#define EVOSETTINGS_TYPES(X)    \
-    X(UNKNOWN)                  \
-    X(BLOB)                     \
-    X(LIST)                     \
-    X(INT)                      \
-    X(TEXT)                     \
+#define EVOSETTINGS_TYPES(X) \
+    X(UNKNOWN)               \
+    X(BLOB)                  \
+    X(LIST)                  \
+    X(INT)                   \
+    X(TEXT)
 
 typedef void evolis_t;
 typedef void evosettings_t;
 
-typedef enum evosettings_connector_e {
+typedef enum evosettings_connector_e
+{
 #define X(NAME, VALUE) EVOSETTINGS_CO_##NAME = VALUE,
     EVOSETTINGS_CONNECTORS(X)
 #undef X
 } evosettings_connector_t;
 
-typedef enum evosettings_type_e {
+typedef enum evosettings_type_e
+{
 #define X(NAME) EVOSETTINGS_TY_##NAME,
     EVOSETTINGS_TYPES(X)
 #undef X
 } evosettings_type_t;
 
-typedef struct evosettings_item_e {
-    char key[256];
-    char value[256];
+typedef struct evosettings_item_e
+{
+        char key[256];
+        char value[256];
 } evosettings_item_t;
 
 /// Returns a string containing library version.
@@ -130,14 +132,15 @@ EVOLIS_LIB int EvoSettings_GetConnectors(evosettings_t* mgr, evosettings_key_t k
 
 /// On success (the key is valid) the value is set and true is returned. False is returned ortherwise.
 EVOLIS_LIB bool EvoSettings_GetValue(evosettings_t* mgr, evosettings_key_t key, const char** value);
-/// On success (the key is a valid key to a boolean value) the value is set and true is returned. False is returned ortherwise.
+/// On success (the key is a valid key to a boolean value) the value is set and true is returned. False is returned
+/// ortherwise.
 EVOLIS_LIB bool EvoSettings_GetBoolValue(evosettings_t* mgr, evosettings_key_t key, bool* value);
-/// On success (the key is a valid key to an integer value) the value is set and true is returned. False is returned ortherwise.
+/// On success (the key is a valid key to an integer value) the value is set and true is returned. False is returned
+/// ortherwise.
 EVOLIS_LIB bool EvoSettings_GetIntValue(evosettings_t* mgr, evosettings_key_t key, int* value);
 
 /// Returns the type of the value matching the 'key' parameter
 EVOLIS_LIB evosettings_type_t EvoSettings_GetValueType(evosettings_t* mgr, evosettings_key_t key);
-
 
 /**
  *  If the setting is of type LIST, the allowed values are written to 'range', up to rangeSize maximum values.
@@ -145,7 +148,8 @@ EVOLIS_LIB evosettings_type_t EvoSettings_GetValueType(evosettings_t* mgr, evose
  *  Returns -1 on failure.
  */
 EVOLIS_LIB int EvoSettings_GetValueRange(evosettings_t* mgr, evosettings_key_t key, char** range, int rangeSize);
-/// On success, true is returned and min and max parameter are filled to the values matching 'key'. Otherwise false is returned and min/max should be ignored.
+/// On success, true is returned and min and max parameter are filled to the values matching 'key'. Otherwise false
+/// is returned and min/max should be ignored.
 EVOLIS_LIB bool EvoSettings_GetIntValueRange(evosettings_t* mgr, evosettings_key_t key, int* min, int* max);
 /// On success, returns a valid string matching the parameter 'key'. Returns NULL on failure.
 EVOLIS_LIB const char* EvoSettings_GetDefaultValue(evosettings_t* mgr, evosettings_key_t key);
@@ -157,11 +161,13 @@ EVOLIS_LIB int EvoSettings_GetDefaultIntValue(evosettings_t* mgr, evosettings_ke
 /// Returns the type of the value matching the 'model' and 'key' parameters.
 EVOLIS_LIB evosettings_type_t EvoSettings_GetValueType2(evolis_model_t model, evosettings_key_t key);
 /**
- *  On success, returns the number of strings of the array matching the 'key' parameter, otherwise returns -1 on failure.
- *  Will return the number of strings of the array matching the 'key' parameter when NULL is passed as 'range'.
+ *  On success, returns the number of strings of the array matching the 'key' parameter, otherwise returns -1 on
+ * failure. Will return the number of strings of the array matching the 'key' parameter when NULL is passed as
+ * 'range'.
  */
 EVOLIS_LIB int EvoSettings_GetValueRange2(evolis_model_t model, evosettings_key_t key, char** range, int rangeSize);
-/// On success, true is returned and min and max parameter are filled to the values matching 'model' and 'key'. Otherwise false is returned and min/max should be ignored.
+/// On success, true is returned and min and max parameter are filled to the values matching 'model' and 'key'.
+/// Otherwise false is returned and min/max should be ignored.
 EVOLIS_LIB bool EvoSettings_GetIntValueRange2(evolis_model_t model, evosettings_key_t key, int* min, int* max);
 
 /// On success, returns a valid string matching the parameter 'model' and 'key'. Returns NULL on failure.
@@ -187,26 +193,30 @@ EVOLIS_LIB bool EvoSettings_SetIntValue_WithRules(evosettings_t* mgr, evosetting
 /// Apply rules
 EVOLIS_LIB bool EvoSettings_ApplyRules(evosettings_t* mgr);
 
-/// On success, returns the number of elements in 'keys', fill the 'keys' impacted by the execution of rules. Returns -1 on failure.
+/// On success, returns the number of elements in 'keys', fill the 'keys' impacted by the execution of rules.
+/// Returns -1 on failure.
 EVOLIS_LIB int EvoSettings_GetKeysUpdatedByRules(evosettings_t* mgr, evosettings_key_t* keys);
 /// Returns true if settings were modified by the driver. False otherwise.
 EVOLIS_LIB bool EvoSettings_CheckIfUpdatedByDrv(evosettings_t* mgr);
 
-/// Export settings to 'out' parameter. Call this method with 'out' set to NULL to get the neededSize. Returns true on sucess, false on failure.
+/// Export settings to 'out' parameter. Call this method with 'out' set to NULL to get the neededSize. Returns true
+/// on sucess, false on failure.
 EVOLIS_LIB bool EvoSettings_Export(evosettings_t* mgr, size_t* neededSize, char* out, size_t outSize);
 /// Export settings to the file specified in 'filePath' parameter. Returns true on sucess, false on failure.
 EVOLIS_LIB bool EvoSettings_ExportFile(evosettings_t* mgr, const char* filePath);
-/// Export settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) to the file specified in 'filePath' parameter.
-/// Returns true on sucess, false on failure.
-EVOLIS_LIB bool EvoSettings_ExportFile2(evosettings_t* mgr, const char* filePath, const evosettings_item_t* optionals, int optionalsCount);
+/// Export settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) to the
+/// file specified in 'filePath' parameter. Returns true on sucess, false on failure.
+EVOLIS_LIB bool EvoSettings_ExportFile2(evosettings_t* mgr, const char* filePath, const evosettings_item_t* optionals,
+                                        int optionalsCount);
 
 /// Import settings from 'data' parameter. Returns true on sucess, false on failure.
 EVOLIS_LIB bool EvoSettings_Import(evosettings_t* mgr, const char* data);
 /// Import settings to the file specified in 'filePath' parameter. Returns true on sucess, false on failure.
 EVOLIS_LIB bool EvoSettings_ImportFile(evosettings_t* mgr, const char* filePath);
-/// Import settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) from the file specified in 'filePath' parameter.
-/// Returns the number of elements imported on sucess, -1 on failure.
-EVOLIS_LIB int EvoSettings_ImportFile2(evosettings_t* mgr, const char* filePath, evosettings_item_t* optionals, int optionalsCount);
+/// Import settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) from
+/// the file specified in 'filePath' parameter. Returns the number of elements imported on sucess, -1 on failure.
+EVOLIS_LIB int EvoSettings_ImportFile2(evosettings_t* mgr, const char* filePath, evosettings_item_t* optionals,
+                                       int optionalsCount);
 
 /// Get evosettings_connector_t enum value matching string 's'
 EVOLIS_LIB evosettings_connector_t EvoSettings_ConnectorFromString(const char* s);

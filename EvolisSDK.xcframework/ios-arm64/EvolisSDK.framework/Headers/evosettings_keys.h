@@ -27,7 +27,6 @@ extern "C" {
     X(BOverlayContrast) \
     X(BOverlayManagement) \
     X(BOverlaySecondManagement) \
-    X(UIBOverlayManagement) \
     X(BPageRotate180) \
     X(BRwErasingSpeed) \
     X(BRwErasingTemperature) \
@@ -48,7 +47,6 @@ extern "C" {
     X(FOverlayContrast) \
     X(FOverlayManagement) \
     X(FOverlaySecondManagement) \
-    X(UIFOverlayManagement) \
     X(FPageRotate180) \
     X(FRwErasingSpeed) \
     X(FRwErasingTemperature) \
@@ -137,10 +135,6 @@ extern "C" {
     X(Track3Data) \
     X(PrinterIsManaged) \
     X(srvAddress) \
-    X(UIBOverlayDefaultAreasList) \
-    X(UIBRwCustomAreasList) \
-    X(UIFOverlayDefaultAreasList) \
-    X(UIFRwCustomAreasList) \
     X(UIMagTrackSettingMode) \
     X(UIRibbonMode) \
     X(UpdatedByDrv) \
@@ -226,23 +220,16 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_BOverlayManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_BOverlayManagement,
     /**
      * EVOSETTINGS_KE_BOverlaySecondManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_BOverlaySecondManagement,
-    /**
-     * EVOSETTINGS_KE_UIBOverlayManagement
-     * Usable in PrintSessions: false
-     * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
-     */
-    EVOSETTINGS_KE_UIBOverlayManagement,
     /**
      * EVOSETTINGS_KE_BPageRotate180
      * Usable in PrintSessions: true
@@ -373,23 +360,16 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_FOverlayManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_FOverlayManagement,
     /**
      * EVOSETTINGS_KE_FOverlaySecondManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_FOverlaySecondManagement,
-    /**
-     * EVOSETTINGS_KE_UIFOverlayManagement
-     * Usable in PrintSessions: false
-     * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
-     */
-    EVOSETTINGS_KE_UIFOverlayManagement,
     /**
      * EVOSETTINGS_KE_FPageRotate180
      * Usable in PrintSessions: true
@@ -975,30 +955,6 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_srvAddress,
     /**
-     * EVOSETTINGS_KE_UIBOverlayDefaultAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIBOverlayDefaultAreasList,
-    /**
-     * EVOSETTINGS_KE_UIBRwCustomAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIBRwCustomAreasList,
-    /**
-     * EVOSETTINGS_KE_UIFOverlayDefaultAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIFOverlayDefaultAreasList,
-    /**
-     * EVOSETTINGS_KE_UIFRwCustomAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIFRwCustomAreasList,
-    /**
      * EVOSETTINGS_KE_UIMagTrackSettingMode
      * Usable in PrintSessions: false
      * Type: INT
@@ -1195,3 +1151,4 @@ typedef enum evosettings_key_e {
 #ifdef __cplusplus
 }
 #endif
+

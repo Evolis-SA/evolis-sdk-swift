@@ -202,8 +202,8 @@ EVOLIS_LIB int avansia_print_exec(avansia_t* printer);
 EVOLIS_LIB int avansia_print_to_file(avansia_t* printer, const char* path);
 
 #ifdef __ANDROID__
-#  include <jni.h>
-    EVOLIS_LIB void avansia_set_android_env(JavaVM* env, jobject androidContext);
+    #include <jni.h>
+EVOLIS_LIB void avansia_set_android_env(JavaVM* env, jobject androidContext);
 #endif // __ANDROID__
 
 #ifdef __cplusplus

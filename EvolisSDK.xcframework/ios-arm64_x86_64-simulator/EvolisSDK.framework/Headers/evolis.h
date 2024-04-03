@@ -21,6 +21,14 @@ extern "C" {
 #include "evolis_version.h"
 #include "evosettings_keys.h"
 
+/// @cond DO_NOT_DOCUMENT
+#ifndef __ATTR_SAL
+    #define _In_
+    #define _Out_
+    #define _Inout_
+#endif
+/// @endcond
+
 ///
 /// Table of contents:
 /// -----------------
@@ -147,7 +155,7 @@ extern "C" {
 EVOLIS_WRA const char* evolis_version(void);
 
 /// Convert error code to a c-string.
-EVOLIS_LIB const char* evolis_get_error_name(int r);
+EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
 
 #ifdef _WIN32
     /// Convert a wide chars string to UTF-8 string. Returns a static pointer.
@@ -240,6 +248,7 @@ typedef enum evolis_mark_e {
     EVOLIS_MA_DURABLE = 6,
     EVOLIS_MA_PLASCO = 7,
     EVOLIS_MA_IDENTISYS = 8,
+    EVOLIS_MA_BODNO = 9,
 } evolis_mark_t;
 
 typedef enum evolis_model_e {
@@ -253,31 +262,34 @@ typedef enum evolis_model_e {
     EVOLIS_MO_EVOLIS_PRIMACY = 7,
     EVOLIS_MO_EVOLIS_ALTESS = 8,
     EVOLIS_MO_EVOLIS_ALTESS_ELITE = 9,
-    EVOLIS_MO_BADGEPASS_NXT5000 = 10,
-    EVOLIS_MO_ID_MAKER_PRIMACY = 11,
-    EVOLIS_MO_EVOLIS_ELYPSO = 12,
-    EVOLIS_MO_ID_MAKER_ELYPSO = 13,
-    EVOLIS_MO_EVOLIS_ZENIUS = 14,
-    EVOLIS_MO_ID_MAKER_ZENIUS = 15,
-    EVOLIS_MO_EVOLIS_APTEO = 16,
-    EVOLIS_MO_DURABLE_DURACARD_ID_300 = 17,
-    EVOLIS_MO_EDIKIO_ACCESS = 18,
-    EVOLIS_MO_EDIKIO_FLEX = 19,
-    EVOLIS_MO_EDIKIO_DUPLEX = 20,
-    EVOLIS_MO_EVOLIS_BADGY100 = 21,
-    EVOLIS_MO_EVOLIS_BADGY200 = 22,
-    EVOLIS_MO_EVOLIS_LAMINATION_MODULE = 23,
-    EVOLIS_MO_EVOLIS_KC_ESSENTIAL = 24,
-    EVOLIS_MO_EVOLIS_KC_PRIME = 25,
-    EVOLIS_MO_EVOLIS_KC_MAX = 26,
-    EVOLIS_MO_EVOLIS_PRIMACY_2 = 27,
-    EVOLIS_MO_EVOLIS_ASMI = 28,
-    EVOLIS_MO_BADGEPASS_NXTELITE = 29,
-    EVOLIS_MO_ID_MAKER_PRIMACY_INFINITY = 30,
-    EVOLIS_MO_PLASCO_PRIMACY_2_LE = 31,
-    EVOLIS_MO_IDENTISYS_PRIMACY_2_SE = 32,
-    EVOLIS_MO_EVOLIS_AVANSIA = 33,
-    EVOLIS_MO_EVOLIS_AGILIA = 34,
+    EVOLIS_MO_BADGEPASS_CONNECT = 10,
+    EVOLIS_MO_BADGEPASS_NXT5000 = 11,
+    EVOLIS_MO_ID_MAKER_PRIMACY = 12,
+    EVOLIS_MO_EVOLIS_ELYPSO = 13,
+    EVOLIS_MO_ID_MAKER_ELYPSO = 14,
+    EVOLIS_MO_EVOLIS_ZENIUS = 15,
+    EVOLIS_MO_ID_MAKER_ZENIUS = 16,
+    EVOLIS_MO_EVOLIS_APTEO = 17,
+    EVOLIS_MO_DURABLE_DURACARD_ID_300 = 18,
+    EVOLIS_MO_EDIKIO_ACCESS = 19,
+    EVOLIS_MO_EDIKIO_FLEX = 20,
+    EVOLIS_MO_EDIKIO_DUPLEX = 21,
+    EVOLIS_MO_EVOLIS_BADGY100 = 22,
+    EVOLIS_MO_EVOLIS_BADGY200 = 23,
+    EVOLIS_MO_BODNO_BADGY100X = 24,
+    EVOLIS_MO_BODNO_BADGY200X = 25,
+    EVOLIS_MO_EVOLIS_LAMINATION_MODULE = 26,
+    EVOLIS_MO_EVOLIS_KC_ESSENTIAL = 27,
+    EVOLIS_MO_EVOLIS_KC_PRIME = 28,
+    EVOLIS_MO_EVOLIS_KC_MAX = 29,
+    EVOLIS_MO_EVOLIS_PRIMACY_2 = 30,
+    EVOLIS_MO_EVOLIS_ASMI = 31,
+    EVOLIS_MO_BADGEPASS_NXTELITE = 32,
+    EVOLIS_MO_ID_MAKER_PRIMACY_INFINITY = 33,
+    EVOLIS_MO_PLASCO_PRIMACY_2_LE = 34,
+    EVOLIS_MO_IDENTISYS_PRIMACY_2_SE = 35,
+    EVOLIS_MO_EVOLIS_AVANSIA = 36,
+    EVOLIS_MO_EVOLIS_AGILIA = 37,
 } evolis_model_t;
 
 typedef enum evolis_link_e {
@@ -324,13 +336,13 @@ typedef struct evolis_device_s {
 EVOLIS_LIB int evolis_get_devices(evolis_device_t** devices, ...);
 
 /// Free device list returned by evolis_get_devices().
-EVOLIS_WRA void evolis_free_devices(evolis_device_t* devices);
+EVOLIS_WRA void evolis_free_devices(_In_ evolis_device_t* devices);
 
 /// Returns a string describing the mark argument.
-EVOLIS_LIB const char* evolis_get_mark_name(evolis_mark_t mark);
+EVOLIS_LIB const char* evolis_get_mark_name(_In_ evolis_mark_t mark);
 
 /// Returns a string describing the model argument.
-EVOLIS_LIB const char* evolis_get_model_name(evolis_model_t model);
+EVOLIS_LIB const char* evolis_get_model_name(_In_ evolis_model_t model);
 
 ///
 /// ToC/DEVICE I/O
@@ -372,74 +384,74 @@ typedef enum evolis_error_management_e {
 } evolis_error_management_t;
 
 /// Connect to the printer referenced by the `name` argument.
-EVOLIS_WRA evolis_t* evolis_open(const char* name, bool supervised);
+EVOLIS_WRA evolis_t* evolis_open(_In_ const char* name, _In_ bool supervised);
 
 /// Connect to a printer with URL and printer type.
 /// @deprecated Please use `evolis_open()` instead.
 EVOLIS_DEPRECATED
-EVOLIS_LIB evolis_t* evolis_open2(const char* device, evolis_type_t type);
+EVOLIS_LIB evolis_t* evolis_open2(_In_ const char* device, _In_ evolis_type_t type);
 
 /// Close connection to the printer.
-EVOLIS_WRA void evolis_close(evolis_t* printer);
+EVOLIS_WRA void evolis_close(_In_ evolis_t* printer);
 
 /// Printer firmware update.
-EVOLIS_WRA int evolis_firmware_update(evolis_t* printer, const char* path);
+EVOLIS_WRA int evolis_firmware_update(_In_ evolis_t* printer, _In_ const char* path);
 
 /// Printer firmware update with buffer.
-EVOLIS_WRA int evolis_firmware_updateb(evolis_t* printer, const evobuf* data, size_t size);
+EVOLIS_WRA int evolis_firmware_updateb(_In_ evolis_t* printer, _In_ const evobuf* data, _In_ size_t size);
 
 /// Set io timeout value.
-EVOLIS_LIB void evolis_set_timeout(evolis_t* printer, int ms);
+EVOLIS_LIB void evolis_set_timeout(_In_ evolis_t* printer, _In_ int ms);
 
 /// Get io timeout value.
-EVOLIS_LIB int evolis_get_timeout(evolis_t* printer);
+EVOLIS_LIB int evolis_get_timeout(_In_ evolis_t* printer);
 
 /// Read data from the printer.
-EVOLIS_LIB ssize_t evolis_read(evolis_t* printer, evobuf* data, size_t maxSize);
+EVOLIS_LIB ssize_t evolis_read(_In_ evolis_t* printer, _Out_ evobuf* data, _In_ size_t maxSize);
 
 /// Read data from the printer with custom timeout.
-EVOLIS_WRA ssize_t evolis_readt(evolis_t* printer, evobuf* data, size_t maxSize, int timeout);
+EVOLIS_WRA ssize_t evolis_readt(_In_ evolis_t* printer, _Out_ evobuf* data, _In_ size_t maxSize, _In_ int timeout);
 
 /// Send data to the printer.
-EVOLIS_LIB ssize_t evolis_write(evolis_t* printer, const evobuf* data, size_t size);
+EVOLIS_LIB ssize_t evolis_write(_In_ evolis_t* printer, _In_ const evobuf* data, _In_ size_t size);
 
 /// Send data to the printer with custom timeout.
-EVOLIS_WRA ssize_t evolis_writet(evolis_t* printer, const evobuf* data, size_t size, int timeout);
+EVOLIS_WRA ssize_t evolis_writet(_In_ evolis_t* printer, _In_ const evobuf* data, _In_ size_t size, _In_ int timeout);
 
 /// Send a command to the printer then read the reply.
-EVOLIS_LIB ssize_t evolis_command(evolis_t* printer, const evobuf* cmd, size_t cmdSize, evobuf* reply, size_t replyMaxSize);
+EVOLIS_LIB ssize_t evolis_command(_In_ evolis_t* printer, _In_ const evobuf* cmd, _In_ size_t cmdSize, _Out_ evobuf* reply, _In_ size_t replyMaxSize);
 
 /// Like evolis_command() but with a timeout arg (in milliseconds).
-EVOLIS_WRA ssize_t evolis_commandt(evolis_t* printer, const evobuf* cmd, size_t cmdSize, evobuf* reply, size_t replyMaxSize, int timeout);
+EVOLIS_WRA ssize_t evolis_commandt(_In_ evolis_t* printer, _In_ const evobuf* cmd, _In_ size_t cmdSize, _Out_ evobuf* reply, _In_ size_t replyMaxSize, _In_ int timeout);
 
 /// Make a reservation of the printer. If session is EVOLIS_SESSION_FREE (0)
 /// a random id is generated. The function will wait the printer to be available,
 /// at most, for waitMs. If waitMs is null then only one try is made.
-EVOLIS_WRA int evolis_reserve(evolis_t* printer, int session, int waitMs);
+EVOLIS_WRA int evolis_reserve(_In_ evolis_t* printer, _In_ int session, _In_ int waitMs);
 
 /// Release the reservation of the printer.
-EVOLIS_WRA int evolis_release(evolis_t* printer);
+EVOLIS_WRA int evolis_release(_In_ evolis_t* printer);
 
 /// Software reset of the printer.
-EVOLIS_LIB int evolis_reset(evolis_t* printer, int timeout, char* timeouted);
+EVOLIS_LIB int evolis_reset(_In_ evolis_t* printer, _In_ int timeout, _Out_ char* timeouted);
 
 /// Get error management mode of the printer (see evolis_error_management_t).
-EVOLIS_WRA int evolis_get_error_management(evolis_t* printer, evolis_error_management_t* em);
+EVOLIS_WRA int evolis_get_error_management(_In_ evolis_t* printer, _Out_ evolis_error_management_t* em);
 
 /// Set error management mode of the printer (PRINTER or SOFTWARE only).
-EVOLIS_WRA int evolis_set_error_management(evolis_t* printer, evolis_error_management_t em);
+EVOLIS_WRA int evolis_set_error_management(_In_ evolis_t* printer, _In_ evolis_error_management_t em);
 
 /// Get session management feature status, true by default.
 /// On Android/USB, Quantum it's false by default.
-EVOLIS_WRA bool evolis_get_session_management(evolis_t* printer);
+EVOLIS_WRA bool evolis_get_session_management(_In_ evolis_t* printer);
 
 /// Set session management behavior.
 /// If false, then session reservation does nothing. Also it doesn't check
 /// if printer is reserved before communicating.
-EVOLIS_WRA void evolis_set_session_management(evolis_t* printer, bool on);
+EVOLIS_WRA void evolis_set_session_management(_In_ evolis_t* printer, _In_ bool on);
 
 /// Clear printer errors, should be use when print returned a EVOLIS_RC_MECHANICAL_ERROR error.
-EVOLIS_WRA int evolis_clear_mechanical_errors(evolis_t* printer);
+EVOLIS_WRA int evolis_clear_mechanical_errors(_In_ evolis_t* printer);
 
 ///
 /// ToC/DEVICE INFOS
@@ -576,34 +588,34 @@ typedef enum evolis_cache_e {
 
 /// Get printer infos.
 /// Same as evolis_get_infos2(a, b, EVOLIS_CA_CACHE_ON_ERROR).
-EVOLIS_WRA int evolis_get_infos(evolis_t* printer, evolis_infos_t* infos);
+EVOLIS_WRA int evolis_get_infos(_In_ evolis_t* printer, _Out_ evolis_infos_t* infos);
 
 /// Get printer infos.
-EVOLIS_LIB int evolis_get_infos2(evolis_t* printer, evolis_infos_t* infos, evolis_cache_t c);
+EVOLIS_LIB int evolis_get_infos2(_In_ evolis_t* printer, _Out_ evolis_infos_t* infos, _In_ evolis_cache_t c);
 
 /// Get ribbon infos.
 /// Same as evolis_get_ribbon2(a, b, EVOLIS_CA_CACHE_ON_ERROR).
-EVOLIS_WRA int evolis_get_ribbon(evolis_t* printer, evolis_ribbon_t* ribbon);
+EVOLIS_WRA int evolis_get_ribbon(_In_ evolis_t* printer, _Out_ evolis_ribbon_t* ribbon);
 
 /// Get ribbon infos.
-EVOLIS_LIB int evolis_get_ribbon2(evolis_t* printer, evolis_ribbon_t* ribbon, evolis_cache_t c);
+EVOLIS_LIB int evolis_get_ribbon2(_In_ evolis_t* printer, _Out_ evolis_ribbon_t* ribbon, _In_ evolis_cache_t c);
 
 /// Get retransfer film infos.
 /// Same as evolis_get_retransfer_film2(a, b, EVOLIS_CA_CACHE_ON_ERROR).
-EVOLIS_WRA int evolis_get_retransfer_film(evolis_t* printer, evolis_ribbon_t* ribbon);
+EVOLIS_WRA int evolis_get_retransfer_film(_In_ evolis_t* printer, _Out_ evolis_ribbon_t* ribbon);
 
 /// Get retransfer film infos.
-EVOLIS_LIB int evolis_get_retransfer_film2(evolis_t* printer, evolis_ribbon_t* ribbon, evolis_cache_t c);
+EVOLIS_LIB int evolis_get_retransfer_film2(_In_ evolis_t* printer, _Out_ evolis_ribbon_t* ribbon, _In_ evolis_cache_t c);
 
 /// Get cleaning infos.
 /// Same as evolis_get_cleaning2(a, b, EVOLIS_CA_CACHE_ON_ERROR).
-EVOLIS_WRA int evolis_get_cleaning(evolis_t* printer, evolis_cleaning_t* infos);
+EVOLIS_WRA int evolis_get_cleaning(_In_ evolis_t* printer, _Out_ evolis_cleaning_t* infos);
 
 /// Get cleaning infos.
-EVOLIS_LIB int evolis_get_cleaning2(evolis_t* printer, evolis_cleaning_t* infos, evolis_cache_t c);
+EVOLIS_LIB int evolis_get_cleaning2(_In_ evolis_t* printer, _Out_ evolis_cleaning_t* infos, _In_ evolis_cache_t c);
 
 /// Get ribbon name.
-EVOLIS_LIB const char* evolis_get_ribbon_name(evolis_ribbon_type_t rt);
+EVOLIS_LIB const char* evolis_get_ribbon_name(_In_ evolis_ribbon_type_t rt);
 
 ///
 /// ToC/DEVICE STATE
@@ -746,13 +758,13 @@ typedef enum evolis_minor_state_e {
 } evolis_minor_state_t;
 
 /// Get device state.
-EVOLIS_WRA int evolis_get_state(evolis_t* printer, evolis_major_state_t* major, evolis_minor_state_t* minor);
+EVOLIS_WRA int evolis_get_state(_In_ evolis_t* printer, _Out_ evolis_major_state_t* major, _Out_ evolis_minor_state_t* minor);
 
 /// Helper to convert major state to a string.
-EVOLIS_LIB const char* evolis_get_major_string(evolis_major_state_t major);
+EVOLIS_LIB const char* evolis_get_major_string(_In_ evolis_major_state_t major);
 
 /// Helper to convert minor state to a string.
-EVOLIS_LIB const char* evolis_get_minor_string(evolis_minor_state_t minor);
+EVOLIS_LIB const char* evolis_get_minor_string(_In_ evolis_minor_state_t minor);
 
 ///
 /// ToC/CARD OPERATIONS
@@ -940,34 +952,34 @@ typedef enum evolis_pos_e {
 } evolis_pos_t;
 
 /// Set card insertion mode.
-EVOLIS_WRA int evolis_set_input_tray(evolis_t* printer, evolis_intray_t tray);
+EVOLIS_WRA int evolis_set_input_tray(_In_ evolis_t* printer, _In_ evolis_intray_t tray);
 
 /// Get card insertion mode value.
-EVOLIS_WRA int evolis_get_input_tray(evolis_t* printer, evolis_intray_t* tray);
+EVOLIS_WRA int evolis_get_input_tray(_In_ evolis_t* printer, _Out_ evolis_intray_t* tray);
 
 /// Set card ejection mode.
-EVOLIS_WRA int evolis_set_output_tray(evolis_t* printer, evolis_outtray_t tray);
+EVOLIS_WRA int evolis_set_output_tray(_In_ evolis_t* printer, _In_ evolis_outtray_t tray);
 
 /// Get card ejection mode value.
-EVOLIS_WRA int evolis_get_output_tray(evolis_t* printer, evolis_outtray_t* tray);
+EVOLIS_WRA int evolis_get_output_tray(_In_ evolis_t* printer, _Out_ evolis_outtray_t* tray);
 
 /// Set card rejection mode.
-EVOLIS_WRA int evolis_set_error_tray(evolis_t* printer, evolis_outtray_t tray);
+EVOLIS_WRA int evolis_set_error_tray(_In_ evolis_t* printer, _In_ evolis_outtray_t tray);
 
 /// Get rejection mode value.
-EVOLIS_WRA int evolis_get_error_tray(evolis_t* printer, evolis_outtray_t* tray);
+EVOLIS_WRA int evolis_get_error_tray(_In_ evolis_t* printer, _Out_ evolis_outtray_t* tray);
 
 /// Move the card in the printer.
-EVOLIS_WRA int evolis_set_card_pos(evolis_t* printer, evolis_pos_t pos);
+EVOLIS_WRA int evolis_set_card_pos(_In_ evolis_t* printer, _In_ evolis_pos_t pos);
 
 /// Insert a card in the printer.
-EVOLIS_WRA int evolis_insert(evolis_t* printer);
+EVOLIS_WRA int evolis_insert(_In_ evolis_t* printer);
 
 /// Eject a card from the printer.
-EVOLIS_WRA int evolis_eject(evolis_t* printer);
+EVOLIS_WRA int evolis_eject(_In_ evolis_t* printer);
 
 /// Reject a card from the printer.
-EVOLIS_WRA int evolis_reject(evolis_t* printer);
+EVOLIS_WRA int evolis_reject(_In_ evolis_t* printer);
 
 ///
 /// ToC/BEZEL SETTINGS
@@ -987,22 +999,22 @@ typedef enum evolis_bezel_behavior_e {
 } evolis_bezel_behavior_t;
 
 /// Get BEZEL behavior.
-EVOLIS_WRA int evolis_bezel_get_behavior(evolis_t* printer, evolis_bezel_behavior_t* bb);
+EVOLIS_WRA int evolis_bezel_get_behavior(_In_ evolis_t* printer, _Out_ evolis_bezel_behavior_t* bb);
 
 /// Set BEZEL behavior.
-EVOLIS_WRA int evolis_bezel_set_behavior(evolis_t* printer, evolis_bezel_behavior_t bb);
+EVOLIS_WRA int evolis_bezel_set_behavior(_In_ evolis_t* printer, _In_ evolis_bezel_behavior_t bb);
 
 /// Get BEZEL delay (in seconds).
-EVOLIS_WRA int evolis_bezel_get_delay(evolis_t* printer, int* seconds);
+EVOLIS_WRA int evolis_bezel_get_delay(_In_ evolis_t* printer, _Out_ int* seconds);
 
 /// Set BEZEL delay (in seconds).
-EVOLIS_WRA int evolis_bezel_set_delay(evolis_t* printer, int seconds);
+EVOLIS_WRA int evolis_bezel_set_delay(_In_ evolis_t* printer, _In_ int seconds);
 
 /// Get the ejection length (in millimetters) of the card.
-EVOLIS_WRA int evolis_bezel_get_offset(evolis_t* printer, int* mm);
+EVOLIS_WRA int evolis_bezel_get_offset(_In_ evolis_t* printer, _Out_ int* mm);
 
 /// Set the ejection length (in millimetters) of the card.
-EVOLIS_WRA int evolis_bezel_set_offset(evolis_t* printer, int mm);
+EVOLIS_WRA int evolis_bezel_set_offset(_In_ evolis_t* printer, _In_ int mm);
 
 ///
 /// ToC/FEEDER SELECTION
@@ -1019,10 +1031,10 @@ typedef enum evolis_feeder_e {
 } evolis_feeder_t;
 
 /// Get selected feeder for printer (KC Max (aka K24) only).
-EVOLIS_WRA int evolis_get_feeder(evolis_t* printer, evolis_feeder_t* f);
+EVOLIS_WRA int evolis_get_feeder(_In_ evolis_t* printer, _Out_ evolis_feeder_t* f);
 
 /// Set printer feeder to use for next card insertion (KC Max (aka K24) only).
-EVOLIS_WRA int evolis_set_feeder(evolis_t* printer, evolis_feeder_t f);
+EVOLIS_WRA int evolis_set_feeder(_In_ evolis_t* printer, _In_ evolis_feeder_t f);
 
 ///
 /// ToC/MAG ENCODING
@@ -1086,28 +1098,28 @@ typedef struct evolis_mag_tracks_s {
 
 /// Initialize `evolis_mag_tracks_t` structure with default values.
 /// No printer communication made here.
-EVOLIS_WRA void evolis_mag_init(evolis_mag_tracks_t* tracks);
+EVOLIS_WRA void evolis_mag_init(_Out_ evolis_mag_tracks_t* tracks);
 
 /// Read coercivity level to use for reading/writing magnetic stripes.
-EVOLIS_LIB int evolis_mag_get_coercivity(evolis_t* printer, evolis_mag_coercivity_t* c);
+EVOLIS_LIB int evolis_mag_get_coercivity(_In_ evolis_t* printer, _Out_ evolis_mag_coercivity_t* c);
 
 /// Configure coercivity level to use for reading/writing magnetic stripes.
-EVOLIS_LIB int evolis_mag_set_coercivity(evolis_t* printer, evolis_mag_coercivity_t c);
+EVOLIS_LIB int evolis_mag_set_coercivity(_In_ evolis_t* printer, _In_ evolis_mag_coercivity_t c);
 
 /// Helper function to retrieve track buffer.
-EVOLIS_LIB int evolis_mag_get_track(evolis_mag_tracks_t* tracks, int track, char** dataPtr);
+EVOLIS_LIB int evolis_mag_get_track(_In_ evolis_mag_tracks_t* tracks, _In_ int track, _Out_ char** dataPtr);
 
 /// Helper function to fill `evolis_mag_tracks_t` structure.
 EVOLIS_LIB void evolis_mag_set_track(evolis_mag_tracks_t* tracks, int track, evolis_mag_format_t fmt, const char* data);
 
 /// Write mag tracks to the card.
-EVOLIS_WRA int evolis_mag_write(evolis_t* printer, evolis_mag_tracks_t* tracks);
+EVOLIS_WRA int evolis_mag_write(_In_ evolis_t* printer, _In_ evolis_mag_tracks_t* tracks);
 
 /// Read all mag tracks from the card.
-EVOLIS_WRA int evolis_mag_read(evolis_t* printer, evolis_mag_tracks_t* tracks);
+EVOLIS_WRA int evolis_mag_read(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks);
 
 /// Read some mag tracks from the card.
-EVOLIS_WRA int evolis_mag_read_tracks(evolis_t* printer, evolis_mag_tracks_t* tracks, int tracksNo);
+EVOLIS_WRA int evolis_mag_read_tracks(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks, _In_ int tracksNo);
 
 ///
 /// ToC/PRINTING
@@ -1169,19 +1181,19 @@ typedef enum evolis_settings_rules_level_e {
 } evolis_settings_rules_level_t;
 
 /// Print a test card.
-EVOLIS_WRA int evolis_print_test_card(evolis_t* printer, int type);
+EVOLIS_WRA int evolis_print_test_card(_In_ evolis_t* printer, _In_ int type);
 
 /// Initialize a new printing session, and send a command to the printer to detect the configuration
-EVOLIS_WRA int evolis_print_init(evolis_t* printer);
+EVOLIS_WRA int evolis_print_init(_In_ evolis_t* printer);
 
 /// Initialize a new printing session using the defined ribbon as a base configuration
-EVOLIS_WRA int evolis_print_init_with_ribbon(evolis_t* printer, evolis_ribbon_type_t ribbon);
+EVOLIS_WRA int evolis_print_init_with_ribbon(_In_ evolis_t* printer, _In_ evolis_ribbon_type_t ribbon);
 
 /// Initialize a new printing session using the defined RW card as a base configuration
-EVOLIS_WRA int evolis_print_init_with_rw_card(evolis_t* printer, evolis_rw_card_type_t ct);
+EVOLIS_WRA int evolis_print_init_with_rw_card(_In_ evolis_t* printer, _In_ evolis_rw_card_type_t ct);
 
 /// Initialize a new printing session with the settings imported from the driver
-EVOLIS_WRA int evolis_print_init_from_driver_settings(evolis_t* printer);
+EVOLIS_WRA int evolis_print_init_from_driver_settings(_In_ evolis_t* printer);
 
 /// Removes all settings set in the printing session
 EVOLIS_LIB void evolis_print_clear_settings(evolis_t* printer);
@@ -1189,125 +1201,125 @@ EVOLIS_LIB void evolis_print_clear_settings(evolis_t* printer);
 /// Clears all settings and options, then loads the driver settings
 /// @deprecated Please use evolis_print_init_from_driver_settings instead
 EVOLIS_DEPRECATED
-EVOLIS_WRA void evolis_print_load_settings(evolis_t* printer);
+EVOLIS_WRA void evolis_print_load_settings(_In_ evolis_t* printer);
 
 /// Get the number of print settings
-EVOLIS_WRA int evolis_print_get_setting_count(evolis_t* printer);
+EVOLIS_WRA int evolis_print_get_setting_count(_In_ evolis_t* printer);
 
 /// Indicates if a setting is valid for the print session
-EVOLIS_WRA bool evolis_print_is_setting_valid(evolis_t* printer, evosettings_key_t key);
+EVOLIS_WRA bool evolis_print_is_setting_valid(_In_ evolis_t* printer, _In_ evosettings_key_t key);
 
 /// Get the setting at the given index
 /// Setting are ordered by key, so inserting a new setting may change
 /// the index of already present settings
-EVOLIS_WRA evosettings_key_t evolis_print_get_setting_key(evolis_t* printer, int index);
+EVOLIS_WRA evosettings_key_t evolis_print_get_setting_key(_In_ evolis_t* printer, _In_ int index);
 
 /// Set a print context setting.
-EVOLIS_WRA bool evolis_print_set_setting(evolis_t* printer, evosettings_key_t key, const char* value);
+EVOLIS_WRA bool evolis_print_set_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _In_ const char* value);
 
 /// Set a print context setting.
-EVOLIS_WRA bool evolis_print_set_int_setting(evolis_t* printer, evosettings_key_t key, int value);
+EVOLIS_WRA bool evolis_print_set_int_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _In_ int value);
 
 /// Set a print context setting.
-EVOLIS_WRA bool evolis_print_set_bool_setting(evolis_t* printer, evosettings_key_t key, bool value);
+EVOLIS_WRA bool evolis_print_set_bool_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _In_ bool value);
 
 /// Get value of a print context setting.
-EVOLIS_WRA bool evolis_print_get_setting(evolis_t* printer, evosettings_key_t key, const char** value);
+EVOLIS_WRA bool evolis_print_get_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _Out_ const char** value);
 
 /// Get value of a print context setting.
-EVOLIS_WRA bool evolis_print_get_int_setting(evolis_t* printer, evosettings_key_t key, int* value);
+EVOLIS_WRA bool evolis_print_get_int_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _Out_ int* value);
 
 /// Get value of a print context setting.
-EVOLIS_WRA bool evolis_print_get_bool_setting(evolis_t* printer, evosettings_key_t key, bool* value);
+EVOLIS_WRA bool evolis_print_get_bool_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key, _Out_ bool* value);
 
 /// Apply rules on the settings
-EVOLIS_LIB bool evolis_print_apply_settings_rules(evolis_t* printer, int rulesToApply);
+EVOLIS_LIB bool evolis_print_apply_settings_rules(_In_ evolis_t* printer, _In_ int rulesToApply);
 
 /// Get the list of keys modified by the rules
-EVOLIS_LIB int evolis_print_get_keys_updated_by_rules(evolis_t* printer, evosettings_key_t* keys);
+EVOLIS_LIB int evolis_print_get_keys_updated_by_rules(_In_ evolis_t* printer, _Out_ evosettings_key_t* keys);
 
 /// Removes a setting from the print context
-EVOLIS_WRA bool evolis_print_remove_setting(evolis_t* printer, evosettings_key_t key);
+EVOLIS_WRA bool evolis_print_remove_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key);
 
 /// Get the number of defined options
-EVOLIS_WRA int evolis_print_get_option_count(evolis_t* printer);
+EVOLIS_WRA int evolis_print_get_option_count(_In_ evolis_t* printer);
 
 /// Get the option at the given index
 /// Options are ordered by key, so inserting a new option may change
 /// the index of already present options
-EVOLIS_WRA const char* evolis_print_get_option_key(evolis_t* printer, int index);
+EVOLIS_WRA const char* evolis_print_get_option_key(_In_ evolis_t* printer, _In_ int index);
 
 /// Set a print processing option.
-EVOLIS_WRA void evolis_print_set_option(evolis_t* printer, const char* key, const char* value);
+EVOLIS_WRA void evolis_print_set_option(_In_ evolis_t* printer, _In_ const char* key, _In_ const char* value);
 
 /// Get value of a print processing option.
-EVOLIS_WRA bool evolis_print_get_option(evolis_t* printer, const char* key, const char** value);
+EVOLIS_WRA bool evolis_print_get_option(_In_ evolis_t* printer, _In_ const char* key, _Out_ const char** value);
 
 /// Removes an option from the print context
-EVOLIS_WRA bool evolis_print_remove_option(evolis_t* printer, const char* key);
+EVOLIS_WRA bool evolis_print_remove_option(_In_ evolis_t* printer, _In_ const char* key);
 
 /// Exports the generated options to a file
-EVOLIS_WRA bool evolis_print_export_options(evolis_t* printer, const char* filepath, char separator);
+EVOLIS_WRA bool evolis_print_export_options(_In_ evolis_t* printer, _In_ const char* filepath, _In_ char separator);
 
 /// Set PRN log state.
-EVOLIS_WRA void evolis_print_set_prnlog(evolis_t* printer, bool enabled, const char* dirPath);
+EVOLIS_WRA void evolis_print_set_prnlog(_In_ evolis_t* printer, _In_ bool enabled, _In_ const char* dirPath);
 
 /// Get PRN log state.
-EVOLIS_LIB bool evolis_print_get_prnlog(evolis_t* printer);
+EVOLIS_LIB bool evolis_print_get_prnlog(_In_ evolis_t* printer);
 
 /// Set the image path to print.
-EVOLIS_WRA int evolis_print_set_imagep(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_imagep(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Set the image buffer to print.
-EVOLIS_LIB int evolis_print_set_imageb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_imageb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
 /// Set a blank image for one face
-EVOLIS_LIB int evolis_print_set_blank_image(evolis_t* printer, evolis_face_t face);
+EVOLIS_LIB int evolis_print_set_blank_image(_In_ evolis_t* printer, _In_ evolis_face_t face);
 
 /// Load bitmap at path and print it with black panel.
-EVOLIS_WRA int evolis_print_set_blackp(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_blackp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Print bitmap buffer with black panel.
-EVOLIS_LIB int evolis_print_set_blackb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_blackb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
 /// Use the image at path to print with overlay panel.
-EVOLIS_WRA int evolis_print_set_overlayp(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_overlayp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Use the image buffer to print with overlay panel.
-EVOLIS_LIB int evolis_print_set_overlayb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_overlayb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
 /// Use the image at path to print with second overlay panel.
-EVOLIS_WRA int evolis_print_set_second_overlayp(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_second_overlayp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Use the image buffer to print with second overlay panel.
-EVOLIS_LIB int evolis_print_set_second_overlayb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_second_overlayb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
 /// Use the image at path as rewritable area definition.
-EVOLIS_WRA int evolis_print_set_rw_areasp(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_rw_areasp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Use the image buffer as rewritable area definition.
-EVOLIS_LIB int evolis_print_set_rw_areasb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_rw_areasb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* data, _In_ size_t size);
 
 /// Use the image at path to print with silver panel (Avansia).
-EVOLIS_WRA int evolis_print_set_silverp(evolis_t* printer, evolis_face_t face, const char* path);
+EVOLIS_WRA int evolis_print_set_silverp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
 
 /// Use the image buffer to print with silver panel (Avansia).
-EVOLIS_LIB int evolis_print_set_silverb(evolis_t* printer, evolis_face_t face, const char* data, size_t size);
+EVOLIS_LIB int evolis_print_set_silverb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
 /// Start printing.
-EVOLIS_LIB int evolis_print_exec(evolis_t* printer);
+EVOLIS_LIB int evolis_print_exec(_In_ evolis_t* printer);
 
 /// Start printing with a timeout (in seconds).
-EVOLIS_WRA int evolis_print_exect(evolis_t* printer, int timeout);
+EVOLIS_WRA int evolis_print_exect(_In_ evolis_t* printer, _In_ int timeout);
 
 /// Generate PRN and write it to a file
-EVOLIS_WRA int evolis_print_to_file(evolis_t* printer, const char* path);
+EVOLIS_WRA int evolis_print_to_file(_In_ evolis_t* printer, _In_ const char* path);
 
 /// Set the value of the post-print auto-ejection setting.
-EVOLIS_WRA bool evolis_print_set_auto_eject(evolis_t* ctx, bool on);
+EVOLIS_WRA bool evolis_print_set_auto_eject(_In_ evolis_t* ctx, _In_ bool on);
 
 /// Get the value of the post-print auto-ejection setting.
-EVOLIS_WRA bool evolis_print_get_auto_eject(evolis_t* ctx);
+EVOLIS_WRA bool evolis_print_get_auto_eject(_In_ evolis_t* ctx);
 
 ///
 /// ToC/SERVICE REQUESTS
@@ -1368,34 +1380,34 @@ typedef enum evolis_scan_image_e {
 } evolis_scan_image_t;
 
 /// Configure scanner's library path.
-EVOLIS_WRA int evolis_scan_set_library_path(const char* path);
+EVOLIS_WRA int evolis_scan_set_library_path(_In_ const char* path);
 
 /// Get scanner's library path.
 EVOLIS_WRA const char* evolis_scan_get_library_path(void);
 
 /// Initialize a new scan session.
-EVOLIS_WRA int evolis_scan_init(evolis_t* printer);
+EVOLIS_WRA int evolis_scan_init(_In_ evolis_t* printer);
 
 /// Get scan options.
-EVOLIS_WRA int evolis_scan_get_option(evolis_t* printer, evolis_scan_opt_t key, int* value);
+EVOLIS_WRA int evolis_scan_get_option(_In_ evolis_t* printer, _In_ evolis_scan_opt_t key, _Out_ int* value);
 
 /// Set scan options.
-EVOLIS_WRA int evolis_scan_set_option(evolis_t* printer, evolis_scan_opt_t key, int value);
+EVOLIS_WRA int evolis_scan_set_option(_In_ evolis_t* printer, _In_ evolis_scan_opt_t key, _In_ int value);
 
 /// Direct communication with scanner.
-EVOLIS_WRA ssize_t evolis_scan_command(evolis_t* printer, const evobuf* cmd, size_t cmdSize, evobuf* reply, size_t replyMaxSize);
+EVOLIS_WRA ssize_t evolis_scan_command(_In_ evolis_t* printer, _In_ const evobuf* cmd, _In_ size_t cmdSize, _Out_ evobuf* reply, _In_ size_t replyMaxSize);
 
 /// Insert and scan a card.
-EVOLIS_WRA int evolis_scan_acquire(evolis_t* printer);
+EVOLIS_WRA int evolis_scan_acquire(_In_ evolis_t* printer);
 
 /// Retrieve image previously acquired.
-EVOLIS_WRA int evolis_scan_get_image(evolis_t* printer, evolis_scan_image_t type, evobuf* buffer, size_t* size);
+EVOLIS_WRA int evolis_scan_get_image(_In_ evolis_t* printer, _In_ evolis_scan_image_t type, _Out_ evobuf* buffer, _Out_ size_t* size);
 
 /// Save image previously acquired to file.
-EVOLIS_WRA int evolis_scan_save_image(evolis_t* printer, evolis_scan_image_t type, const char* path);
+EVOLIS_WRA int evolis_scan_save_image(_In_ evolis_t* printer, _In_ evolis_scan_image_t type, _In_ const char* path);
 
 /// Firmware update for scanner.
-EVOLIS_WRA int evolis_scan_firmware_update(evolis_t* printer, const char* path);
+EVOLIS_WRA int evolis_scan_firmware_update(_In_ evolis_t* printer, _In_ const char* path);
 
 ///
 /// ToC/PRINTER DISCOVERY
@@ -1426,7 +1438,7 @@ typedef struct evolis_netdevice_s {
 
 typedef void (*evolis_discovery_cb)(evolis_netdevice_t* dev, void* data);
 
-EVOLIS_WRA int evolis_discovery_start(evolis_discovery_cb cb, void* data);
+EVOLIS_WRA int evolis_discovery_start(_In_ evolis_discovery_cb cb, _Out_ void* data);
 
 EVOLIS_WRA void evolis_discovery_stop(void);
 
@@ -1445,13 +1457,13 @@ typedef enum evolis_log_e {
 } evolis_log_t;
 
 /// Sets the file where messages are stored.
-EVOLIS_WRA void evolis_log_set_path(const char* path);
+EVOLIS_WRA void evolis_log_set_path(_In_ const char* path);
 
 /// Sets the log level (`EVOLIS_LG_ERROR` by default).
-EVOLIS_WRA void evolis_log_set_level(evolis_log_t level);
+EVOLIS_WRA void evolis_log_set_level(_In_ evolis_log_t level);
 
 /// Show log messages on console.
-EVOLIS_WRA void evolis_log_set_console(bool on);
+EVOLIS_WRA void evolis_log_set_console(_In_ bool on);
 
 ///
 /// ToC/FILE HELPERS

@@ -418,7 +418,7 @@ typedef struct evolis_status_e {
 } evolis_status_t;
 
 /// Get status of the printer.
-EVOLIS_WRA int evolis_status(evolis_t* printer, evolis_status_t* status);
+EVOLIS_WRA int evolis_status(_In_ evolis_t* printer, _Out_ evolis_status_t* status);
 
 /// Check if config flag is on.
 EVOLIS_LIB bool evolis_status_is_on_cfg(const evolis_status_t* status, evolis_cfg_flag_t f);
