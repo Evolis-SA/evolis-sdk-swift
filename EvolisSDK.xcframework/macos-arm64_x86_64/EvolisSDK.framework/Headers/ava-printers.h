@@ -10,12 +10,12 @@
 
 #include <stdint.h>
 
-#define AVANSIA_IS_IBSY(asi) (asi.btHardwareStatus & 32) //!< Test the "I_Bsy" bit of `avansia_status_infos_t` struct.
-#define AVANSIA_IS_IRDY(asi) (asi.btHardwareStatus & 16) //!< Test the "I_Rdy" bit of `avansia_status_infos_t` struct.
-#define AVANSIA_IS_MPRT(asi) (asi.btHardwareStatus &  8) //!< Test the "M_Prt" bit of `avansia_status_infos_t` struct.
-#define AVANSIA_IS_MERR(asi) (asi.btHardwareStatus &  4) //!< Test the "M_Err" bit of `avansia_status_infos_t` struct.
-#define AVANSIA_IS_MBSY(asi) (asi.btHardwareStatus &  2) //!< Test the "M_Bsy" bit of `avansia_status_infos_t` struct.
-#define AVANSIA_IS_MRDY(asi) (asi.btHardwareStatus &  1) //!< Test the "M_Rdy" bit of `avansia_status_infos_t` struct.
+#define AVANSIA_IS_IBSY(asi) (asi.btHardwareStatus & 32) //!< Test the "I_Bsy" bit of `avansia_status_info_t` struct.
+#define AVANSIA_IS_IRDY(asi) (asi.btHardwareStatus & 16) //!< Test the "I_Rdy" bit of `avansia_status_info_t` struct.
+#define AVANSIA_IS_MPRT(asi) (asi.btHardwareStatus &  8) //!< Test the "M_Prt" bit of `avansia_status_info_t` struct.
+#define AVANSIA_IS_MERR(asi) (asi.btHardwareStatus &  4) //!< Test the "M_Err" bit of `avansia_status_info_t` struct.
+#define AVANSIA_IS_MBSY(asi) (asi.btHardwareStatus &  2) //!< Test the "M_Bsy" bit of `avansia_status_info_t` struct.
+#define AVANSIA_IS_MRDY(asi) (asi.btHardwareStatus &  1) //!< Test the "M_Rdy" bit of `avansia_status_info_t` struct.
 
 /**
  * List of print status returned by `avansia_print_status()` function.
@@ -71,8 +71,8 @@ typedef enum avansia_ic_encoder_e {
  * A data structure that stores the printer error information.
  * Replaces `PR5600_PRINTER_SENSE` structure from the **EVLDAPI.dll** library.
  *
- * @see avansia_get_printer_status_infos
- * @see avansia_get_printer_status_infos2
+ * @see avansia_get_printer_status_info
+ * @see avansia_get_printer_status_info2
  */
 typedef struct avansia_sense_s {
     uint8_t    btErrorCode;                     //!< Stores a fixed value (11110000).
@@ -95,9 +95,9 @@ typedef struct avansia_sense_s {
  * A data structure that stores the printer's operational information.
  * Replaces the `PR5600_STATUS_INFO` structure from the **EVLDAPI.dll** library.
  *
- * @see avansia_get_printer_status_infos
+ * @see avansia_get_printer_status_info
  */
-typedef struct avansia_status_infos_s {
+typedef struct avansia_status_info_s {
     uint8_t     btHardwareStatus;               //!< Indicates the printer hardware status.
     uint8_t     btCardPosition;                 //!< Indicates the location of the card within the printer.
     uint8_t     btPrinterStatus;                //!< Indicates the printer's printing status.
@@ -111,15 +111,15 @@ typedef struct avansia_status_infos_s {
     char        acHeatRollerROMVersion[4];      //!< Indicates the heat roller unit's ROM version.
     uint8_t     btICTagData[8];                 //!< Indicates the tag information of the card at the access position of IC R/W.
     uint8_t     btReserved;                     //!< Not used
-} avansia_status_infos_t;
+} avansia_status_info_t;
 
 /**
  * It is the structure to store the extended operational information of the printer.
  * Replaces the `PR5600_STATUS_INFO2` structure from the **EVLDAPI.dll** library.
  *
- * @see avansia_get_printer_status_infos2
+ * @see avansia_get_printer_status_info2
  */
-typedef struct avansia_status_infos2_s {
+typedef struct avansia_status_info2_s {
     uint8_t     btHardwareStatus;               //!< Indicates the printer hardware status.
     uint8_t     btCardPosition;                 //!< Indicates the location of the card within the printer.
     uint8_t     btPrinterStatus;                //!< Indicates the printer's printing status.
@@ -137,16 +137,16 @@ typedef struct avansia_status_infos2_s {
     uint8_t     btRibbonRemainder;              //!< It shows rough residual quantity (%) of ink ribbon.
     uint8_t     btFilmRemainder;                //!< It shows rough residual quantity (%) of retransfer film.
     uint8_t     btReserved2[16];                //!< Not used
-} avansia_status_infos2_t;
+} avansia_status_info2_t;
 
 /**
- * A structure that hold `avansia_status_infos2_t` and `avansia_sense_t`. It
+ * A structure that hold `avansia_status_info2_t` and `avansia_sense_t`. It
  * can be use when calling `evolis_status()` function with an Avansia printer.
  *
  * @see evolis_status()
  */
 typedef struct avansia_status_s {
-    avansia_status_infos2_t infos;
+    avansia_status_info2_t info;
     avansia_sense_t sense;
 } avansia_status_t;
 
@@ -154,9 +154,9 @@ typedef struct avansia_status_s {
  * A data structure that stores the printer's system settings information.
  * Replaces `PR5600_SYSTEM_INFO` structure from the **EVLDAPI.dll** library.
  *
- * @see avansia_get_printer_system_infos
+ * @see avansia_get_printer_system_info
  */
-typedef struct avansia_system_infos_s {
+typedef struct avansia_system_info_s {
     uint8_t     btConfiguration[2];                         //!< Indicates the printer configuration information. Each bit indicates whether the option is connected (1) or not connected (0).
     uint8_t     btRibbonSetting;                            //!< Indicates the type of ribbon selected.
     uint8_t     btRibbonPanel;                              //!< Indicates the type of panel (type of data) that can be printed with the selected type of ribbon.
@@ -181,7 +181,7 @@ typedef struct avansia_system_infos_s {
     char        acMainRevision[4];                          //!< Indicates the main program version.
     char        acSerialNumber[8];                          //!< Indicates the printer serial number.
     char        cPrinterID;                                 //!< Indicates the printer ID number.
-} avansia_system_infos_t;
+} avansia_system_info_t;
 
 typedef struct avansia_ribbon_film_card_params_s {
     uint8_t btRibbonType;
@@ -216,16 +216,16 @@ EVOLIS_LIB int avansia_wait_for_printing_done(evolis_t* printer);
 EVOLIS_LIB int avansia_set_card_side(evolis_t* printer, avansia_card_side_t acs);
 
 /// Avansia: Get printer status (Nisca complient).
-EVOLIS_LIB int avansia_get_printer_status_infos(evolis_t* printer,
-    avansia_status_infos_t* infos, avansia_sense_t* sense);
+EVOLIS_LIB int avansia_get_printer_status_info(evolis_t* printer,
+    avansia_status_info_t* info, avansia_sense_t* sense);
 
 /// Avansia: Get extended printer status (Nisca complient).
-EVOLIS_LIB int avansia_get_printer_status_infos2(evolis_t* printer,
-    avansia_status_infos2_t* infos, size_t infosReqSize, size_t* infosRepSize,
+EVOLIS_LIB int avansia_get_printer_status_info2(evolis_t* printer,
+    avansia_status_info2_t* info, size_t infoReqSize, size_t* infoRepSize,
     avansia_sense_t* sense, size_t senseReqSize, size_t* senseRepSize);
 
 /// Avansia: Get printer settings.
-EVOLIS_LIB int avansia_get_printer_system_infos(evolis_t* printer, avansia_system_infos_t* infos);
+EVOLIS_LIB int avansia_get_printer_system_info(evolis_t* printer, avansia_system_info_t* info);
 
 /// Avansia: Get ribbon, film and card params.
 EVOLIS_LIB int avansia_get_ribbon_film_card_params(evolis_t* printer, avansia_ribbon_film_card_params_t* params);

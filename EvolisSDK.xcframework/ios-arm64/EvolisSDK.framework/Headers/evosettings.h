@@ -83,15 +83,6 @@ EVOLIS_LIB evosettings_t* EvoSettings_Create(const char* printerName, evolis_t* 
 /// Destroys the handle created by EvoSettings_Create().
 EVOLIS_LIB void EvoSettings_Delete(evosettings_t* mgr);
 
-/// Returns true if auto session reservation is enabled.
-EVOLIS_DEPRECATED
-EVOLIS_LIB bool EvoSettings_IsAutoSessionEnabled(evosettings_t* mgr);
-
-/// If enabled, a session will be reserved before communicating with printer.
-/// This function is depcrecated and does nothing.
-EVOLIS_DEPRECATED
-EVOLIS_LIB void EvoSettings_SetAutoSessionEnabled(evosettings_t* mgr, bool on);
-
 /// This function is to select connectors used to read settings.
 EVOLIS_LIB void EvoSettings_SelectReaders(evosettings_t* mgr, int connectors);
 
@@ -195,7 +186,7 @@ EVOLIS_LIB bool EvoSettings_ApplyRules(evosettings_t* mgr);
 
 /// On success, returns the number of elements in 'keys', fill the 'keys' impacted by the execution of rules.
 /// Returns -1 on failure.
-EVOLIS_LIB int EvoSettings_GetKeysUpdatedByRules(evosettings_t* mgr, evosettings_key_t* keys);
+EVOLIS_LIB size_t EvoSettings_GetKeysUpdatedByRules(evosettings_t* mgr, evosettings_key_t* keys);
 /// Returns true if settings were modified by the driver. False otherwise.
 EVOLIS_LIB bool EvoSettings_CheckIfUpdatedByDrv(evosettings_t* mgr);
 

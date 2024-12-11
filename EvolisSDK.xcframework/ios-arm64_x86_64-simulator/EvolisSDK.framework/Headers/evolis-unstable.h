@@ -18,22 +18,6 @@ extern "C" {
 #include "evolis.h"
 
 ///
-/// MAG ENCODING
-/// ------------
-///
-
-/// Writes a specific magnetic track.
-/// @deprecated
-EVOLIS_DEPRECATED
-EVOLIS_LIB int evolis_mag_write_track(evolis_t* printer, int track, evolis_mag_format_t f, const char* in,
-                                      size_t inSize);
-
-/// Reads a specific magnetic track.
-/// @deprecated
-EVOLIS_DEPRECATED
-EVOLIS_LIB int evolis_mag_read_track(evolis_t* printer, int track, evolis_mag_format_t f, char* out, size_t outSize);
-
-///
 /// IMAGE PROCESSING
 /// ----------------
 ///

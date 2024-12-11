@@ -54,7 +54,8 @@ typedef evolis_type_t avansia_type_t;
 typedef evolis_error_management_t avansia_error_management_t;
 
 /// Connect to the printer referenced by the `name` argument.
-EVOLIS_LIB avansia_t* avansia_open(const char* name, bool supervised);
+/// Same as avansia_open_with_mode(a, EVOLIS_OM_AUTO)
+EVOLIS_LIB avansia_t* avansia_open(const char* name);
 
 /// Connect to a printer with URL and printer type.
 /// @deprecated Please use `avansia_open()` instead.
@@ -65,16 +66,16 @@ EVOLIS_LIB avansia_t* avansia_open2(const char* device, avansia_type_t type);
 EVOLIS_LIB void avansia_close(avansia_t* printer);
 
 /// Read data from the printer.
-EVOLIS_LIB ssize_t avansia_read(avansia_t* printer, char* data, size_t maxSize);
+EVOLIS_LIB int32_t avansia_read(avansia_t* printer, char* data, size_t maxSize);
 
 /// Read data from the printer with custom timeout.
-EVOLIS_LIB ssize_t avansia_readt(avansia_t* printer, char* data, size_t maxSize, int timeout);
+EVOLIS_LIB int32_t avansia_readt(avansia_t* printer, char* data, size_t maxSize, int timeout);
 
 /// Send data to the printer.
-EVOLIS_LIB ssize_t avansia_write(avansia_t* printer, const char* data, size_t size);
+EVOLIS_LIB int32_t avansia_write(avansia_t* printer, const char* data, size_t size);
 
 /// Send data to the printer with custom timeout.
-EVOLIS_LIB ssize_t avansia_writet(avansia_t* printer, const char* data, size_t size, int timeout);
+EVOLIS_LIB int32_t avansia_writet(avansia_t* printer, const char* data, size_t size, int timeout);
 
 /// Software reset of the printer.
 EVOLIS_LIB int avansia_reset(avansia_t* printer, int timeout, char* timeouted);
@@ -89,18 +90,17 @@ EVOLIS_LIB int avansia_set_error_management(avansia_t* printer, avansia_error_ma
 EVOLIS_LIB int avansia_clear_mechanical_errors(avansia_t* printer);
 
 ///
-/// ToC/DEVICE INFOS
+/// ToC/DEVICE INFO
 /// ----------------
 ///
 
-/// The printer infos struct contains general informations of the printer. It is
+/// The printer info struct contains general informations of the printer. It is
 /// populated when calling `avansia_open()` function. You can retrieve it by
-/// calling `avansia_infos()`.
-typedef evolis_infos_t avansia_infos_t;
+/// calling `avansia_info()`.
+typedef evolis_info_t avansia_info_t;
 
-/// Get printer infos.
-/// Same as avansia_get_infos2(a, b, AVANSIA_CA_CACHE_ON_ERROR).
-EVOLIS_LIB int avansia_get_infos(avansia_t* printer, avansia_infos_t* infos);
+/// Get printer info.
+EVOLIS_LIB int avansia_get_info(avansia_t* printer, avansia_info_t* info);
 
 ///
 /// ToC/CARD OPERATIONS
