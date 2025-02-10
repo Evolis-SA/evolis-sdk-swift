@@ -552,6 +552,7 @@ typedef enum evolis_ribbon_type_e {
     EVOLIS_RT_YMCKK          = 1001,
     EVOLIS_RT_YMCKKS         = 1051,
     EVOLIS_RT_YMCKKI         = 1005,
+    EVOLIS_RT_KBLACK_R       = 1100,
     EVOLIS_RT_CLEAR          = 2000,
 } evolis_ribbon_type_t;
 
