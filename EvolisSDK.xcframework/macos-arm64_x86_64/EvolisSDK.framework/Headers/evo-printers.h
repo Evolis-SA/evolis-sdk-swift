@@ -58,181 +58,181 @@ typedef enum evolis_flag_e {
     EVOLIS_CFG_EXTENSION_3 = 45,               //!< Extension 3 is used
     EVOLIS_CFG_LAMINATION_MODULE_2 = 46,       //!< Second lamination module detected
     EVOLIS_CFG_EXTENSION_4 = 47,               //!< Extension 4 is used
-    EVOLIS_INF_CLAIM = 48,                     //!< Raised when EPS printing
-    EVOLIS_INF_CARD_HOPPER = 49,               //!< Card present at the hopper
-    EVOLIS_INF_CARD_FEEDER = 50,               //!< Card present in the feeder
-    EVOLIS_INF_CARD_FLIP = 51,                 //!< Card present in the flip-over
-    EVOLIS_INF_CARD_CONTACTLESS = 52,          //!< Card present in contactless card station
-    EVOLIS_INF_CARD_SMART = 53,                //!< Card present in smart card station
-    EVOLIS_INF_CARD_PRINT = 54,                //!< Card present in printing position
-    EVOLIS_INF_CARD_EJECT = 55,                //!< Card present in eject position
-    EVOLIS_INF_PRINTER_MASTER = 56,            //!< Error management is set to 'printer'
-    EVOLIS_INF_PCSVC_LOCKED = 57,              //!< The EPS is supervising the printer
-    EVOLIS_INF_SLEEP_MODE = 58,                //!< Printer is in sleep mode
-    EVOLIS_INF_UNKNOWN_RIBBON = 59,            //!< Installed ribbon is unknown/unreadable
-    EVOLIS_INF_RIBBON_LOW = 60,                //!< Remaining ribbon is below low limit
-    EVOLIS_INF_CLEANING_MANDATORY = 61,        //!< Cleaning is mandatory
-    EVOLIS_INF_CLEANING = 62,                  //!< Cleaning is recommended
-    EVOLIS_INF_RESET = 63,                     //!< Printer has just rebooted
-    EVOLIS_INF_CLEAN_OUTWARRANTY = 64,         //!< Warranty lost, cleaning has not been done in time
-    EVOLIS_INF_CLEAN_LAST_OUTWARRANTY = 65,    //!< Cleaning is mandatory, next card printed will lose the warranty
-    EVOLIS_INF_CLEAN_2ND_PASS = 66,            //!< Cleaning sequence requires the second cleaning card
-    EVOLIS_INF_READY_FOR_CLEANING = 67,        //!< Printer ready for cleaning (ribbon has been removed and cover closed)
-    EVOLIS_INF_CLEANING_ADVANCED = 68,         //!< Advanced cleaning requested
-    EVOLIS_INF_WRONG_ZONE_RIBBON = 69,         //!< Installed ribbon has not the right zone
-    EVOLIS_INF_RIBBON_CHANGED = 70,            //!< Installed ribbon is different from the previous one
-    EVOLIS_INF_CLEANING_REQUIRED = 71,         //!< Cleaning is required
-    EVOLIS_INF_PRINTING_RUNNING = 72,          //!< Printing is in progress
-    EVOLIS_INF_ENCODING_RUNNING = 73,          //!< Encoding is in progress (smart, contactless or magnetic)
-    EVOLIS_INF_CLEANING_RUNNING = 74,          //!< Cleaning is in progress
-    EVOLIS_INF_WRONG_ZONE_ALERT = 75,          //!< Installed ribbon has wrong zone, there are only a few prints remaining before printing is blocked
-    EVOLIS_INF_WRONG_ZONE_EXPIRED = 76,        //!< Installed ribbon has wrong zone, printing is not allowed
-    EVOLIS_INF_SYNCH_PRINT_CENTER = 77,        //!< Raised by EPS during a pop-up
-    EVOLIS_INF_UPDATING_FIRMWARE = 78,         //!< Firmware is currently downloading
-    EVOLIS_INF_BUSY = 79,                      //!< The printer is busy (printing, encoding)
-    EVOLIS_INF_NO_LAMINATION_TO_DO = 80,       //!< Lamination module is set to 'pass through' mode
-    EVOLIS_INF_LAMI_ALLOW_TO_INSERT = 81,      //!< Lamination module ready to insert card
-    EVOLIS_INF_LAMINATING_RUNNING = 82,        //!< Lamination process is running
-    EVOLIS_INF_CLEAN_REMINDER = 83,            //!< Reminder to clean the laminator
-    EVOLIS_INF_LAMI_TEMP_NOT_READY = 84,       //!< Lamination roller is heating up, but its temperature is currently too low for the lamination process
-    EVOLIS_INF_SYNCHRONOUS_MODE = 85,          //!< Lamination process is set to synchronous
-    EVOLIS_INF_LCD_BUT_ACK = 86,               //!< LCD pop up button acknowledged
-    EVOLIS_INF_LCD_BUT_OK = 87,                //!< LCD pop up OK button pressed
-    EVOLIS_INF_LCD_BUT_RETRY = 88,             //!< LCD pop up Retry button pressed
-    EVOLIS_INF_LCD_BUT_CANCEL = 89,            //!< LCD pop up Cancel button pressed
-    EVOLIS_INF_FEEDER_NEAR_EMPTY = 90,         //!< Feeder is near empty (low level sensor)
-    EVOLIS_INF_FEEDER1_EMPTY = 91,             //!< Feeder 1 is empty for KM2000B
-    EVOLIS_INF_FEEDER2_EMPTY = 92,             //!< Feeder 2 is empty for KM2000B
-    EVOLIS_INF_FEEDER3_EMPTY = 93,             //!< Feeder 3 is empty for KM2000B
-    EVOLIS_INF_FEEDER4_EMPTY = 94,             //!< Feeder 4 is empty for KM2000B
-    EVOLIS_INF_FEEDER1_NEAR_EMPTY = 95,        //!< Feeder 1 is near empty for KM2000B
-    EVOLIS_INF_FEEDER2_NEAR_EMPTY = 96,        //!< Feeder 2 is near empty for KM2000B
-    EVOLIS_INF_FEEDER3_NEAR_EMPTY = 97,        //!< Feeder 3 is near empty for KM2000B
-    EVOLIS_INF_FEEDER4_NEAR_EMPTY = 98,        //!< Feeder 4 is near empty for KM2000B
-    EVOLIS_INF_SA_PROCESSING = 99,             //!< Sensor adjustment is running
-    EVOLIS_INF_SCP_PROCESSING = 100,           //!< Cleaning sequence is running
-    EVOLIS_INF_OPT_PROCESSING = 101,           //!< Option activation is running (with activation key)
-    EVOLIS_INF_X08_PRINTER_UNLOCKED = 102,     //!< Lock system currently unlocked
-    EVOLIS_INF_X08_FEEDER_OPEN = 103,          //!< Feeder cover is open (used with locking system)
-    EVOLIS_INF_X08_EJECTBOX_FULL = 104,        //!< Locking system feeder eject box full
-    EVOLIS_INF_X08_PRINT_UNLOCKED = 105,       //!< Printing is currently unlocked, both mechanically and firmware-wise
-    EVOLIS_INF_LAMINATE_UNKNOWN = 106,         //!< Installed laminate film is unknown/unreadable
-    EVOLIS_INF_LAMINATE_LOW = 107,             //!< Laminate film is close to its end
-    EVOLIS_INF_LAMI_CARD = 108,                //!< Card present in the lamination module
-    EVOLIS_INF_LAMI_CLEANING_RUNNING = 109,    //!< Lamination module cleaning process is running
-    EVOLIS_INF_LAMI_UPDATING_FIRMWARE = 110,   //!< Lamination module firmware update is running
-    EVOLIS_INF_LAMI_READY_FOR_CLEANING = 111,  //!< Lamination module ready for cleaning (no laminate film and cover closed)
-    EVOLIS_INF_CARD_REAR = 112,                //!< Card present at the rear of the printer
-    EVOLIS_INF_CLEAR_UNKNOWN = 113,            //!< Installed clear ribbon is unknown
-    EVOLIS_INF_CLEAR_LOW = 114,                //!< Remaining clear ribbon is below the low limit
-    EVOLIS_INF_WRONG_ZONE_CLEAR = 115,         //!< Installed clear ribbon has not the right zone
-    EVOLIS_INF_CLEAR_CHANGED = 116,            //!< Installed clear ribbon is different from the previous one
-    EVOLIS_INF_WRONG_ZONE_CLEAR_ALERT = 117,   //!< Installed clear ribbon has wrong zone: only a few prints remaining before printing is blocked
-    EVOLIS_INF_WRONG_ZONE_CLEAR_EXPIRED = 118, //!< Installed clear ribbon has wrong zone: printing not allowed
-    EVOLIS_INF_RETRANSFER_RUNNING = 119,       //!< Retransfer sequence is running
-    EVOLIS_INF_HEATING = 120,                  //!< Printer is heating up
-    EVOLIS_INF_CARD_MAN_FEED = 121,            //!< Card present in the manual feeding module
-    EVOLIS_INF_HEAT_ROLLER_WORN_OUT = 122,     //!< Heat roller reached its maximum recommended of retransfers
-    EVOLIS_INF_PRE_HEATING_PRINT_HEAD = 123,   //!< Print head pre heating in progress
-    EVOLIS_WAR_POWER_SUPPLY = 124,             //!< Power supply voltage is too low
-    EVOLIS_WAR_REMOVE_RIBBON = 125,            //!< Ribbon must be removed (in rewrite mode)
-    EVOLIS_WAR_RECEPTACLE_OPEN = 126,          //!< Not used
-    EVOLIS_WAR_REJECT_BOX_FULL = 127,          //!< Reject box is full
-    EVOLIS_WAR_CARD_ON_EJECT = 128,            //!< Card in eject position and has to be removed (in manual insertion mode)
-    EVOLIS_WAR_WAIT_CARD = 129,                //!< Printer is waiting for manual card insertion
-    EVOLIS_WAR_FEEDER_EMPTY = 130,             //!< Feeder is empty
-    EVOLIS_WAR_COOLING = 131,                  //!< Print head temperature too high: cooling down
-    EVOLIS_WAR_HOPPER_FULL = 132,              //!< Printer hopper is full
-    EVOLIS_WAR_RIBBON_ENDED = 133,             //!< Installed ribbon reached its end
-    EVOLIS_WAR_PRINTER_LOCKED = 134,           //!< Printer is locked (used with locking system)
-    EVOLIS_WAR_COVER_OPEN = 135,               //!< Printer cover is opened
-    EVOLIS_WAR_NO_RIBBON = 136,                //!< No ribbon detected in the printer
-    EVOLIS_WAR_UNSUPPORTED_RIBBON = 137,       //!< Installed ribbon is not supported by the printer
-    EVOLIS_WAR_NO_CLEAR = 138,                 //!< No clear ribbon installed
-    EVOLIS_WAR_CLEAR_END = 139,                //!< Clear ribbon reached its end
-    EVOLIS_WAR_CLEAR_UNSUPPORTED = 140,        //!< Installed clear ribbon is not supported by the printer
-    EVOLIS_WAR_REJECT_BOX_COVER_OPEN = 141,    //!< Reject box cover is open
-    EVOLIS_WAR_EPS_NO_AUTO = 142,              //!< For tagless ribbons, indicates to the EPS to not automatically set the ribbon
-    EVOLIS_WAR_FEEDER_OPEN = 143,              //!< Printer feeder is opened
-    EVOLIS_WAR_NO_LAMINATE = 144,              //!< No laminate film installed
-    EVOLIS_WAR_LAMI_COVER_OPEN = 145,          //!< Lamination module cover is open
-    EVOLIS_WAR_LAMINATE_END = 146,             //!< Laminate film reached its end
-    EVOLIS_WAR_LAMI_HOPPER_FULL = 147,         //!< Lamination module hopper is full
-    EVOLIS_WAR_LAMINATE_UNSUPPORTED = 148,     //!< Installed laminate film is not supported
-    EVOLIS_ERR_HEAD_TEMP = 149,                //!< Job interrupted because the print head temperature was too high
-    EVOLIS_ERR_NO_OPTION = 150,                //!< Requested option is not available
-    EVOLIS_ERR_FEEDER_ERROR = 151,             //!< Error while feeding a card
-    EVOLIS_ERR_RIBBON_ERROR = 152,             //!< Ribbon error during printing
-    EVOLIS_ERR_COVER_OPEN = 153,               //!< Job interrupted by an open cover
-    EVOLIS_ERR_MECHANICAL = 154,               //!< Mechanical error (card jam, ribbon jam, ...)
-    EVOLIS_ERR_REJECT_BOX_FULL = 155,          //!< Card sent to reject box but it was full
-    EVOLIS_ERR_BAD_RIBBON = 156,               //!< Job interrupted because the installed ribbon is not the one expected
-    EVOLIS_ERR_RIBBON_ENDED = 157,             //!< Job interrupted because the ribbon is finished
-    EVOLIS_ERR_HOPPER_FULL = 158,              //!< Card sent to hopper but it was full
-    EVOLIS_ERR_BLANK_TRACK = 159,              //!< No data on track after magnetic reading
-    EVOLIS_ERR_MAGNETIC_DATA = 160,            //!< Magnetic data is not matching the settings
-    EVOLIS_ERR_READ_MAGNETIC = 161,            //!< Corrupted/absent data on track after magnetic reading
-    EVOLIS_ERR_WRITE_MAGNETIC = 162,           //!< Corrupted/absent data on track after magnetic encoding
-    EVOLIS_ERR_FEATURE = 163,                  //!< Job sent is not supported by the printer
-    EVOLIS_ERR_RET_TEMPERATURE = 164,          //!< Retransfer roller couldn't reach its operating temperature in time
-    EVOLIS_ERR_CLEAR_ERROR = 165,              //!< Clear ribbon error during printing
-    EVOLIS_ERR_CLEAR_ENDED = 166,              //!< Job interrupted because the clear ribbon is finished
-    EVOLIS_ERR_BAD_CLEAR = 167,                //!< Job interrupted because the installed clear ribbon is not the one expected
-    EVOLIS_ERR_REJECT_BOX_COVER_OPEN = 168,    //!< Card sent to reject box but its cover was open
-    EVOLIS_ERR_CARD_ON_EJECT = 169,            //!< Card in eject position was not removed in time (in manual insertion mode)
-    EVOLIS_ERR_NO_CARD_INSERTED = 170,         //!< No card was presented in time (in manual insertion mode)
-    EVOLIS_ERR_FEEDER_OPEN = 171,              //!< Job interrupted because the printer feeder is opened
-    EVOLIS_ERR_LAMI_TEMPERATURE = 172,         //!< Job interrupted because the laminator temperature was too high
-    EVOLIS_ERR_LAMINATE = 173,                 //!< Error on the laminate film
-    EVOLIS_ERR_LAMI_MECHANICAL = 174,          //!< Mechanical error on the lamination module (card jam, ribbon jam, ...)
-    EVOLIS_ERR_LAMINATE_END = 175,             //!< Job interrupted because the laminate film is finished
-    EVOLIS_ERR_LAMI_COVER_OPEN = 176,          //!< Job interrupted by an open lamination module cover
-    EVOLIS_ERR_PRE_HEATING_PRINT_HEAD = 177,   //!< Print head pre heating : target not reach under the timeout on the last cycle
-    EVOLIS_RSV_WAR_0X20000000 = 178,           //!< Reserved flag WAR:0x20000000
-    EVOLIS_RSV_WAR_0X00800000 = 179,           //!< Reserved flag WAR:0x00800000
-    EVOLIS_RSV_WAR_0X00400000 = 180,           //!< Reserved flag WAR:0x00400000
-    EVOLIS_RSV_WAR_0X00004000 = 181,           //!< Reserved flag WAR:0x00004000
-    EVOLIS_RSV_WAR_0X00000080 = 182,           //!< Reserved flag WAR:0x00000080
-    EVOLIS_RSV_WAR_0X00000040 = 183,           //!< Reserved flag WAR:0x00000040
-    EVOLIS_RSV_WAR_0X00000020 = 184,           //!< Reserved flag WAR:0x00000020
-    EVOLIS_RSV_WAR_0X00000010 = 185,           //!< Reserved flag WAR:0x00000010
-    EVOLIS_RSV_WAR_0X00000008 = 186,           //!< Reserved flag WAR:0x00000008
-    EVOLIS_RSV_WAR_0X00000004 = 187,           //!< Reserved flag WAR:0x00000004
-    EVOLIS_RSV_WAR_0X00000002 = 188,           //!< Reserved flag WAR:0x00000002
-    EVOLIS_RSV_WAR_0X00000001 = 189,           //!< Reserved flag WAR:0x00000001
-    EVOLIS_RSV_ERR_0X80000000 = 190,           //!< Reserved flag ERR:0x80000000
-    EVOLIS_RSV_ERR_0X40000000 = 191,           //!< Reserved flag ERR:0x40000000
-    EVOLIS_RSV_ERR_0X00000040 = 192,           //!< Reserved flag ERR:0x00000040
-    EVOLIS_RSV_ERR_0X00000020 = 193,           //!< Reserved flag ERR:0x00000020
-    EVOLIS_RSV_ERR_0X00000010 = 194,           //!< Reserved flag ERR:0x00000010
-    EVOLIS_RSV_ERR_0X00000008 = 195,           //!< Reserved flag ERR:0x00000008
-    EVOLIS_RSV_ERR_0X00000004 = 196,           //!< Reserved flag ERR:0x00000004
-    EVOLIS_RSV_ERR_0X00000002 = 197,           //!< Reserved flag ERR:0x00000002
-    EVOLIS_RSV_ERR_0X00000001 = 198,           //!< Reserved flag ERR:0x00000001
-    EVOLIS_RSV_EX3_0X10000000 = 199,           //!< Reserved flag EX3:0x10000000
-    EVOLIS_RSV_EX3_0X00800000 = 200,           //!< Reserved flag EX3:0x00800000
-    EVOLIS_RSV_EX3_0X00400000 = 201,           //!< Reserved flag EX3:0x00400000
-    EVOLIS_RSV_EX3_0X00200000 = 202,           //!< Reserved flag EX3:0x00200000
-    EVOLIS_RSV_EX3_0X00100000 = 203,           //!< Reserved flag EX3:0x00100000
-    EVOLIS_RSV_EX3_0X00080000 = 204,           //!< Reserved flag EX3:0x00080000
-    EVOLIS_RSV_EX3_0X00040000 = 205,           //!< Reserved flag EX3:0x00040000
-    EVOLIS_RSV_EX3_0X00020000 = 206,           //!< Reserved flag EX3:0x00020000
-    EVOLIS_RSV_EX3_0X00010000 = 207,           //!< Reserved flag EX3:0x00010000
-    EVOLIS_RSV_EX3_0X00008000 = 208,           //!< Reserved flag EX3:0x00008000
-    EVOLIS_RSV_EX3_0X00004000 = 209,           //!< Reserved flag EX3:0x00004000
-    EVOLIS_RSV_EX3_0X00002000 = 210,           //!< Reserved flag EX3:0x00002000
-    EVOLIS_RSV_EX3_0X00001000 = 211,           //!< Reserved flag EX3:0x00001000
-    EVOLIS_RSV_EX3_0X00000800 = 212,           //!< Reserved flag EX3:0x00000800
-    EVOLIS_RSV_EX3_0X00000400 = 213,           //!< Reserved flag EX3:0x00000400
-    EVOLIS_RSV_EX3_0X00000200 = 214,           //!< Reserved flag EX3:0x00000200
-    EVOLIS_RSV_EX3_0X00000100 = 215,           //!< Reserved flag EX3:0x00000100
-    EVOLIS_RSV_EX3_0X00000080 = 216,           //!< Reserved flag EX3:0x00000080
-    EVOLIS_RSV_EX3_0X00000040 = 217,           //!< Reserved flag EX3:0x00000040
-    EVOLIS_RSV_EX3_0X00000020 = 218,           //!< Reserved flag EX3:0x00000020
-    EVOLIS_RSV_EX3_0X00000010 = 219,           //!< Reserved flag EX3:0x00000010
-    EVOLIS_RSV_EX3_0X00000008 = 220,           //!< Reserved flag EX3:0x00000008
-    EVOLIS_RSV_EX3_0X00000004 = 221,           //!< Reserved flag EX3:0x00000004
-    EVOLIS_RSV_EX3_0X00000002 = 222,           //!< Reserved flag EX3:0x00000002
+    EVOLIS_CFG_BRIDGE = 48,                    //!< Configuration for bridge module
+    EVOLIS_CFG_INDENTING = 49,                 //!< Configuration for indenting module
+    EVOLIS_INF_CLAIM = 50,                     //!< Raised when EPS printing
+    EVOLIS_INF_CARD_HOPPER = 51,               //!< Card present at the hopper
+    EVOLIS_INF_CARD_FEEDER = 52,               //!< Card present in the feeder
+    EVOLIS_INF_CARD_FLIP = 53,                 //!< Card present in the flip-over
+    EVOLIS_INF_CARD_CONTACTLESS = 54,          //!< Card present in contactless card station
+    EVOLIS_INF_CARD_SMART = 55,                //!< Card present in smart card station
+    EVOLIS_INF_CARD_PRINT = 56,                //!< Card present in printing position
+    EVOLIS_INF_CARD_EJECT = 57,                //!< Card present in eject position
+    EVOLIS_INF_PRINTER_MASTER = 58,            //!< Error management is set to 'printer'
+    EVOLIS_INF_PCSVC_LOCKED = 59,              //!< The EPS is supervising the printer
+    EVOLIS_INF_SLEEP_MODE = 60,                //!< Printer is in sleep mode
+    EVOLIS_INF_UNKNOWN_RIBBON = 61,            //!< Installed ribbon is unknown/unreadable
+    EVOLIS_INF_RIBBON_LOW = 62,                //!< Remaining ribbon is below low limit
+    EVOLIS_INF_CLEANING_MANDATORY = 63,        //!< Cleaning is mandatory
+    EVOLIS_INF_CLEANING = 64,                  //!< Cleaning is recommended
+    EVOLIS_INF_RESET = 65,                     //!< Printer has just rebooted
+    EVOLIS_INF_CLEAN_OUTWARRANTY = 66,         //!< Warranty lost, cleaning has not been done in time
+    EVOLIS_INF_CLEAN_LAST_OUTWARRANTY = 67,    //!< Cleaning is mandatory, next card printed will lose the warranty
+    EVOLIS_INF_CLEAN_2ND_PASS = 68,            //!< Cleaning sequence requires the second cleaning card
+    EVOLIS_INF_READY_FOR_CLEANING = 69,        //!< Printer ready for cleaning (ribbon has been removed and cover closed)
+    EVOLIS_INF_CLEANING_ADVANCED = 70,         //!< Advanced cleaning requested
+    EVOLIS_INF_WRONG_ZONE_RIBBON = 71,         //!< Installed ribbon has not the right zone
+    EVOLIS_INF_RIBBON_CHANGED = 72,            //!< Installed ribbon is different from the previous one
+    EVOLIS_INF_CLEANING_REQUIRED = 73,         //!< Cleaning is required
+    EVOLIS_INF_PRINTING_RUNNING = 74,          //!< Printing is in progress
+    EVOLIS_INF_ENCODING_RUNNING = 75,          //!< Encoding is in progress (smart, contactless or magnetic)
+    EVOLIS_INF_CLEANING_RUNNING = 76,          //!< Cleaning is in progress
+    EVOLIS_INF_WRONG_ZONE_ALERT = 77,          //!< Installed ribbon has wrong zone, there are only a few prints remaining before printing is blocked
+    EVOLIS_INF_WRONG_ZONE_EXPIRED = 78,        //!< Installed ribbon has wrong zone, printing is not allowed
+    EVOLIS_INF_SYNCH_PRINT_CENTER = 79,        //!< Raised by EPS during a pop-up
+    EVOLIS_INF_UPDATING_FIRMWARE = 80,         //!< Firmware is currently downloading
+    EVOLIS_INF_BUSY = 81,                      //!< The printer is busy (printing, encoding)
+    EVOLIS_INF_NO_LAMINATION_TO_DO = 82,       //!< Lamination module is set to 'pass through' mode
+    EVOLIS_INF_LAMI_ALLOW_TO_INSERT = 83,      //!< Lamination module ready to insert card
+    EVOLIS_INF_LAMINATING_RUNNING = 84,        //!< Lamination process is running
+    EVOLIS_INF_CLEAN_REMINDER = 85,            //!< Reminder to clean the laminator
+    EVOLIS_INF_LAMI_TEMP_NOT_READY = 86,       //!< Lamination roller is heating up, but its temperature is currently too low for the lamination process
+    EVOLIS_INF_SYNCHRONOUS_MODE = 87,          //!< Lamination process is set to synchronous
+    EVOLIS_INF_LCD_BUT_ACK = 88,               //!< LCD pop up button acknowledged
+    EVOLIS_INF_LCD_BUT_OK = 89,                //!< LCD pop up OK button pressed
+    EVOLIS_INF_LCD_BUT_RETRY = 90,             //!< LCD pop up Retry button pressed
+    EVOLIS_INF_LCD_BUT_CANCEL = 91,            //!< LCD pop up Cancel button pressed
+    EVOLIS_INF_FEEDER_NEAR_EMPTY = 92,         //!< Feeder is near empty (low level sensor)
+    EVOLIS_INF_FEEDER1_EMPTY = 93,             //!< Feeder 1 is empty for KM2000B
+    EVOLIS_INF_FEEDER2_EMPTY = 94,             //!< Feeder 2 is empty for KM2000B
+    EVOLIS_INF_FEEDER3_EMPTY = 95,             //!< Feeder 3 is empty for KM2000B
+    EVOLIS_INF_FEEDER4_EMPTY = 96,             //!< Feeder 4 is empty for KM2000B
+    EVOLIS_INF_FEEDER1_NEAR_EMPTY = 97,        //!< Feeder 1 is near empty for KM2000B
+    EVOLIS_INF_FEEDER2_NEAR_EMPTY = 98,        //!< Feeder 2 is near empty for KM2000B
+    EVOLIS_INF_FEEDER3_NEAR_EMPTY = 99,        //!< Feeder 3 is near empty for KM2000B
+    EVOLIS_INF_FEEDER4_NEAR_EMPTY = 100,       //!< Feeder 4 is near empty for KM2000B
+    EVOLIS_INF_SA_PROCESSING = 101,            //!< Sensor adjustment is running
+    EVOLIS_INF_SCP_PROCESSING = 102,           //!< Cleaning sequence is running
+    EVOLIS_INF_OPT_PROCESSING = 103,           //!< Option activation is running (with activation key)
+    EVOLIS_INF_X08_PRINTER_UNLOCKED = 104,     //!< Lock system currently unlocked
+    EVOLIS_INF_X08_FEEDER_OPEN = 105,          //!< Feeder cover is open (used with locking system)
+    EVOLIS_INF_X08_EJECTBOX_FULL = 106,        //!< Locking system feeder eject box full
+    EVOLIS_INF_X08_PRINT_UNLOCKED = 107,       //!< Printing is currently unlocked, both mechanically and firmware-wise
+    EVOLIS_INF_LAMINATE_UNKNOWN = 108,         //!< Installed laminate film is unknown/unreadable
+    EVOLIS_INF_LAMINATE_LOW = 109,             //!< Laminate film is close to its end
+    EVOLIS_INF_LAMI_CARD = 110,                //!< Card present in the lamination module
+    EVOLIS_INF_LAMI_CLEANING_RUNNING = 111,    //!< Lamination module cleaning process is running
+    EVOLIS_INF_LAMI_UPDATING_FIRMWARE = 112,   //!< Lamination module firmware update is running
+    EVOLIS_INF_LAMI_READY_FOR_CLEANING = 113,  //!< Lamination module ready for cleaning (no laminate film and cover closed)
+    EVOLIS_INF_CARD_REAR = 114,                //!< Card present at the rear of the printer
+    EVOLIS_INF_CLEAR_UNKNOWN = 115,            //!< Installed clear ribbon is unknown
+    EVOLIS_INF_CLEAR_LOW = 116,                //!< Remaining clear ribbon is below the low limit
+    EVOLIS_INF_WRONG_ZONE_CLEAR = 117,         //!< Installed clear ribbon has not the right zone
+    EVOLIS_INF_CLEAR_CHANGED = 118,            //!< Installed clear ribbon is different from the previous one
+    EVOLIS_INF_WRONG_ZONE_CLEAR_ALERT = 119,   //!< Installed clear ribbon has wrong zone: only a few prints remaining before printing is blocked
+    EVOLIS_INF_WRONG_ZONE_CLEAR_EXPIRED = 120, //!< Installed clear ribbon has wrong zone: printing not allowed
+    EVOLIS_INF_RETRANSFER_RUNNING = 121,       //!< Retransfer sequence is running
+    EVOLIS_INF_HEATING = 122,                  //!< Printer is heating up
+    EVOLIS_INF_CARD_MAN_FEED = 123,            //!< Card present in the manual feeding module
+    EVOLIS_INF_HEAT_ROLLER_WORN_OUT = 124,     //!< Heat roller reached its maximum recommended of retransfers
+    EVOLIS_INF_PRE_HEATING_PRINT_HEAD = 125,   //!< Print head pre heating in progress
+    EVOLIS_INF_CARD_BRIDGE = 126,              //!< The card is located in the bridge module
+    EVOLIS_INF_CARD_INDENTING = 127,           //!< The card is located in the indenting module
+    EVOLIS_INF_BRIDGE_UPDATING_FIRMWARE = 128, //!< Bridge module firmware update is running
+    EVOLIS_INF_CASSETTE_PRESENCE = 129,        //!< Internal K7 is inserted into feeder
+    EVOLIS_WAR_POWER_SUPPLY = 130,             //!< Power supply voltage is too low
+    EVOLIS_WAR_REMOVE_RIBBON = 131,            //!< Ribbon must be removed (in rewrite mode)
+    EVOLIS_WAR_RECEPTACLE_OPEN = 132,          //!< Not used
+    EVOLIS_WAR_REJECT_BOX_FULL = 133,          //!< Reject box is full
+    EVOLIS_WAR_CARD_ON_EJECT = 134,            //!< Card in eject position and has to be removed (in manual insertion mode)
+    EVOLIS_WAR_WAIT_CARD = 135,                //!< Printer is waiting for manual card insertion
+    EVOLIS_WAR_FEEDER_EMPTY = 136,             //!< Feeder is empty
+    EVOLIS_WAR_COOLING = 137,                  //!< Print head temperature too high: cooling down
+    EVOLIS_WAR_HOPPER_FULL = 138,              //!< Printer hopper is full
+    EVOLIS_WAR_RIBBON_ENDED = 139,             //!< Installed ribbon reached its end
+    EVOLIS_WAR_PRINTER_LOCKED = 140,           //!< Printer is locked (used with locking system)
+    EVOLIS_WAR_COVER_OPEN = 141,               //!< Printer cover is opened
+    EVOLIS_WAR_NO_RIBBON = 142,                //!< No ribbon detected in the printer
+    EVOLIS_WAR_UNSUPPORTED_RIBBON = 143,       //!< Installed ribbon is not supported by the printer
+    EVOLIS_WAR_NO_CLEAR = 144,                 //!< No clear ribbon installed
+    EVOLIS_WAR_CLEAR_END = 145,                //!< Clear ribbon reached its end
+    EVOLIS_WAR_CLEAR_UNSUPPORTED = 146,        //!< Installed clear ribbon is not supported by the printer
+    EVOLIS_WAR_REJECT_BOX_COVER_OPEN = 147,    //!< Reject box cover is open
+    EVOLIS_WAR_EPS_NO_AUTO = 148,              //!< For tagless ribbons, indicates to the EPS to not automatically set the ribbon
+    EVOLIS_WAR_FEEDER_OPEN = 149,              //!< Printer feeder is opened
+    EVOLIS_WAR_NO_LAMINATE = 150,              //!< No laminate film installed
+    EVOLIS_WAR_LAMI_COVER_OPEN = 151,          //!< Lamination module cover is open
+    EVOLIS_WAR_LAMINATE_END = 152,             //!< Laminate film reached its end
+    EVOLIS_WAR_LAMI_HOPPER_FULL = 153,         //!< Lamination module hopper is full
+    EVOLIS_WAR_LAMINATE_UNSUPPORTED = 154,     //!< Installed laminate film is not supported
+    EVOLIS_WAR_REJECT_BOX_ALMOST_FULL = 155,   //!< Reject box is almost full
+    EVOLIS_ERR_HEAD_TEMP = 156,                //!< Job interrupted because the print head temperature was too high
+    EVOLIS_ERR_NO_OPTION = 157,                //!< Requested option is not available
+    EVOLIS_ERR_FEEDER_ERROR = 158,             //!< Error while feeding a card
+    EVOLIS_ERR_RIBBON_ERROR = 159,             //!< Ribbon error during printing
+    EVOLIS_ERR_COVER_OPEN = 160,               //!< Job interrupted by an open cover
+    EVOLIS_ERR_MECHANICAL = 161,               //!< Mechanical error (card jam, ribbon jam, ...)
+    EVOLIS_ERR_REJECT_BOX_FULL = 162,          //!< Card sent to reject box but it was full
+    EVOLIS_ERR_BAD_RIBBON = 163,               //!< Job interrupted because the installed ribbon is not the one expected
+    EVOLIS_ERR_RIBBON_ENDED = 164,             //!< Job interrupted because the ribbon is finished
+    EVOLIS_ERR_HOPPER_FULL = 165,              //!< Card sent to hopper but it was full
+    EVOLIS_ERR_BLANK_TRACK = 166,              //!< No data on track after magnetic reading
+    EVOLIS_ERR_MAGNETIC_DATA = 167,            //!< Magnetic data is not matching the settings
+    EVOLIS_ERR_READ_MAGNETIC = 168,            //!< Corrupted/absent data on track after magnetic reading
+    EVOLIS_ERR_WRITE_MAGNETIC = 169,           //!< Corrupted/absent data on track after magnetic encoding
+    EVOLIS_ERR_FEATURE = 170,                  //!< Job sent is not supported by the printer
+    EVOLIS_ERR_RET_TEMPERATURE = 171,          //!< Retransfer roller couldn't reach its operating temperature in time
+    EVOLIS_ERR_CLEAR_ERROR = 172,              //!< Clear ribbon error during printing
+    EVOLIS_ERR_CLEAR_ENDED = 173,              //!< Job interrupted because the clear ribbon is finished
+    EVOLIS_ERR_BAD_CLEAR = 174,                //!< Job interrupted because the installed clear ribbon is not the one expected
+    EVOLIS_ERR_REJECT_BOX_COVER_OPEN = 175,    //!< Card sent to reject box but its cover was open
+    EVOLIS_ERR_CARD_ON_EJECT = 176,            //!< Card in eject position was not removed in time (in manual insertion mode)
+    EVOLIS_ERR_NO_CARD_INSERTED = 177,         //!< No card was presented in time (in manual insertion mode)
+    EVOLIS_ERR_FEEDER_OPEN = 178,              //!< Job interrupted because the printer feeder is opened
+    EVOLIS_ERR_LAMI_TEMPERATURE = 179,         //!< Job interrupted because the laminator temperature was too high
+    EVOLIS_ERR_LAMINATE = 180,                 //!< Error on the laminate film
+    EVOLIS_ERR_LAMI_MECHANICAL = 181,          //!< Mechanical error on the lamination module (card jam, ribbon jam, ...)
+    EVOLIS_ERR_LAMINATE_END = 182,             //!< Job interrupted because the laminate film is finished
+    EVOLIS_ERR_LAMI_COVER_OPEN = 183,          //!< Job interrupted by an open lamination module cover
+    EVOLIS_ERR_PRE_HEATING_PRINT_HEAD = 184,   //!< Print head pre heating : target not reach under the timeout on the last cycle
+    EVOLIS_RSV_WAR_0X20000000 = 185,           //!< Reserved flag WAR:0x20000000
+    EVOLIS_RSV_WAR_0X00800000 = 186,           //!< Reserved flag WAR:0x00800000
+    EVOLIS_RSV_WAR_0X00400000 = 187,           //!< Reserved flag WAR:0x00400000
+    EVOLIS_RSV_WAR_0X00004000 = 188,           //!< Reserved flag WAR:0x00004000
+    EVOLIS_RSV_WAR_0X00000080 = 189,           //!< Reserved flag WAR:0x00000080
+    EVOLIS_RSV_WAR_0X00000040 = 190,           //!< Reserved flag WAR:0x00000040
+    EVOLIS_RSV_WAR_0X00000020 = 191,           //!< Reserved flag WAR:0x00000020
+    EVOLIS_RSV_WAR_0X00000010 = 192,           //!< Reserved flag WAR:0x00000010
+    EVOLIS_RSV_WAR_0X00000008 = 193,           //!< Reserved flag WAR:0x00000008
+    EVOLIS_RSV_WAR_0X00000004 = 194,           //!< Reserved flag WAR:0x00000004
+    EVOLIS_RSV_WAR_0X00000002 = 195,           //!< Reserved flag WAR:0x00000002
+    EVOLIS_RSV_WAR_0X00000001 = 196,           //!< Reserved flag WAR:0x00000001
+    EVOLIS_RSV_ERR_0X80000000 = 197,           //!< Reserved flag ERR:0x80000000
+    EVOLIS_RSV_ERR_0X40000000 = 198,           //!< Reserved flag ERR:0x40000000
+    EVOLIS_RSV_ERR_0X00000040 = 199,           //!< Reserved flag ERR:0x00000040
+    EVOLIS_RSV_ERR_0X00000020 = 200,           //!< Reserved flag ERR:0x00000020
+    EVOLIS_RSV_ERR_0X00000010 = 201,           //!< Reserved flag ERR:0x00000010
+    EVOLIS_RSV_ERR_0X00000008 = 202,           //!< Reserved flag ERR:0x00000008
+    EVOLIS_RSV_ERR_0X00000004 = 203,           //!< Reserved flag ERR:0x00000004
+    EVOLIS_RSV_ERR_0X00000002 = 204,           //!< Reserved flag ERR:0x00000002
+    EVOLIS_RSV_ERR_0X00000001 = 205,           //!< Reserved flag ERR:0x00000001
+    EVOLIS_RSV_EX3_0X10000000 = 206,           //!< Reserved flag EX3:0x10000000
+    EVOLIS_RSV_EX3_0X00800000 = 207,           //!< Reserved flag EX3:0x00800000
+    EVOLIS_RSV_EX3_0X00400000 = 208,           //!< Reserved flag EX3:0x00400000
+    EVOLIS_RSV_EX3_0X00200000 = 209,           //!< Reserved flag EX3:0x00200000
+    EVOLIS_RSV_EX3_0X00100000 = 210,           //!< Reserved flag EX3:0x00100000
+    EVOLIS_RSV_EX3_0X00080000 = 211,           //!< Reserved flag EX3:0x00080000
+    EVOLIS_RSV_EX3_0X00040000 = 212,           //!< Reserved flag EX3:0x00040000
+    EVOLIS_RSV_EX3_0X00020000 = 213,           //!< Reserved flag EX3:0x00020000
+    EVOLIS_RSV_EX3_0X00010000 = 214,           //!< Reserved flag EX3:0x00010000
+    EVOLIS_RSV_EX3_0X00008000 = 215,           //!< Reserved flag EX3:0x00008000
+    EVOLIS_RSV_EX3_0X00004000 = 216,           //!< Reserved flag EX3:0x00004000
+    EVOLIS_RSV_EX3_0X00002000 = 217,           //!< Reserved flag EX3:0x00002000
+    EVOLIS_RSV_EX3_0X00001000 = 218,           //!< Reserved flag EX3:0x00001000
+    EVOLIS_RSV_EX3_0X00000800 = 219,           //!< Reserved flag EX3:0x00000800
+    EVOLIS_RSV_EX3_0X00000400 = 220,           //!< Reserved flag EX3:0x00000400
+    EVOLIS_RSV_EX3_0X00000200 = 221,           //!< Reserved flag EX3:0x00000200
+    EVOLIS_RSV_EX3_0X00000100 = 222,           //!< Reserved flag EX3:0x00000100
     EVOLIS_RSV_EX3_0X00000001 = 223,           //!< Reserved flag EX3:0x00000001
 } evolis_flag_t;
 
@@ -287,6 +287,8 @@ typedef enum evolis_flag_e {
     X(EVOLIS_CFG_EXTENSION_3, EX2, 0x80000000, "Extension 3 is used", DSE_STDEVOLIS_CFG_EXTENSION_3) \
     X(EVOLIS_CFG_LAMINATION_MODULE_2, EX2, 0x00800000, "Second lamination module detected", DSE_LAMINATOR_CFG_LAMINATION_MODULE_2) \
     X(EVOLIS_CFG_EXTENSION_4, EX3, 0x80000000, "Extension 4 is used", DSE_STDEVOLIS_CFG_EXTENSION_4) \
+    X(EVOLIS_CFG_BRIDGE, EX3, 0x00000080, "Configuration for bridge module", DSE_UNDEFINED) \
+    X(EVOLIS_CFG_INDENTING, EX3, 0x00000020, "Configuration for indenting module", DSE_UNDEFINED) \
     X(EVOLIS_INF_CLAIM, INF, 0x80000000, "Raised when EPS printing", DSE_STDEVOLIS_INF_CLAIM) \
     X(EVOLIS_INF_CARD_HOPPER, INF, 0x40000000, "Card present at the hopper", DSE_STDEVOLIS_INF_CARD_HOPPER) \
     X(EVOLIS_INF_CARD_FEEDER, INF, 0x20000000, "Card present in the feeder", DSE_STDEVOLIS_INF_CARD_FEEDER) \
@@ -363,6 +365,10 @@ typedef enum evolis_flag_e {
     X(EVOLIS_INF_CARD_MAN_FEED, EX3, 0x08000000, "Card present in the manual feeding module", DSE_STDEVOLIS_INF_CARD_MAN_FEED) \
     X(EVOLIS_INF_HEAT_ROLLER_WORN_OUT, EX3, 0x04000000, "Heat roller reached its maximum recommended of retransfers", DSE_STDEVOLIS_INF_HEAT_ROLLER_WORN_OUT) \
     X(EVOLIS_INF_PRE_HEATING_PRINT_HEAD, EX3, 0x02000000, "Print head pre heating in progress", DSE_STDEVOLIS_INF_PRE_HEATING_PRINT_HEAD) \
+    X(EVOLIS_INF_CARD_BRIDGE, EX3, 0x00000040, "The card is located in the bridge module", DSE_UNDEFINED) \
+    X(EVOLIS_INF_CARD_INDENTING, EX3, 0x00000010, "The card is located in the indenting module", DSE_UNDEFINED) \
+    X(EVOLIS_INF_BRIDGE_UPDATING_FIRMWARE, EX3, 0x00000008, "Bridge module firmware update is running", DSE_UNDEFINED) \
+    X(EVOLIS_INF_CASSETTE_PRESENCE, EX3, 0x00000002, "Internal K7 is inserted into feeder", DSE_UNDEFINED) \
     X(EVOLIS_WAR_POWER_SUPPLY, WAR, 0x80000000, "Power supply voltage is too low", DSE_STDEVOLIS_DEF_POWER_SUPPLY) \
     X(EVOLIS_WAR_REMOVE_RIBBON, WAR, 0x40000000, "Ribbon must be removed (in rewrite mode)", DSE_STDEVOLIS_DEF_REMOVE_RIBBON) \
     X(EVOLIS_WAR_RECEPTACLE_OPEN, WAR, 0x10000000, "Not used", DSE_STDEVOLIS_DEF_RECEPTACLE_OPEN) \
@@ -388,6 +394,7 @@ typedef enum evolis_flag_e {
     X(EVOLIS_WAR_LAMINATE_END, EX2, 0x00002000, "Laminate film reached its end", DSE_LAMINATOR_DEF_LAMINATE_END) \
     X(EVOLIS_WAR_LAMI_HOPPER_FULL, EX2, 0x00001000, "Lamination module hopper is full", DSE_LAMINATOR_DEF_LAMI_HOPPER_FULL) \
     X(EVOLIS_WAR_LAMINATE_UNSUPPORTED, EX2, 0x00000800, "Installed laminate film is not supported", DSE_LAMINATOR_DEF_LAMINATE_UNSUPPORTED) \
+    X(EVOLIS_WAR_REJECT_BOX_ALMOST_FULL, EX3, 0x00000004, "Reject box is almost full", DSE_UNDEFINED) \
     X(EVOLIS_ERR_HEAD_TEMP, ERR, 0x20000000, "Job interrupted because the print head temperature was too high", DSE_STDEVOLIS_ERR_HEAD_TEMP) \
     X(EVOLIS_ERR_NO_OPTION, ERR, 0x10000000, "Requested option is not available", DSE_STDEVOLIS_ERR_NO_OPTION) \
     X(EVOLIS_ERR_FEEDER_ERROR, ERR, 0x08000000, "Error while feeding a card", DSE_STDEVOLIS_ERR_FEEDER_ERROR) \
@@ -455,13 +462,6 @@ typedef enum evolis_flag_e {
     X(EVOLIS_RSV_EX3_0X00000400, EX3, 0x00000400, "Reserved flag EX3:0x00000400", DSE_UNDEFINED) \
     X(EVOLIS_RSV_EX3_0X00000200, EX3, 0x00000200, "Reserved flag EX3:0x00000200", DSE_UNDEFINED) \
     X(EVOLIS_RSV_EX3_0X00000100, EX3, 0x00000100, "Reserved flag EX3:0x00000100", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000080, EX3, 0x00000080, "Reserved flag EX3:0x00000080", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000040, EX3, 0x00000040, "Reserved flag EX3:0x00000040", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000020, EX3, 0x00000020, "Reserved flag EX3:0x00000020", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000010, EX3, 0x00000010, "Reserved flag EX3:0x00000010", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000008, EX3, 0x00000008, "Reserved flag EX3:0x00000008", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000004, EX3, 0x00000004, "Reserved flag EX3:0x00000004", DSE_UNDEFINED) \
-    X(EVOLIS_RSV_EX3_0X00000002, EX3, 0x00000002, "Reserved flag EX3:0x00000002", DSE_UNDEFINED) \
     X(EVOLIS_RSV_EX3_0X00000001, EX3, 0x00000001, "Reserved flag EX3:0x00000001", DSE_UNDEFINED) \
 
 #define EVOLIS_STATUS_EX_COUNT 4
@@ -803,13 +803,13 @@ typedef enum evolis_ex2_flag_e {
     X(RSV_EX3_0X00000400,             0x00000400, "Reserved flag EX3:0x00000400") \
     X(RSV_EX3_0X00000200,             0x00000200, "Reserved flag EX3:0x00000200") \
     X(RSV_EX3_0X00000100,             0x00000100, "Reserved flag EX3:0x00000100") \
-    X(RSV_EX3_0X00000080,             0x00000080, "Reserved flag EX3:0x00000080") \
-    X(RSV_EX3_0X00000040,             0x00000040, "Reserved flag EX3:0x00000040") \
-    X(RSV_EX3_0X00000020,             0x00000020, "Reserved flag EX3:0x00000020") \
-    X(RSV_EX3_0X00000010,             0x00000010, "Reserved flag EX3:0x00000010") \
-    X(RSV_EX3_0X00000008,             0x00000008, "Reserved flag EX3:0x00000008") \
-    X(RSV_EX3_0X00000004,             0x00000004, "Reserved flag EX3:0x00000004") \
-    X(RSV_EX3_0X00000002,             0x00000002, "Reserved flag EX3:0x00000002") \
+    X(CFG_BRIDGE,                     0x00000080, "Configuration for bridge module") \
+    X(INF_CARD_BRIDGE,                0x00000040, "The card is located in the bridge module") \
+    X(CFG_INDENTING,                  0x00000020, "Configuration for indenting module") \
+    X(INF_CARD_INDENTING,             0x00000010, "The card is located in the indenting module") \
+    X(INF_BRIDGE_UPDATING_FIRMWARE,   0x00000008, "Bridge module firmware update is running") \
+    X(DEF_REJECT_BOX_ALMOST_FULL,     0x00000004, "Reject box is almost full") \
+    X(INF_CASSETTE_PRESENCE,          0x00000002, "Internal K7 is inserted into feeder") \
     X(RSV_EX3_0X00000001,             0x00000001, "Reserved flag EX3:0x00000001") \
 
 /// @deprecated Use `evolis_flag_t` instead.
@@ -838,13 +838,13 @@ typedef enum evolis_ex3_flag_e {
     EVOLIS_EX3_RSV_EX3_0X00000400          = (int) 0x00000400, //!< Reserved flag EX3:0x00000400
     EVOLIS_EX3_RSV_EX3_0X00000200          = (int) 0x00000200, //!< Reserved flag EX3:0x00000200
     EVOLIS_EX3_RSV_EX3_0X00000100          = (int) 0x00000100, //!< Reserved flag EX3:0x00000100
-    EVOLIS_EX3_RSV_EX3_0X00000080          = (int) 0x00000080, //!< Reserved flag EX3:0x00000080
-    EVOLIS_EX3_RSV_EX3_0X00000040          = (int) 0x00000040, //!< Reserved flag EX3:0x00000040
-    EVOLIS_EX3_RSV_EX3_0X00000020          = (int) 0x00000020, //!< Reserved flag EX3:0x00000020
-    EVOLIS_EX3_RSV_EX3_0X00000010          = (int) 0x00000010, //!< Reserved flag EX3:0x00000010
-    EVOLIS_EX3_RSV_EX3_0X00000008          = (int) 0x00000008, //!< Reserved flag EX3:0x00000008
-    EVOLIS_EX3_RSV_EX3_0X00000004          = (int) 0x00000004, //!< Reserved flag EX3:0x00000004
-    EVOLIS_EX3_RSV_EX3_0X00000002          = (int) 0x00000002, //!< Reserved flag EX3:0x00000002
+    EVOLIS_EX3_CFG_BRIDGE                  = (int) 0x00000080, //!< Configuration for bridge module
+    EVOLIS_EX3_INF_CARD_BRIDGE             = (int) 0x00000040, //!< The card is located in the bridge module
+    EVOLIS_EX3_CFG_INDENTING               = (int) 0x00000020, //!< Configuration for indenting module
+    EVOLIS_EX3_INF_CARD_INDENTING          = (int) 0x00000010, //!< The card is located in the indenting module
+    EVOLIS_EX3_INF_BRIDGE_UPDATING_FIRMWARE = (int) 0x00000008, //!< Bridge module firmware update is running
+    EVOLIS_EX3_DEF_REJECT_BOX_ALMOST_FULL  = (int) 0x00000004, //!< Reject box is almost full
+    EVOLIS_EX3_INF_CASSETTE_PRESENCE       = (int) 0x00000002, //!< Internal K7 is inserted into feeder
     EVOLIS_EX3_RSV_EX3_0X00000001          = (int) 0x00000001, //!< Reserved flag EX3:0x00000001
 } evolis_ex3_flag_t;
 
