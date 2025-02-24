@@ -34,8 +34,8 @@ extern "C" {
 
 #define EVOLIS_VERSION_MAJOR 9
 #define EVOLIS_VERSION_MINOR 0
-#define EVOLIS_VERSION_PATCH 2
-#define EVOLIS_VERSION_BUILD 6484
+#define EVOLIS_VERSION_PATCH 3
+#define EVOLIS_VERSION_BUILD 6596
 
 #define EVOLIS_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 

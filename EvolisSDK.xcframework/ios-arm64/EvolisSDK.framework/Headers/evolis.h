@@ -938,39 +938,45 @@ typedef enum evolis_pos_e {
     /// For Avansia printers, the insert is made inside a printing job when the
     /// return status of `avansia_print_restult()` is `AVANSIA_PR_STANDBY_INS`.
     EVOLIS_CP_INSERT = 0,
-
     /// Insert card from back side. Move it to
     /// default position.
     EVOLIS_CP_INSERTBACK = 1,
-
     /// Insert then eject a card from the printer.
     EVOLIS_CP_INSERTEJECT = 2,
-
     /// Eject the card from the printer.
     /// 
     /// For Avansia printers, the eject is made inside a printing job when the
     /// return status of `avansia_print_result()` is `AVANSIA_PR_STANDBY_EJE`.
     EVOLIS_CP_EJECT = 3,
-
     /// Reject the card from the printer.
     /// 
     /// TODO
     /// For Avansia printers, the insert is made inside a printing job when the
     /// return status is STANDBY. TODO Terminer la doc en fonction du retour de print_exec().
     EVOLIS_CP_REJECT = 4,
-
     /// Move the card to the smart station.
     /// The card is inserted if none in the printer.
     EVOLIS_CP_CONTACT = 5,
-
     /// Move the card to the contact station.
     /// The card is inserted if none in the printer.
     EVOLIS_CP_CONTACTLESS = 6,
-
     /// Move the card in order to scan it (below the contact station).
     /// The card is inserted if none in the printer.
     EVOLIS_CP_SCAN = 7,
-
+#ifdef EVOLIS_SP_GWI
+    /// Eject the card under the printer throught the bridge.
+    EVOLIS_CP_EJECTBRIDGE = 1000,
+    /// Insert the card to the indenting module.
+    EVOLIS_CP_INSERTINDENTING = 1001,
+    /// Eject the card from indenting module.
+    EVOLIS_CP_EJECTINDENTING = 1002,
+    /// Eject the card to the manual feeder.
+    EVOLIS_CP_EJECTMANUALFEEDER = 1003,
+    /// Eject the card to the reject box.
+    EVOLIS_CP_EJECTREJECTBOX = 1004,
+    /// Insert the card from bridge to contactless station.
+    EVOLIS_CP_INSERTBRIDGECONTACLESS = 1005,
+#endif
 } evolis_pos_t;
 
 /// Set card insertion mode.
