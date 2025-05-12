@@ -174,9 +174,6 @@ EVOLIS_LIB void avansia_print_set_prnlog(avansia_t* printer, bool enabled, const
 /// Get PRN log state.
 EVOLIS_LIB bool avansia_print_get_prnlog(avansia_t* printer);
 
-/// Set the image to print.
-EVOLIS_LIB int avansia_print_set_image(avansia_t* printer, avansia_face_t face, const evolis_image_t* img);
-
 /// Set the image path to print.
 EVOLIS_LIB int avansia_print_set_imagep(avansia_t* printer, avansia_face_t face, const char* path);
 

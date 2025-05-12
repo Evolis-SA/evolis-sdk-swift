@@ -16,6 +16,6 @@
 #import "evolis_version.h"
 #import "evosettings_keys.h"
 #import "evosettings.h"
-#import "evolis-unstable.h"
+#import "evo-laminator.h"
 
 #endif /* bridge_h */
