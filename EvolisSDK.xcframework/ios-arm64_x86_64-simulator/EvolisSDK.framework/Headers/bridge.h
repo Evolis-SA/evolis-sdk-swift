@@ -1,6 +1,6 @@
 //
 //  bridge.h
-//  
+//
 //
 //  Created by Creative on 23/12/2022.
 //
@@ -16,6 +16,6 @@
 #import "evolis_version.h"
 #import "evosettings_keys.h"
 #import "evosettings.h"
-#import "evolis-unstable.h"
+#import "evo-laminator.h"
 
 #endif /* bridge_h */

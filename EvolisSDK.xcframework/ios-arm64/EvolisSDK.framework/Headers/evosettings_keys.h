@@ -27,7 +27,6 @@ extern "C" {
     X(BOverlayContrast) \
     X(BOverlayManagement) \
     X(BOverlaySecondManagement) \
-    X(UIBOverlayManagement) \
     X(BPageRotate180) \
     X(BRwErasingSpeed) \
     X(BRwErasingTemperature) \
@@ -48,7 +47,6 @@ extern "C" {
     X(FOverlayContrast) \
     X(FOverlayManagement) \
     X(FOverlaySecondManagement) \
-    X(UIFOverlayManagement) \
     X(FPageRotate180) \
     X(FRwErasingSpeed) \
     X(FRwErasingTemperature) \
@@ -86,6 +84,7 @@ extern "C" {
     X(IBOverlayDefaultContent) \
     X(IBOverlaySecondCustom) \
     X(IBOverlaySecondDefaultContent) \
+    X(IBRegionPrintingMode) \
     X(IBRwCustom) \
     X(IBRwCustomBitmap) \
     X(IBTextRegion) \
@@ -100,6 +99,7 @@ extern "C" {
     X(IFOverlayDefaultContent) \
     X(IFOverlaySecondCustom) \
     X(IFOverlaySecondDefaultContent) \
+    X(IFRegionPrintingMode) \
     X(IFRwCustom) \
     X(IFRwCustomBitmap) \
     X(IFTextRegion) \
@@ -116,6 +116,7 @@ extern "C" {
     X(IGIQLACY) \
     X(IGMonoReaderType) \
     X(IGMonochromeSpeed) \
+    X(IGRegionOrientation) \
     X(IGRibbonOptimization) \
     X(IGSendIQLA) \
     X(IGSendSpoolerSession) \
@@ -137,10 +138,6 @@ extern "C" {
     X(Track3Data) \
     X(PrinterIsManaged) \
     X(srvAddress) \
-    X(UIBOverlayDefaultAreasList) \
-    X(UIBRwCustomAreasList) \
-    X(UIFOverlayDefaultAreasList) \
-    X(UIFRwCustomAreasList) \
     X(UIMagTrackSettingMode) \
     X(UIRibbonMode) \
     X(UpdatedByDrv) \
@@ -226,23 +223,16 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_BOverlayManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_BOverlayManagement,
     /**
      * EVOSETTINGS_KE_BOverlaySecondManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_BOverlaySecondManagement,
-    /**
-     * EVOSETTINGS_KE_UIBOverlayManagement
-     * Usable in PrintSessions: false
-     * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
-     */
-    EVOSETTINGS_KE_UIBOverlayManagement,
     /**
      * EVOSETTINGS_KE_BPageRotate180
      * Usable in PrintSessions: true
@@ -373,23 +363,16 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_FOverlayManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_FOverlayManagement,
     /**
      * EVOSETTINGS_KE_FOverlaySecondManagement
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
+     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH
      */
     EVOSETTINGS_KE_FOverlaySecondManagement,
-    /**
-     * EVOSETTINGS_KE_UIFOverlayManagement
-     * Usable in PrintSessions: false
-     * Type: LIST
-     * Possible values: NOVARNISH, FULLVARNISH, BMPVARNISH, UVVARNISH
-     */
-    EVOSETTINGS_KE_UIFOverlayManagement,
     /**
      * EVOSETTINGS_KE_FPageRotate180
      * Usable in PrintSessions: true
@@ -562,7 +545,7 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_GRibbonType
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: RC_YMCKI, RC_YMCKKI, RC_YMCFK, RC_YMCK, RC_YMCKK, RC_YMCKO, RC_YMCKOS, RC_YMCKOS13, RC_YMCKOK, RC_YMCKOKOS, RC_YMCKOO, RM_KO, RM_KBLACK, RM_KWHITE, RM_KRED, RM_KGREEN, RM_KBLUE, RM_KSCRATCH, RM_KMETALSILVER, RM_KMETALGOLD, RM_KSIGNATURE, RM_KWAX, RM_KPREMIUM, RM_HOLO, RM_SOKO, RC_YMCK_A, RC_YMCKK_A, RC_YMCKI_A, RC_YMCKH_A, RC_YMCFK_A, RC_YMCKSI_A
+     * Possible values: RC_YMCKI, RC_YMCKKI, RC_YMCFK, RC_YMCK, RC_YMCKK, RC_YMCKO, RC_YMCKOS, RC_YMCKOS13, RC_YMCKOK, RC_YMCKOKS13, RC_YMCKOKOS, RC_YMCKOO, RM_KO, RM_KBLACK, RM_KWHITE, RM_KRED, RM_KGREEN, RM_KBLUE, RM_KSCRATCH, RM_KMETALSILVER, RM_KMETALGOLD, RM_KSIGNATURE, RM_KWAX, RM_KPREMIUM, RM_HOLO, RM_SOKO, RC_YMCK_A, RC_YMCKK_A, RC_YMCKI_A, RC_YMCKH_A, RC_YMCFK_A, RC_YMCKSI_A, RM_KBLACK_R
      */
     EVOSETTINGS_KE_GRibbonType,
     /**
@@ -643,6 +626,13 @@ typedef enum evosettings_key_e {
      * Type: BLOB
      */
     EVOSETTINGS_KE_IBOverlaySecondDefaultContent,
+    /**
+     * EVOSETTINGS_KE_IBRegionPrintingMode
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: RESIN, BLACK_COMPOSITE
+     */
+    EVOSETTINGS_KE_IBRegionPrintingMode,
     /**
      * EVOSETTINGS_KE_IBRwCustom
      * Usable in PrintSessions: true
@@ -730,6 +720,13 @@ typedef enum evosettings_key_e {
      * Type: BLOB
      */
     EVOSETTINGS_KE_IFOverlaySecondDefaultContent,
+    /**
+     * EVOSETTINGS_KE_IFRegionPrintingMode
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: RESIN, BLACK_COMPOSITE
+     */
+    EVOSETTINGS_KE_IFRegionPrintingMode,
     /**
      * EVOSETTINGS_KE_IFRwCustom
      * Usable in PrintSessions: true
@@ -836,6 +833,13 @@ typedef enum evosettings_key_e {
      * Range: 1-10
      */
     EVOSETTINGS_KE_IGMonochromeSpeed,
+    /**
+     * EVOSETTINGS_KE_IGRegionOrientation
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: LANDSCAPE, PORTRAIT
+     */
+    EVOSETTINGS_KE_IGRegionOrientation,
     /**
      * EVOSETTINGS_KE_IGRibbonOptimization
      * Usable in PrintSessions: true
@@ -974,30 +978,6 @@ typedef enum evosettings_key_e {
      * Type: TEXT
      */
     EVOSETTINGS_KE_srvAddress,
-    /**
-     * EVOSETTINGS_KE_UIBOverlayDefaultAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIBOverlayDefaultAreasList,
-    /**
-     * EVOSETTINGS_KE_UIBRwCustomAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIBRwCustomAreasList,
-    /**
-     * EVOSETTINGS_KE_UIFOverlayDefaultAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIFOverlayDefaultAreasList,
-    /**
-     * EVOSETTINGS_KE_UIFRwCustomAreasList
-     * Usable in PrintSessions: false
-     * Type: TEXT
-     */
-    EVOSETTINGS_KE_UIFRwCustomAreasList,
     /**
      * EVOSETTINGS_KE_UIMagTrackSettingMode
      * Usable in PrintSessions: false
@@ -1195,3 +1175,4 @@ typedef enum evosettings_key_e {
 #ifdef __cplusplus
 }
 #endif
+
