@@ -51,6 +51,8 @@ extern "C" {
 // - SCAN
 // - LOGGING
 // - FILE HELPERS
+// - SECURITY
+// - STANDBY
 //
 
 //
@@ -174,6 +176,9 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
 #define EVOLIS_RETURN_CODES(X) \
     X(OK, 0) \
     X(EUNDEFINED, -1) \
+    X(EINTERNAL, -2) \
+    X(ECANCELLED, -3) \
+    X(EDISABLED, -4) \
     X(EUNSUPPORTED, -5) \
     X(EPARAMS, -6) \
     X(ETIMEOUT, -7) \
@@ -190,6 +195,8 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(PRINT_EUNKNOWNRIBBON, -25) \
     X(PRINT_ENOIMAGE, -26) \
     X(PRINT_WSETTING, -27) \
+    X(PRINT_EJOB, -28) \
+    X(PRINT_ESESSION, -29) \
     X(LAM_ENOCOM, -40) \
     X(LAM_EDEVICE, -41) \
     X(LAM_ERROR, -42) \
@@ -202,6 +209,25 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(PRINTER_EOTHER, -62) \
     X(PRINTER_EBUSY, -63) \
     X(PRINTER_NOSTATUS, -64) \
+    X(PRINTER_EMODEL, -65) \
+    X(PRINTER_NETWORK_ERROR, -80) \
+    X(PRINTER_NETWORK_ECERT, -81) \
+    X(CARD_ERROR, -200) \
+    X(CARD_EINSERTION, -201) \
+    X(SMART_ERROR, -300) \
+    X(SMART_ENOCOM, -301) \
+    X(SMART_ENOCARD, -302) \
+    X(SMART_EBUSY, -303) \
+    X(SYSTEM_ERROR, -500) \
+    X(SYSTEM_EBUSY, -501) \
+    X(SYSTEM_EFILE, -502) \
+    X(USER_ERROR, -600) \
+    X(USER_EUNIDENTIFIED, -601) \
+    X(USER_EUNAUTHORIZED, -602) \
+    X(USER_ETIMEOUT, -603) \
+    X(USER_EINVALID, -604) \
+    X(SANDBOX_ERROR, -700) \
+    X(SANDBOX_EBUSY, -701) \
     X(SVC_ENOCOM, -10000) \
     X(SVC_EREPLY, -10001) \
     X(SVC_ERROR, -10002) \
@@ -215,41 +241,65 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(HTTP_ERROR, -20500) \
 
 typedef enum evolis_return_code_e {
-    EVOLIS_RC_OK = 0,                       //!< Everything is good.
-    EVOLIS_RC_EUNDEFINED = -1,              //!< Error code when an undefined error occurs.
-    EVOLIS_RC_EUNSUPPORTED = -5,            //!< Error code when the library or printer does not support requested feature.
-    EVOLIS_RC_EPARAMS = -6,                 //!< Invalid params given to the API.
-    EVOLIS_RC_ETIMEOUT = -7,                //!< A timeout occured during function call.
-    EVOLIS_RC_SESSION_ETIMEOUT = -10,       //!< Printer reservation have expired.
-    EVOLIS_RC_SESSION_EBUSY = -11,          //!< Printer in use, session detected.
-    EVOLIS_RC_SESSION_DISABLED = -12,       //!< Session management is disabled. See evolis_set_session_management().
-    EVOLIS_RC_SESSION_FAILED = -13,         //!< An error was encountered while trying to reserve the printer
-    EVOLIS_RC_SESSION_ENABLED = -14,        //!< This operation is not available when the session management is on. See evolis_set_session_management().
-    EVOLIS_RC_PRINT_EDATA = -20,            //!< Bad input data, check images and settings.
-    EVOLIS_RC_PRINT_NEEDACTION = -21,       //!< Printer not ready to print. Cover open ? Feeder ?
-    EVOLIS_RC_PRINT_EMECHANICAL = -22,      //!< Mechanical error happened while printing.
+    EVOLIS_RC_OK = 0,                       //!< Everything is good
+    EVOLIS_RC_EUNDEFINED = -1,              //!< An undefined error occured
+    EVOLIS_RC_EINTERNAL = -2,               //!< An internal logic error occured
+    EVOLIS_RC_ECANCELLED = -3,              //!< The operation was cancelled before completion
+    EVOLIS_RC_EDISABLED = -4,               //!< The requested feature is currently disabled
+    EVOLIS_RC_EUNSUPPORTED = -5,            //!< The requested feature is not supported by the library or the printer
+    EVOLIS_RC_EPARAMS = -6,                 //!< Some invalid parameters were provided to the API
+    EVOLIS_RC_ETIMEOUT = -7,                //!< A timeout occured during function call
+    EVOLIS_RC_SESSION_ETIMEOUT = -10,       //!< The printer reservation has expired
+    EVOLIS_RC_SESSION_EBUSY = -11,          //!< The printer is in use, session detected
+    EVOLIS_RC_SESSION_DISABLED = -12,       //!< The session management is disabled. See evolis_set_session_management()
+    EVOLIS_RC_SESSION_FAILED = -13,         //!< An error occured while trying to reserve the printer
+    EVOLIS_RC_SESSION_ENABLED = -14,        //!< The operation is not available when the session management is on. See evolis_set_session_management()
+    EVOLIS_RC_PRINT_EDATA = -20,            //!< Invalid input data, check images and settings
+    EVOLIS_RC_PRINT_NEEDACTION = -21,       //!< The printer is not ready to print. Check ribbon, cover, feeder, etc
+    EVOLIS_RC_PRINT_EMECHANICAL = -22,      //!< A mechanical error happened during printing
     EVOLIS_RC_PRINT_WAITCARDINSERT = -23,   //!< Avansia only
     EVOLIS_RC_PRINT_WAITCARDEJECT = -24,    //!< Avansia only
-    EVOLIS_RC_PRINT_EUNKNOWNRIBBON = -25,   //!< Missing GRibbonType setting.
-    EVOLIS_RC_PRINT_ENOIMAGE = -26,         //!< No image given.
-    EVOLIS_RC_PRINT_WSETTING = -27,         //!< Settings were imported from the driver, and at least one could not be read
-    EVOLIS_RC_LAM_ENOCOM = -40,             //!< The laminator module is missing or can't communicate with the printer
-    EVOLIS_RC_LAM_EDEVICE = -41,            //!< The device is not a laminator module
+    EVOLIS_RC_PRINT_EUNKNOWNRIBBON = -25,   //!< The GRibbonType setting missing
+    EVOLIS_RC_PRINT_ENOIMAGE = -26,         //!< No image was provided
+    EVOLIS_RC_PRINT_WSETTING = -27,         //!< The settings were imported from the driver and at least one could not be read
+    EVOLIS_RC_PRINT_EJOB = -28,             //!< A print job was not created or has expired
+    EVOLIS_RC_PRINT_ESESSION = -29,         //!< No session currently available
+    EVOLIS_RC_LAM_ENOCOM = -40,             //!< The lamination module is missing or can't communicate with the printer
+    EVOLIS_RC_LAM_EDEVICE = -41,            //!< The device is not a lamination module
     EVOLIS_RC_LAM_ERROR = -42,              //!< The lamination module indicated an error
     EVOLIS_RC_LAM_EVALUE = -43,             //!< The value used or returned by the lamination module doesn't match the expected format
-    EVOLIS_RC_MAG_ERROR = -50,              //!< Error reading or writing magnetic data.
-    EVOLIS_RC_MAG_EDATA = -51,              //!< The data that you are trying to write on the magnetic track is not valid.
-    EVOLIS_RC_MAG_EBLANK = -52,             //!< Magnetic track is blank.
-    EVOLIS_RC_PRINTER_ENOCOM = -60,         //!< Printer offline.
-    EVOLIS_RC_PRINTER_EREPLY = -61,         //!< Printer reply contains "ERR".
-    EVOLIS_RC_PRINTER_EOTHER = -62,         //!< macOS only. USB printer in use by other software.
-    EVOLIS_RC_PRINTER_EBUSY = -63,          //!< macOS only. CUPS is printing.
-    EVOLIS_RC_PRINTER_NOSTATUS = -64,       //!< Status disabled on the printer.
+    EVOLIS_RC_MAG_ERROR = -50,              //!< Error reading or writing magnetic data
+    EVOLIS_RC_MAG_EDATA = -51,              //!< The data intended to be written to the magnetic track is not valid
+    EVOLIS_RC_MAG_EBLANK = -52,             //!< The magnetic track is blank
+    EVOLIS_RC_PRINTER_ENOCOM = -60,         //!< The printer is offline
+    EVOLIS_RC_PRINTER_EREPLY = -61,         //!< The printer reply contains "ERR"
+    EVOLIS_RC_PRINTER_EOTHER = -62,         //!< macOS only. USB printer in use by other software
+    EVOLIS_RC_PRINTER_EBUSY = -63,          //!< macOS only. CUPS is printing
+    EVOLIS_RC_PRINTER_NOSTATUS = -64,       //!< Statuses are disabled on the printer
+    EVOLIS_RC_PRINTER_EMODEL = -65,         //!< The printer model is invalid
+    EVOLIS_RC_PRINTER_NETWORK_ERROR = -80,  //!< An error occured during network operation
+    EVOLIS_RC_PRINTER_NETWORK_ECERT = -81,  //!< The certificate is invalid
+    EVOLIS_RC_CARD_ERROR = -200,            //!< An error occured during card movement
+    EVOLIS_RC_CARD_EINSERTION = -201,       //!< An error occured during card insertion
+    EVOLIS_RC_SMART_ERROR = -300,           //!< An error occured during a smart operation
+    EVOLIS_RC_SMART_ENOCOM = -301,          //!< Failed to communicate with the PCSC reader
+    EVOLIS_RC_SMART_ENOCARD = -302,         //!< No smart card present to perform the reading/encoding operations
+    EVOLIS_RC_SMART_EBUSY = -303,           //!< The card is already connected to a PCSC encoder
+    EVOLIS_RC_SYSTEM_ERROR = -500,          //!< An error occured during an internal OS process
+    EVOLIS_RC_SYSTEM_EBUSY = -501,          //!< The OS is currently busy
+    EVOLIS_RC_SYSTEM_EFILE = -502,          //!< An error occured during a filesystem operation
+    EVOLIS_RC_USER_ERROR = -600,            //!< Authentication failure
+    EVOLIS_RC_USER_EUNIDENTIFIED = -601,    //!< No user currently logged in, authentication required
+    EVOLIS_RC_USER_EUNAUTHORIZED = -602,    //!< The user is not authorized to perform this action
+    EVOLIS_RC_USER_ETIMEOUT = -603,         //!< The login session expired
+    EVOLIS_RC_USER_EINVALID = -604,         //!< Invalid login data was provided
+    EVOLIS_RC_SANDBOX_ERROR = -700,         //!< An error occured during sandbox operation
+    EVOLIS_RC_SANDBOX_EBUSY = -701,         //!< The sandbox is currently busy
     EVOLIS_RC_SVC_ENOCOM = -10000,          //!< Failed to communicate with the service
     EVOLIS_RC_SVC_EREPLY = -10001,          //!< Invalid service reply
     EVOLIS_RC_SVC_ERROR = -10002,           //!< The service indicated an error
-    EVOLIS_RC_SVC_EDATA = -10003,           //!< The input data could not be sent to the service
-    EVOLIS_RC_SVC_NO_EVENT = -10004,        //!< There is no active event for the printer
+    EVOLIS_RC_SVC_EDATA = -10003,           //!< The input data could not be send to the service
+    EVOLIS_RC_SVC_NO_EVENT = -10004,        //!< No active event available for the printer
     EVOLIS_RC_SVC_EEVENT = -10005,          //!< The selected event is not active for the printer
     EVOLIS_RC_SVC_EACTION = -10006,         //!< The selected action is not active for current printer event
     EVOLIS_RC_HTTP_REPLY_NOT_OK = -20000,   //!< A reply was received with an HTTP error code (internal usage)
@@ -324,6 +374,8 @@ typedef enum evolis_model_e {
     EVOLIS_MO_EVOLIS_AGILIA = 43,
     EVOLIS_MO_ATC_ATC600 = 44,
     EVOLIS_MO_EVOLIS_QUANTUM2 = 45,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 46,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 47,
 } evolis_model_t;
 
 typedef enum evolis_link_e {
@@ -377,7 +429,7 @@ EVOLIS_WRA void evolis_free_devices(_In_ evolis_device_t* devices);
 EVOLIS_LIB const char* evolis_get_mark_name(_In_ evolis_mark_t mark);
 
 /// Returns a string describing the model argument.
-EVOLIS_LIB const char* evolis_get_model_name(_In_ evolis_model_t model);
+EVOLIS_WRA const char* evolis_get_model_name(_In_ evolis_model_t model);
 
 //
 // ToC/DEVICE I/O
@@ -676,6 +728,12 @@ EVOLIS_LIB int evolis_get_cleaning2(_In_ evolis_t* printer, _Out_ evolis_cleanin
 /// Get ribbon name.
 EVOLIS_LIB const char* evolis_get_ribbon_name(_In_ evolis_ribbon_type_t rt);
 
+/// Get the model of the current printer
+EVOLIS_LIB evolis_model_t evolis_get_model(evolis_t* ctx);
+
+/// Get the mark of the current printer
+EVOLIS_LIB evolis_mark_t evolis_get_mark(evolis_t* ctx);
+
 //
 // ToC/DEVICE STATE
 // ----------------
@@ -814,6 +872,7 @@ typedef enum evolis_minor_state_e {
     EVOLIS_MI_AVANSIA_OPT_MAGNETIC_JIS2 = 118,
     EVOLIS_MI_DEF_FEEDER_OPEN = 119,
     EVOLIS_MI_ERR_FEEDER_OPEN = 120,
+    EVOLIS_MI_INF_LAMI_CLEANING = 121,
 } evolis_minor_state_t;
 
 /// Get device state.
@@ -1057,6 +1116,9 @@ EVOLIS_WRA int evolis_eject(_In_ evolis_t* printer);
 /// Reject a card from the printer.
 EVOLIS_WRA int evolis_reject(_In_ evolis_t* printer);
 
+/// Flip the card.
+EVOLIS_WRA int evolis_card_flip(_In_ evolis_t* printer);
+
 //
 // ToC/BEZEL SETTINGS
 // ------------------
@@ -1148,6 +1210,13 @@ typedef enum evolis_mag_coercivity_e {
 
 } evolis_mag_coercivity_t;
 
+/// List of tracks.
+typedef enum evolis_mag_track_number_e {
+    EVOLIS_MT_TRACK1 = 0, //!< First magnetic track
+    EVOLIS_MT_TRACK2 = 1, //!< Second magnetic track
+    EVOLIS_MT_TRACK3 = 2, //!< Third magnetic track
+} evolis_mag_track_number_t;
+
 /// Structure for reading/writing on magnetic tracks.
 typedef struct evolis_mag_tracks_s {
     /// Tracks data.
@@ -1180,7 +1249,7 @@ EVOLIS_LIB int evolis_mag_set_coercivity(_In_ evolis_t* printer, _In_ evolis_mag
 EVOLIS_LIB int evolis_mag_get_track(_In_ evolis_mag_tracks_t* tracks, _In_ int track, _Out_ char** dataPtr);
 
 /// Helper function to fill `evolis_mag_tracks_t` structure.
-EVOLIS_LIB void evolis_mag_set_track(evolis_mag_tracks_t* tracks, int track, evolis_mag_format_t fmt, const char* data);
+EVOLIS_LIB int evolis_mag_set_track(evolis_mag_tracks_t* tracks, int track, evolis_mag_format_t fmt, const char* data);
 
 /// Write mag tracks to the card.
 EVOLIS_WRA int evolis_mag_write(_In_ evolis_t* printer, _In_ evolis_mag_tracks_t* tracks);
@@ -1189,7 +1258,16 @@ EVOLIS_WRA int evolis_mag_write(_In_ evolis_t* printer, _In_ evolis_mag_tracks_t
 EVOLIS_WRA int evolis_mag_read(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks);
 
 /// Read some mag tracks from the card.
-EVOLIS_WRA int evolis_mag_read_tracks(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks, _In_ bool t0, _In_ bool t1, _In_ bool t2);
+EVOLIS_WRA int evolis_mag_read_tracks(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks, _In_ bool track1, _In_ bool track2, _In_ bool track3);
+
+/// Write mag tracks to the card with a custom timeout argument in ms.
+EVOLIS_WRA int evolis_mag_writet(_In_ evolis_t* printer, _In_ evolis_mag_tracks_t* tracks, _In_ int timeout);
+
+/// Read all mag tracks from the card with a custom timeout argument in ms.
+EVOLIS_WRA int evolis_mag_readt(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks, _In_ int timeout);
+
+/// Read some mag tracks from the card with a custom timeout argument in ms.
+EVOLIS_WRA int evolis_mag_read_trackst(_In_ evolis_t* printer, _Out_ evolis_mag_tracks_t* tracks, _In_ bool track1, _In_ bool track2, _In_ bool track3, _In_ int timeout);
 
 //
 // ToC/PRINTING
@@ -1222,7 +1300,7 @@ typedef enum evolis_settings_rules_level_e {
     EVOLIS_RL_UPDATE_DUPLEX = 0x0001,
 
     /// Set default layers configuration for the selected ribbon
-    /// (eg activate the first overlay and black point if available)
+    /// (eg activate the first overlay, uv and black point if available)
     EVOLIS_RL_UPDATE_LAYERS = 0x0002,
 
     /// Apply UPDATE_DUPLEX and UPDATE_LAYERS rules
@@ -1404,6 +1482,12 @@ EVOLIS_WRA int evolis_print_set_silverp(_In_ evolis_t* printer, _In_ evolis_face
 /// Use the image buffer to print with silver panel (Avansia).
 EVOLIS_LIB int evolis_print_set_silverb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
 
+/// Use the image at path to print with the fluo pannel
+EVOLIS_WRA int evolis_print_set_uvp(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const char* path);
+
+/// Use the image buffer to print with the fluo pannel
+EVOLIS_LIB int evolis_print_set_uvb(_In_ evolis_t* printer, _In_ evolis_face_t face, _In_ const evobuf* data, _In_ size_t size);
+
 /// Start printing.
 EVOLIS_LIB int evolis_print_exec(_In_ evolis_t* printer);
 
@@ -1543,6 +1627,68 @@ EVOLIS_LIB int evolis_file_write(const char* filename, const char* data, size_t 
 
 /// Free memory allocated by `evolis_file_read()`.
 EVOLIS_LIB void evolis_file_free(char* p);
+
+///
+/// ToC/SECURITY
+/// ----------------
+///
+
+/// Configure duration of temporary unlock.
+EVOLIS_WRA int evolis_unlock_set_time(_In_ evolis_t* ctx, _In_ uint16_t time);
+
+/// Get duration of temporary unlock.
+EVOLIS_WRA int evolis_unlock_get_time(_In_ evolis_t* ctx);
+
+/// Unlock the printer.
+EVOLIS_WRA int evolis_unlock(_In_ evolis_t* ctx);
+
+/// Lock the printer.
+EVOLIS_WRA int evolis_lock(_In_ evolis_t* ctx);
+
+/// Enable electromechanical locking system.
+EVOLIS_WRA int evolis_lock_enable(_In_ evolis_t* ctx);
+
+/// Disable electromechanical locking system.
+EVOLIS_WRA int evolis_lock_disable(_In_ evolis_t* ctx);
+
+/// Get the state of the lock.
+EVOLIS_WRA int evolis_lock_is_enabled(_In_ evolis_t* ctx, _Out_ bool* isEnabled);
+
+/// Enable the kineclipse feature.
+EVOLIS_WRA int evolis_kineclipse_enable(_In_ evolis_t* ctx);
+
+/// Disable the kineclipse feature.
+EVOLIS_WRA int evolis_kineclipse_disable(_In_ evolis_t* ctx);
+
+/// Configure the number of passes of the kineclipse feature.
+EVOLIS_WRA int evolis_kineclipse_set_number_of_passes(_In_ evolis_t* ctx, _In_ uint8_t passes);
+
+/// Get the number of passes of the kineclipse feature.
+EVOLIS_WRA int evolis_kineclipse_get_number_of_passes(_In_ evolis_t* ctx);
+
+/// Get the state of the kineclipse.
+EVOLIS_WRA int evolis_kineclipse_is_enabled(_In_ evolis_t* ctx, _Out_ bool* isEnabled);
+
+///
+/// ToC/STANDBY
+/// ----------------
+///
+
+/// Set the standby time.
+EVOLIS_WRA int evolis_set_time_to_standby(_In_ evolis_t* ctx, _In_ uint16_t seconds);
+
+/// Get the standby time.
+EVOLIS_WRA int evolis_get_time_to_standby(_In_ evolis_t* ctx);
+
+/// Set the automatic shutdown time.
+EVOLIS_WRA int evolis_set_time_to_auto_shutdown(_In_ evolis_t* ctx, _In_ uint16_t seconds);
+
+/// Get the automatic shutdown time.
+EVOLIS_WRA int evolis_get_time_to_auto_shutdown(_In_ evolis_t* ctx);
+
+/// Shutdown the printer.
+EVOLIS_WRA int evolis_shutdown(_In_ evolis_t* ctx);
+
 
 #ifdef __ANDROID__
 #  include <jni.h>

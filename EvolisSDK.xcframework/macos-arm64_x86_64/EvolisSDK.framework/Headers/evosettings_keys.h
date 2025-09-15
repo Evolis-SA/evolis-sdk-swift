@@ -36,7 +36,6 @@ extern "C" {
     X(BUvBrightness) \
     X(BUvContrast) \
     X(BUvManagement) \
-    X(BUvPremium) \
     X(Duplex) \
     X(FBlackManagement) \
     X(FColorBrightness) \
@@ -56,7 +55,6 @@ extern "C" {
     X(FUvBrightness) \
     X(FUvContrast) \
     X(FUvManagement) \
-    X(FUvPremium) \
     X(GCardPreloading) \
     X(GDigitalScrambling) \
     X(GDuplexType) \
@@ -76,6 +74,7 @@ extern "C" {
     X(GPrintingMode) \
     X(GShortPanelManagement) \
     X(GSmoothing) \
+    X(GUvPremium) \
     X(IBBlackCustom) \
     X(IBBlackLevelValue) \
     X(IBDarkLevelValue) \
@@ -117,7 +116,6 @@ extern "C" {
     X(IGMonoReaderType) \
     X(IGMonochromeSpeed) \
     X(IGRegionOrientation) \
-    X(IGRibbonOptimization) \
     X(IGSendIQLA) \
     X(IGSendSpoolerSession) \
     X(IGDisableAutoEject) \
@@ -297,13 +295,6 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_BUvManagement,
     /**
-     * EVOSETTINGS_KE_BUvPremium
-     * Usable in PrintSessions: true
-     * Type: LIST
-     * Possible values: ON, OFF
-     */
-    EVOSETTINGS_KE_BUvPremium,
-    /**
      * EVOSETTINGS_KE_Duplex
      * Usable in PrintSessions: true
      * Type: LIST
@@ -437,13 +428,6 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_FUvManagement,
     /**
-     * EVOSETTINGS_KE_FUvPremium
-     * Usable in PrintSessions: true
-     * Type: LIST
-     * Possible values: ON, OFF
-     */
-    EVOSETTINGS_KE_FUvPremium,
-    /**
      * EVOSETTINGS_KE_GCardPreloading
      * Usable in PrintSessions: true
      * Type: LIST
@@ -576,6 +560,13 @@ typedef enum evosettings_key_e {
      * Possible values: STDSMOOTH, ADVSMOOTH, NOSMOOTH
      */
     EVOSETTINGS_KE_GSmoothing,
+    /**
+     * EVOSETTINGS_KE_GUvPremium
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ON, OFF
+     */
+    EVOSETTINGS_KE_GUvPremium,
     /**
      * EVOSETTINGS_KE_IBBlackCustom
      * Usable in PrintSessions: true
@@ -840,13 +831,6 @@ typedef enum evosettings_key_e {
      * Possible values: LANDSCAPE, PORTRAIT
      */
     EVOSETTINGS_KE_IGRegionOrientation,
-    /**
-     * EVOSETTINGS_KE_IGRibbonOptimization
-     * Usable in PrintSessions: true
-     * Type: LIST
-     * Possible values: ON, OFF
-     */
-    EVOSETTINGS_KE_IGRibbonOptimization,
     /**
      * EVOSETTINGS_KE_IGSendIQLA
      * Usable in PrintSessions: true

@@ -41,13 +41,7 @@ EVOLIS_LIB void avansia_free_devices(avansia_device_t* devices);
 /// @see avansia_close()
 typedef evolis_t avansia_t;
 
-/// The printer type is used to establish the connection to the printer. All
-/// Evolis printers have the save communication protocol except for the Avansia
-/// which have a specific one.
-///
-/// Over IP, the printer type can be detected thus you can use the
-/// `AVANSIA_TY_AUTO` enum value. In any case, specifying the right printer type
-/// is more efficient.
+/// @deprecated Please use `avansia_open()` which doesn't need this type
 typedef evolis_type_t avansia_type_t;
 
 /// List of error management modes of the printer.
@@ -86,7 +80,7 @@ EVOLIS_LIB int avansia_get_error_management(avansia_t* printer, avansia_error_ma
 /// Set error management mode of the printer (PRINTER or SOFTWARE only).
 EVOLIS_LIB int avansia_set_error_management(avansia_t* printer, avansia_error_management_t em);
 
-/// Clear printer errors, should be use when print returned a AVANSIA_RC_MECHANICAL_ERROR error.
+/// Clear printer errors, should be used when print returned a AVANSIA_RC_MECHANICAL_ERROR error.
 EVOLIS_LIB int avansia_clear_mechanical_errors(avansia_t* printer);
 
 ///
@@ -94,7 +88,7 @@ EVOLIS_LIB int avansia_clear_mechanical_errors(avansia_t* printer);
 /// ----------------
 ///
 
-/// The printer info struct contains general informations of the printer. It is
+/// The printer info struct contains general information about the printer. It is
 /// populated when calling `avansia_open()` function. You can retrieve it by
 /// calling `avansia_info()`.
 typedef evolis_info_t avansia_info_t;
@@ -113,7 +107,7 @@ EVOLIS_LIB int avansia_get_info(avansia_t* printer, avansia_info_t* info);
 /// @see avansia_set_input_tray()
 typedef evolis_intray_t avansia_intray_t;
 
-/// The following card exit are available for Evolis printers. Some of the exits
+/// The following card exits are available for Evolis printers. Some of the exits
 /// are not valid for all printers. See notes below for details.
 ///
 /// @see avansia_set_output_tray()
