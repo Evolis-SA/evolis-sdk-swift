@@ -34,7 +34,10 @@ extern "C" {
     /* Linux/Mac connectors: */                                                    \
     X(CUPS, 0x0800) /* CUPS storage. */                                            \
     X(CONF, 0x1000) /* Conf file storage. */                                       \
-    X(SOLO, 0x2000) /* Individual file storage. */
+    X(SOLO, 0x2000) /* Individual file storage. */                                 \
+                                                                                   \
+    /* Internal usage */                                                           \
+    X(HTTP, 0x4000)
 
 #define EVOSETTINGS_TYPES(X) \
     X(UNKNOWN)               \
@@ -51,6 +54,7 @@ typedef enum evosettings_connector_e
 #define X(NAME, VALUE) EVOSETTINGS_CO_##NAME = VALUE,
     EVOSETTINGS_CONNECTORS(X)
 #undef X
+    EVOSETTINGS_CO_NONE = EVOSETTINGS_CO_UNKNOWN
 } evosettings_connector_t;
 
 typedef enum evosettings_type_e
@@ -121,13 +125,13 @@ EVOLIS_LIB bool EvoSettings_IsWritable(evosettings_t* mgr, evosettings_key_t key
 /// Returns list of connectors associated to a key.
 EVOLIS_LIB int EvoSettings_GetConnectors(evosettings_t* mgr, evosettings_key_t key);
 
-/// On success (the key is valid) the value is set and true is returned. False is returned ortherwise.
+/// On success (the key is valid) the value is set and true is returned. False is returned otherwise.
 EVOLIS_LIB bool EvoSettings_GetValue(evosettings_t* mgr, evosettings_key_t key, const char** value);
 /// On success (the key is a valid key to a boolean value) the value is set and true is returned. False is returned
-/// ortherwise.
+/// otherwise.
 EVOLIS_LIB bool EvoSettings_GetBoolValue(evosettings_t* mgr, evosettings_key_t key, bool* value);
 /// On success (the key is a valid key to an integer value) the value is set and true is returned. False is returned
-/// ortherwise.
+/// otherwise.
 EVOLIS_LIB bool EvoSettings_GetIntValue(evosettings_t* mgr, evosettings_key_t key, int* value);
 
 /// Returns the type of the value matching the 'key' parameter
@@ -168,11 +172,11 @@ EVOLIS_LIB bool EvoSettings_GetDefaultBoolValue2(evolis_model_t model, evosettin
 /// Returns the integer value matching the 'model' and 'key' parameter.
 EVOLIS_LIB int EvoSettings_GetDefaultIntValue2(evolis_model_t model, evosettings_key_t key);
 
-/// If returns true, the string value has been successfully set for 'key' parameter. False is returned on failure.
+/// Returns true if the string value has been successfully set for 'key' parameter. False is returned on failure.
 EVOLIS_LIB bool EvoSettings_SetValue(evosettings_t* mgr, evosettings_key_t key, const char* value);
-/// If returns true, the boolean value has been successfully set for 'key' parameter. False is returned on failure.
+/// Returns true if the boolean value has been successfully set for 'key' parameter. False is returned on failure.
 EVOLIS_LIB bool EvoSettings_SetBoolValue(evosettings_t* mgr, evosettings_key_t key, bool value);
-/// If returns true, the integer value has been successfully set for 'key' parameter. False is returned on failure.
+/// Returns true if the integer value has been successfully set for 'key' parameter. False is returned on failure.
 EVOLIS_LIB bool EvoSettings_SetIntValue(evosettings_t* mgr, evosettings_key_t key, int value);
 
 /// Same as EvoSettings_SetValue(). But apply rules to validate settings.
@@ -191,21 +195,21 @@ EVOLIS_LIB size_t EvoSettings_GetKeysUpdatedByRules(evosettings_t* mgr, evosetti
 EVOLIS_LIB bool EvoSettings_CheckIfUpdatedByDrv(evosettings_t* mgr);
 
 /// Export settings to 'out' parameter. Call this method with 'out' set to NULL to get the neededSize. Returns true
-/// on sucess, false on failure.
+/// on success, false on failure.
 EVOLIS_LIB bool EvoSettings_Export(evosettings_t* mgr, size_t* neededSize, char* out, size_t outSize);
-/// Export settings to the file specified in 'filePath' parameter. Returns true on sucess, false on failure.
+/// Export settings to the file specified in 'filePath' parameter. Returns true on success, false on failure.
 EVOLIS_LIB bool EvoSettings_ExportFile(evosettings_t* mgr, const char* filePath);
 /// Export settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) to the
-/// file specified in 'filePath' parameter. Returns true on sucess, false on failure.
+/// file specified in 'filePath' parameter. Returns true on success, false on failure.
 EVOLIS_LIB bool EvoSettings_ExportFile2(evosettings_t* mgr, const char* filePath, const evosettings_item_t* optionals,
                                         int optionalsCount);
 
-/// Import settings from 'data' parameter. Returns true on sucess, false on failure.
+/// Import settings from 'data' parameter. Returns true on success, false on failure.
 EVOLIS_LIB bool EvoSettings_Import(evosettings_t* mgr, const char* data);
-/// Import settings to the file specified in 'filePath' parameter. Returns true on sucess, false on failure.
+/// Import settings to the file specified in 'filePath' parameter. Returns true on success, false on failure.
 EVOLIS_LIB bool EvoSettings_ImportFile(evosettings_t* mgr, const char* filePath);
 /// Import settings specified in 'optionals' (specify the number of elements of that array to optionalsCount) from
-/// the file specified in 'filePath' parameter. Returns the number of elements imported on sucess, -1 on failure.
+/// the file specified in 'filePath' parameter. Returns the number of elements imported on success, -1 on failure.
 EVOLIS_LIB int EvoSettings_ImportFile2(evosettings_t* mgr, const char* filePath, evosettings_item_t* optionals,
                                        int optionalsCount);
 
