@@ -106,6 +106,7 @@ extern "C" {
     X(IFUvCustom) \
     X(IFThresholdValue) \
     X(IGBlackSub) \
+    X(IG10milCardThickness) \
     X(IGDuplexPreset) \
     X(IGIQLABC) \
     X(IGIQLABM) \
@@ -761,6 +762,13 @@ typedef enum evosettings_key_e {
      * Type: TEXT
      */
     EVOSETTINGS_KE_IGBlackSub,
+    /**
+     * EVOSETTINGS_KE_IG10milCardThickness
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ON, OFF
+     */
+    EVOSETTINGS_KE_IG10milCardThickness,
     /**
      * EVOSETTINGS_KE_IGDuplexPreset
      * Usable in PrintSessions: false

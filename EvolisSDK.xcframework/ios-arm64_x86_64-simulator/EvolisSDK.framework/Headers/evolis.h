@@ -221,6 +221,7 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(SYSTEM_ERROR, -500) \
     X(SYSTEM_EBUSY, -501) \
     X(SYSTEM_EFILE, -502) \
+    X(SYSTEM_ENETWORK, -503) \
     X(USER_ERROR, -600) \
     X(USER_EUNIDENTIFIED, -601) \
     X(USER_EUNAUTHORIZED, -602) \
@@ -288,6 +289,7 @@ typedef enum evolis_return_code_e {
     EVOLIS_RC_SYSTEM_ERROR = -500,          //!< An error occured during an internal OS process
     EVOLIS_RC_SYSTEM_EBUSY = -501,          //!< The OS is currently busy
     EVOLIS_RC_SYSTEM_EFILE = -502,          //!< An error occured during a filesystem operation
+    EVOLIS_RC_SYSTEM_ENETWORK = -503,       //!< An error occured during a network operation
     EVOLIS_RC_USER_ERROR = -600,            //!< Authentication failure
     EVOLIS_RC_USER_EUNIDENTIFIED = -601,    //!< No user currently logged in, authentication required
     EVOLIS_RC_USER_EUNAUTHORIZED = -602,    //!< The user is not authorized to perform this action
@@ -325,6 +327,7 @@ typedef enum evolis_mark_e {
     EVOLIS_MA_BODNO = 9,
     EVOLIS_MA_BRAVO = 10,
     EVOLIS_MA_ATC = 11,
+    EVOLIS_MA_BOYA_WUZHOU = 12,
 } evolis_mark_t;
 
 typedef enum evolis_model_e {
@@ -341,41 +344,43 @@ typedef enum evolis_model_e {
     EVOLIS_MO_BADGEPASS_CONNECT = 10,
     EVOLIS_MO_BADGEPASS_NXT5000 = 11,
     EVOLIS_MO_ID_MAKER_PRIMACY = 12,
-    EVOLIS_MO_EVOLIS_ELYPSO = 13,
-    EVOLIS_MO_ID_MAKER_ELYPSO = 14,
-    EVOLIS_MO_EVOLIS_ZENIUS = 15,
-    EVOLIS_MO_ID_MAKER_ZENIUS = 16,
-    EVOLIS_MO_ATC_ATC300 = 17,
-    EVOLIS_MO_EVOLIS_APTEO = 18,
-    EVOLIS_MO_BADGEPASS_CONNECT_LITE = 19,
-    EVOLIS_MO_DURABLE_DURACARD_ID_300 = 20,
-    EVOLIS_MO_EDIKIO_ACCESS = 21,
-    EVOLIS_MO_EDIKIO_FLEX = 22,
-    EVOLIS_MO_EDIKIO_DUPLEX = 23,
-    EVOLIS_MO_EVOLIS_BADGY100 = 24,
-    EVOLIS_MO_EVOLIS_BADGY200 = 25,
-    EVOLIS_MO_BODNO_BADGY100X = 26,
-    EVOLIS_MO_BODNO_BADGY200X = 27,
-    EVOLIS_MO_EVOLIS_LAMINATION_MODULE = 28,
-    EVOLIS_MO_EVOLIS_KC_ESSENTIAL = 29,
-    EVOLIS_MO_EVOLIS_KC_PRIME = 30,
-    EVOLIS_MO_ATC_ATC310 = 31,
-    EVOLIS_MO_EVOLIS_KC_MAX = 32,
-    EVOLIS_MO_EVOLIS_PRIMACY_2 = 33,
-    EVOLIS_MO_EVOLIS_ASMI = 34,
-    EVOLIS_MO_BADGEPASS_NXTELITE = 35,
-    EVOLIS_MO_BADGEPASS_CONNECTPLUS = 36,
-    EVOLIS_MO_ID_MAKER_PRIMACY_INFINITY = 37,
-    EVOLIS_MO_PLASCO_PRIMACY_2_LE = 38,
-    EVOLIS_MO_IDENTISYS_PRIMACY_2_SE = 39,
-    EVOLIS_MO_BRAVO_DC_3300 = 40,
-    EVOLIS_MO_EVOLIS_EPX300 = 41,
-    EVOLIS_MO_EVOLIS_AVANSIA = 42,
-    EVOLIS_MO_EVOLIS_AGILIA = 43,
-    EVOLIS_MO_ATC_ATC600 = 44,
-    EVOLIS_MO_EVOLIS_QUANTUM2 = 45,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 46,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 47,
+    EVOLIS_MO_BOYA_WUZHOU_BY_W3 = 13,
+    EVOLIS_MO_EVOLIS_DC_380 = 14,
+    EVOLIS_MO_EVOLIS_ELYPSO = 15,
+    EVOLIS_MO_ID_MAKER_ELYPSO = 16,
+    EVOLIS_MO_EVOLIS_ZENIUS = 17,
+    EVOLIS_MO_ID_MAKER_ZENIUS = 18,
+    EVOLIS_MO_ATC_ATC300 = 19,
+    EVOLIS_MO_EVOLIS_APTEO = 20,
+    EVOLIS_MO_BADGEPASS_CONNECT_LITE = 21,
+    EVOLIS_MO_DURABLE_DURACARD_ID_300 = 22,
+    EVOLIS_MO_EDIKIO_ACCESS = 23,
+    EVOLIS_MO_EDIKIO_FLEX = 24,
+    EVOLIS_MO_EDIKIO_DUPLEX = 25,
+    EVOLIS_MO_EVOLIS_BADGY100 = 26,
+    EVOLIS_MO_EVOLIS_BADGY200 = 27,
+    EVOLIS_MO_BODNO_BADGY100X = 28,
+    EVOLIS_MO_BODNO_BADGY200X = 29,
+    EVOLIS_MO_EVOLIS_LAMINATION_MODULE = 30,
+    EVOLIS_MO_EVOLIS_KC_ESSENTIAL = 31,
+    EVOLIS_MO_EVOLIS_KC_PRIME = 32,
+    EVOLIS_MO_ATC_ATC310 = 33,
+    EVOLIS_MO_EVOLIS_KC_MAX = 34,
+    EVOLIS_MO_EVOLIS_PRIMACY_2 = 35,
+    EVOLIS_MO_EVOLIS_ASMI = 36,
+    EVOLIS_MO_BADGEPASS_NXTELITE = 37,
+    EVOLIS_MO_BADGEPASS_CONNECTPLUS = 38,
+    EVOLIS_MO_ID_MAKER_PRIMACY_INFINITY = 39,
+    EVOLIS_MO_PLASCO_PRIMACY_2_LE = 40,
+    EVOLIS_MO_IDENTISYS_PRIMACY_2_SE = 41,
+    EVOLIS_MO_BRAVO_DC_3300 = 42,
+    EVOLIS_MO_EVOLIS_EPX300 = 43,
+    EVOLIS_MO_EVOLIS_AVANSIA = 44,
+    EVOLIS_MO_EVOLIS_AGILIA = 45,
+    EVOLIS_MO_ATC_ATC600 = 46,
+    EVOLIS_MO_EVOLIS_QUANTUM2 = 47,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 48,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 49,
 } evolis_model_t;
 
 typedef enum evolis_link_e {
@@ -1587,9 +1592,14 @@ typedef struct evolis_netdevice_s {
 
 typedef void (*evolis_discovery_cb)(evolis_netdevice_t* dev, void* data);
 
+/// Start evolis discovery process which will call the given callback when a device is found.
 EVOLIS_WRA int evolis_discovery_start(_In_ evolis_discovery_cb cb, _Out_ void* data);
 
+/// Stop evolis discovery process.
 EVOLIS_WRA void evolis_discovery_stop(void);
+
+/// Start a discovery process for the given 'duration' (in ms), add discovered printer to the given 'devices' pointer up to the given 'size'
+EVOLIS_LIB int evolis_discovery_get_devices(_In_ evolis_netdevice_t** devices, _In_ size_t size, _In_ int duration);
 
 //
 // ToC/LOGGING
