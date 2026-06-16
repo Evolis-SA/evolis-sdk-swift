@@ -77,7 +77,14 @@ extern "C" {
     X(GUvPremium) \
     X(IBBlackCustom) \
     X(IBBlackLevelValue) \
+    X(IBColorProfile) \
+    X(IBColorProfileCustom) \
+    X(IBColorProfileContent) \
+    X(IBColorProfileMode) \
     X(IBDarkLevelValue) \
+    X(IBImageDensity) \
+    X(IBIqla) \
+    X(IBHeatLevel) \
     X(IBNoTransferAreas) \
     X(IBOverlayCustom) \
     X(IBOverlayDefaultContent) \
@@ -86,13 +93,21 @@ extern "C" {
     X(IBRegionPrintingMode) \
     X(IBRwCustom) \
     X(IBRwCustomBitmap) \
+    X(IBSendIQLA) \
     X(IBTextRegion) \
     X(IBThresholdValue) \
     X(IBUvContent) \
     X(IBUvCustom) \
     X(IFBlackCustom) \
     X(IFBlackLevelValue) \
+    X(IFColorProfile) \
+    X(IFColorProfileCustom) \
+    X(IFColorProfileContent) \
+    X(IFColorProfileMode) \
     X(IFDarkLevelValue) \
+    X(IFImageDensity) \
+    X(IFIqla) \
+    X(IFHeatLevel) \
     X(IFNoTransferAreas) \
     X(IFOverlayCustom) \
     X(IFOverlayDefaultContent) \
@@ -101,6 +116,7 @@ extern "C" {
     X(IFRegionPrintingMode) \
     X(IFRwCustom) \
     X(IFRwCustomBitmap) \
+    X(IFSendIQLA) \
     X(IFTextRegion) \
     X(IFUvContent) \
     X(IFUvCustom) \
@@ -147,6 +163,8 @@ extern "C" {
     X(IGColorProfileCustom) \
     X(IGColorProfileContent) \
     X(UIColorProfileName) \
+    X(UIBColorProfileName) \
+    X(UIFColorProfileName) \
     X(WIScanImageDepth) \
     X(WIScanImageResolution) \
     X(WIScanImageFileFormat) \
@@ -530,7 +548,7 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_GRibbonType
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: RC_YMCKI, RC_YMCKKI, RC_YMCFK, RC_YMCK, RC_YMCKK, RC_YMCKO, RC_YMCKOS, RC_YMCKOS13, RC_YMCKOK, RC_YMCKOKS13, RC_YMCKOKOS, RC_YMCKOO, RM_KO, RM_KBLACK, RM_KWHITE, RM_KRED, RM_KGREEN, RM_KBLUE, RM_KSCRATCH, RM_KMETALSILVER, RM_KMETALGOLD, RM_KSIGNATURE, RM_KWAX, RM_KPREMIUM, RM_HOLO, RM_SOKO, RC_YMCK_A, RC_YMCKK_A, RC_YMCKI_A, RC_YMCKH_A, RC_YMCFK_A, RC_YMCKSI_A, RM_KBLACK_R
+     * Possible values: RC_YMCKI, RC_YMCKKI, RC_YMCFK, RC_YMCK, RC_YMCKK, RC_YMCKO, RC_YMCKOS, RC_YMCKOS13, RC_YMCKOK, RC_YMCKOKS13, RC_YMCKOKOS, RC_YMCKOO, RM_KO, RM_KBLACK, RM_KWHITE, RM_KRED, RM_KGREEN, RM_KBLUE, RM_KSCRATCH, RM_KMETALSILVER, RM_KMETALGOLD, RM_KSIGNATURE, RM_KWAX, RM_KPREMIUM, RM_KRMS, RM_HOLO, RM_SOKO, RM_SO, RC_YMCK_A, RC_YMCKK_A, RC_YMCKI_A, RC_YMCKH_A, RC_YMCFK_A, RC_YMCKSI_A, RM_KBLACK_R
      */
     EVOSETTINGS_KE_GRibbonType,
     /**
@@ -582,12 +600,56 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_IBBlackLevelValue,
     /**
+     * EVOSETTINGS_KE_IBColorProfile
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ADOBEPROFILE, STDPROFILE
+     */
+    EVOSETTINGS_KE_IBColorProfile,
+    /**
+     * EVOSETTINGS_KE_IBColorProfileCustom
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IBColorProfileCustom,
+    /**
+     * EVOSETTINGS_KE_IBColorProfileContent
+     * Usable in PrintSessions: false
+     * Type: BLOB
+     */
+    EVOSETTINGS_KE_IBColorProfileContent,
+    /**
+     * EVOSETTINGS_KE_IBColorProfileMode
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: NOPROFILE, DRIVERPROFILE, CUSTOM
+     */
+    EVOSETTINGS_KE_IBColorProfileMode,
+    /**
      * EVOSETTINGS_KE_IBDarkLevelValue
      * Usable in PrintSessions: true
      * Type: INT
      * Range: 0-255
      */
     EVOSETTINGS_KE_IBDarkLevelValue,
+    /**
+     * EVOSETTINGS_KE_IBImageDensity
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IBImageDensity,
+    /**
+     * EVOSETTINGS_KE_IBIqla
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IBIqla,
+    /**
+     * EVOSETTINGS_KE_IBHeatLevel
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IBHeatLevel,
     /**
      * EVOSETTINGS_KE_IBNoTransferAreas
      * Usable in PrintSessions: true
@@ -638,6 +700,13 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_IBRwCustomBitmap,
     /**
+     * EVOSETTINGS_KE_IBSendIQLA
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ON, OFF
+     */
+    EVOSETTINGS_KE_IBSendIQLA,
+    /**
      * EVOSETTINGS_KE_IBTextRegion
      * Usable in PrintSessions: true
      * Type: TEXT
@@ -676,12 +745,56 @@ typedef enum evosettings_key_e {
      */
     EVOSETTINGS_KE_IFBlackLevelValue,
     /**
+     * EVOSETTINGS_KE_IFColorProfile
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ADOBEPROFILE, STDPROFILE
+     */
+    EVOSETTINGS_KE_IFColorProfile,
+    /**
+     * EVOSETTINGS_KE_IFColorProfileCustom
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IFColorProfileCustom,
+    /**
+     * EVOSETTINGS_KE_IFColorProfileContent
+     * Usable in PrintSessions: false
+     * Type: BLOB
+     */
+    EVOSETTINGS_KE_IFColorProfileContent,
+    /**
+     * EVOSETTINGS_KE_IFColorProfileMode
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: NOPROFILE, DRIVERPROFILE, CUSTOM
+     */
+    EVOSETTINGS_KE_IFColorProfileMode,
+    /**
      * EVOSETTINGS_KE_IFDarkLevelValue
      * Usable in PrintSessions: true
      * Type: INT
      * Range: 0-255
      */
     EVOSETTINGS_KE_IFDarkLevelValue,
+    /**
+     * EVOSETTINGS_KE_IFImageDensity
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IFImageDensity,
+    /**
+     * EVOSETTINGS_KE_IFIqla
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IFIqla,
+    /**
+     * EVOSETTINGS_KE_IFHeatLevel
+     * Usable in PrintSessions: true
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_IFHeatLevel,
     /**
      * EVOSETTINGS_KE_IFNoTransferAreas
      * Usable in PrintSessions: true
@@ -731,6 +844,13 @@ typedef enum evosettings_key_e {
      * Type: BLOB
      */
     EVOSETTINGS_KE_IFRwCustomBitmap,
+    /**
+     * EVOSETTINGS_KE_IFSendIQLA
+     * Usable in PrintSessions: true
+     * Type: LIST
+     * Possible values: ON, OFF
+     */
+    EVOSETTINGS_KE_IFSendIQLA,
     /**
      * EVOSETTINGS_KE_IFTextRegion
      * Usable in PrintSessions: true
@@ -1002,14 +1122,14 @@ typedef enum evosettings_key_e {
      * EVOSETTINGS_KE_GColorProfileMode
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: NOPROFILE, DRIVERPROFILE, CUSTOM
+     * Possible values: NOPROFILE, DRIVERPROFILE, CUSTOM, DEPRECATED
      */
     EVOSETTINGS_KE_GColorProfileMode,
     /**
      * EVOSETTINGS_KE_GColorProfile
      * Usable in PrintSessions: true
      * Type: LIST
-     * Possible values: STDPROFILE
+     * Possible values: ADOBEPROFILE, STDPROFILE
      */
     EVOSETTINGS_KE_GColorProfile,
     /**
@@ -1037,6 +1157,18 @@ typedef enum evosettings_key_e {
      * Type: TEXT
      */
     EVOSETTINGS_KE_UIColorProfileName,
+    /**
+     * EVOSETTINGS_KE_UIBColorProfileName
+     * Usable in PrintSessions: false
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_UIBColorProfileName,
+    /**
+     * EVOSETTINGS_KE_UIFColorProfileName
+     * Usable in PrintSessions: false
+     * Type: TEXT
+     */
+    EVOSETTINGS_KE_UIFColorProfileName,
     /**
      * EVOSETTINGS_KE_WIScanImageDepth
      * Usable in PrintSessions: false
@@ -1163,6 +1295,55 @@ typedef enum evosettings_key_e {
     EVOSETTINGS_KE_UIScannerActivation
 } evosettings_key_t;
 
+
+typedef enum evolis_color_config_e {
+     EVOLIS_CC_UNKNOWN = -1,
+
+    /**
+     * Standard
+     * Default configuration
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_STANDARD,
+    /**
+     * Intense colors
+     * Alternative to the standard configuration that provides more intense colors
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_INTENSE_COLORS,
+    /**
+     * Color harmony
+     * Balanced and polyvalent configuration adapted for designs with a mix of elements (photos, solid color areas, gradients)
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_COLOR_HARMONY,
+    /**
+     * Solid colors
+     * Configuration for designs with several solid color areas
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_SOLID_COLORS,
+    /**
+     * Grey shades
+     * Configuration for a better rendering of shades of grey (especially light greys)
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_GREY_SHADES,
+    /**
+     * ID picture
+     * Configuration suitable for printing portraits, based on a custom Evolis profile
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_ID_PICTURE_STD,
+    /**
+     * ID picture (Adobe)
+     * Configuration suitable for printing portraits, based on the Adobe 1998 profile
+     * Available for: Agilia, Avansia2
+     */
+    EVOLIS_CC_ID_PICTURE_ADOBE,
+
+     EVOLIS_CC_NB_COLOR_CFG,
+} evolis_color_config_t;
 
 #ifdef __cplusplus
 }

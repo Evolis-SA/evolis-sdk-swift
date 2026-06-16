@@ -56,6 +56,18 @@ typedef enum avansia_card_side_e {
 } avansia_card_side_t;
 
 /**
+ * Power save mode.
+ */
+typedef enum avansia_power_save_mode_e {
+    /// Heater off.
+    AVANSIA_PSM_HEATER_OFF = 0,
+
+    /// Main power off.
+    AVANSIA_PSM_MAIN_POWER_OFF = 1,
+
+} avansia_power_save_mode_t;
+
+/**
  * Available IC encoder.
  */
 typedef enum avansia_ic_encoder_e {
@@ -203,6 +215,9 @@ EVOLIS_LIB int avansia_status(evolis_t* printer, avansia_status_t* status);
 /// Avansia: Hardware reboot of the printer.
 EVOLIS_LIB int avansia_hw_reset(evolis_t* printer, int timeout, char* timeouted);
 
+/// Avansia: SOftware reboot of the printer.
+EVOLIS_LIB int avansia_sw_reset(evolis_t* printer, int timeout, char* timeouted);
+
 /// Avansia: Simulate pressing the set button.
 EVOLIS_LIB int avansia_press_set_button(evolis_t* printer);
 
@@ -238,3 +253,30 @@ EVOLIS_LIB int avansia_move_card_ic_encoder(evolis_t* printer, avansia_ic_encode
 
 /// Avansia: Notify encoder
 EVOLIS_LIB int avansia_notify_ic_encoder(evolis_t* printer, bool encoder);
+
+// Get card eject side
+EVOLIS_LIB int avansia_get_eject_card_side(evolis_t* printer, avansia_card_side_t* side);
+
+// Set card eject side
+EVOLIS_LIB int avansia_set_eject_card_side(evolis_t* printer, avansia_card_side_t side);
+
+// Get Debowing value
+EVOLIS_LIB int avansia_get_debowing(evolis_t* printer, evolis_face_t face);
+
+// Set Debowing value
+EVOLIS_LIB int avansia_set_debowing(evolis_t* printer, evolis_face_t face, int value);
+
+// Get power save mode
+EVOLIS_LIB int avansia_get_power_save_mode(evolis_t* printer, avansia_power_save_mode_t* mode);
+
+// Set power save mode
+EVOLIS_LIB int avansia_set_power_save_mode(evolis_t* printer, avansia_power_save_mode_t mode);
+
+// Get power save time
+EVOLIS_LIB int avansia_get_power_save_time(evolis_t* printer);
+
+// Set power save time
+EVOLIS_LIB int avansia_set_power_save_time(evolis_t* printer, int time);
+
+// Eject card without print.
+EVOLIS_LIB int avansia_eject_card_without_print(evolis_t* printer);

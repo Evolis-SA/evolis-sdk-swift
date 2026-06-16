@@ -39,6 +39,8 @@ typedef enum evolis_laminator_film_type_e {
     EVOLIS_LFT_ALT_FULL_MAG_1_0_MI = 513,
     /// Alt Full 0.6 Mil Gen Holo
     EVOLIS_LFT_ALT_0_6_MIL_GEN_HOLO = 514,
+    /// Alt Gen Holo Varnish
+    EVOLIS_LFT_ALT_GEN_HOLO_VARNISH = 515,
 } evolis_laminator_film_type_t;
 
 typedef enum evolis_laminator_index_e {

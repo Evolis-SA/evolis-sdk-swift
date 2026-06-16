@@ -53,6 +53,7 @@ extern "C" {
 // - FILE HELPERS
 // - SECURITY
 // - STANDBY
+// - CLEANING
 //
 
 //
@@ -158,7 +159,7 @@ extern "C" {
 EVOLIS_WRA const char* evolis_version(void);
 
 /// Convert error code to a c-string.
-EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
+EVOLIS_WRA const char* evolis_get_error_name(_In_ int r);
 
 #ifdef _WIN32
     /// Convert a wide chars string to UTF-8 string. Returns a static pointer.
@@ -182,6 +183,7 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(EUNSUPPORTED, -5) \
     X(EPARAMS, -6) \
     X(ETIMEOUT, -7) \
+    X(ENEEDACTION, -8) \
     X(SESSION_ETIMEOUT, -10) \
     X(SESSION_EBUSY, -11) \
     X(SESSION_DISABLED, -12) \
@@ -222,6 +224,7 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(SYSTEM_EBUSY, -501) \
     X(SYSTEM_EFILE, -502) \
     X(SYSTEM_ENETWORK, -503) \
+    X(SYSTEM_EUNAUTHORIZED_PRINTER, -504) \
     X(USER_ERROR, -600) \
     X(USER_EUNIDENTIFIED, -601) \
     X(USER_EUNAUTHORIZED, -602) \
@@ -239,6 +242,8 @@ EVOLIS_LIB const char* evolis_get_error_name(_In_ int r);
     X(HTTP_REPLY_NOT_OK, -20000) \
     X(HTTP_EREQUEST_ERROR, -20001) \
     X(HTTP_EREPLY_FORMAT, -20002) \
+    X(HTTP_EINSECURE, -20003) \
+    X(HTTP_ECERTIFICATE, -20004) \
     X(HTTP_ERROR, -20500) \
 
 typedef enum evolis_return_code_e {
@@ -250,6 +255,7 @@ typedef enum evolis_return_code_e {
     EVOLIS_RC_EUNSUPPORTED = -5,            //!< The requested feature is not supported by the library or the printer
     EVOLIS_RC_EPARAMS = -6,                 //!< Some invalid parameters were provided to the API
     EVOLIS_RC_ETIMEOUT = -7,                //!< A timeout occured during function call
+    EVOLIS_RC_ENEEDACTION = -8,             //!< The printer is not ready. Check ribbon, cover, feeder, etc
     EVOLIS_RC_SESSION_ETIMEOUT = -10,       //!< The printer reservation has expired
     EVOLIS_RC_SESSION_EBUSY = -11,          //!< The printer is in use, session detected
     EVOLIS_RC_SESSION_DISABLED = -12,       //!< The session management is disabled. See evolis_set_session_management()
@@ -290,6 +296,7 @@ typedef enum evolis_return_code_e {
     EVOLIS_RC_SYSTEM_EBUSY = -501,          //!< The OS is currently busy
     EVOLIS_RC_SYSTEM_EFILE = -502,          //!< An error occured during a filesystem operation
     EVOLIS_RC_SYSTEM_ENETWORK = -503,       //!< An error occured during a network operation
+    EVOLIS_RC_SYSTEM_EUNAUTHORIZED_PRINTER = -504, //!< The print module is not associated to the system and thus not authorized
     EVOLIS_RC_USER_ERROR = -600,            //!< Authentication failure
     EVOLIS_RC_USER_EUNIDENTIFIED = -601,    //!< No user currently logged in, authentication required
     EVOLIS_RC_USER_EUNAUTHORIZED = -602,    //!< The user is not authorized to perform this action
@@ -307,6 +314,8 @@ typedef enum evolis_return_code_e {
     EVOLIS_RC_HTTP_REPLY_NOT_OK = -20000,   //!< A reply was received with an HTTP error code (internal usage)
     EVOLIS_RC_HTTP_EREQUEST_ERROR = -20001, //!< The HTTP request is invalid
     EVOLIS_RC_HTTP_EREPLY_FORMAT = -20002,  //!< The received data didn't match the expected format
+    EVOLIS_RC_HTTP_EINSECURE = -20003,      //!< HTTP connection refused because HTTPS is enforced
+    EVOLIS_RC_HTTP_ECERTIFICATE = -20004,   //!< Connection refused due to an invalid/unknown certificate
     EVOLIS_RC_HTTP_ERROR = -20500,          //!< An unexpected HTTP communication error occured
 } evolis_return_code_t;
 
@@ -378,9 +387,11 @@ typedef enum evolis_model_e {
     EVOLIS_MO_EVOLIS_AVANSIA = 44,
     EVOLIS_MO_EVOLIS_AGILIA = 45,
     EVOLIS_MO_ATC_ATC600 = 46,
-    EVOLIS_MO_EVOLIS_QUANTUM2 = 47,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 48,
-    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 49,
+    EVOLIS_MO_EVOLIS_AVANSIA2 = 47,
+    EVOLIS_MO_EVOLIS_QUANTUM2 = 48,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_CLASSIC = 49,
+    EVOLIS_MO_EVOLIS_ZENIUS_2_EXPERT = 50,
+    EVOLIS_MO_EVOLIS_EPX200 = 51,
 } evolis_model_t;
 
 typedef enum evolis_link_e {
@@ -568,6 +579,24 @@ EVOLIS_WRA void evolis_set_session_management(_In_ evolis_t* printer, _In_ bool 
 /// Clear printer errors, should be use when print returned a EVOLIS_RC_MECHANICAL_ERROR error.
 EVOLIS_WRA int evolis_clear_mechanical_errors(_In_ evolis_t* printer);
 
+/// Authenticate a user
+EVOLIS_WRA int evolis_login(_In_ evolis_t* printer, _In_ const char* username, _In_ const char* password);
+
+/// Logout a user
+EVOLIS_WRA int evolis_logout(_In_ evolis_t* printer);
+
+/// Get whether insecure HTTP connections are currently allowed
+EVOLIS_WRA bool evolis_http_get_allow_unsafe(_In_ evolis_t* printer);
+
+/// Allow or forbid the use of insecure HTTP connections
+EVOLIS_WRA void evolis_http_set_allow_unsafe(_In_ evolis_t* printer, _In_ bool enable);
+
+/// Get whether HTTPS certificate validation is currently bypassed
+EVOLIS_WRA bool evolis_http_get_allow_unchecked_cert(_In_ evolis_t* printer);
+
+/// Allow or forbid certificate validation for HTTPS connections
+EVOLIS_WRA void evolis_http_set_allow_unchecked_cert(_In_ evolis_t* printer, _In_ bool enable);
+
 //
 // ToC/DEVICE INFO
 // ----------------
@@ -648,6 +677,7 @@ typedef enum evolis_ribbon_type_e {
     EVOLIS_RT_YMCKKI         = 1005,
     EVOLIS_RT_KBLACK_R       = 1100,
     EVOLIS_RT_CLEAR          = 2000,
+    EVOLIS_RT_SO             = 16,
 } evolis_ribbon_type_t;
 
 /// List of RW cards accepted by Evolis printers.
@@ -702,6 +732,24 @@ typedef enum evolis_cache_e {
     EVOLIS_CA_CACHE_ONLY,                   //!< Retrieve cache, no i/o operations.
 } evolis_cache_t;
 
+typedef enum evolis_network_interface_type_e {
+    EVOLIS_NIT_ETHERNET = 0,
+    EVOLIS_NIT_WIFI = 1,
+} evolis_network_interface_type_t;
+
+/// Structure containing network interface information
+typedef struct evolis_network_interface_s {
+    evolis_network_interface_type_t    interfaceType;
+    char                               ipv4Address[16];             //!< IPv4 address not in CIDR format
+    char                               ipv4SubnetMask[16];
+    char                               ipv4Gateway[16];
+    char                               ipv4MulticastAddress[16];
+    char                               ipv6Address[64];             //!< IPv6 address in CIDR format.
+    char                               ipv6Gateway[64];
+    char                               ipv6MulticastAddress[64];
+    char                               macAddress[24];
+} evolis_network_interface_t;
+
 /// Get printer info.
 /// Same as evolis_get_info2(a, b, EVOLIS_CA_CACHE_ON_ERROR).
 EVOLIS_WRA int evolis_get_info(_In_ evolis_t* printer, _Out_ evolis_info_t* info);
@@ -738,6 +786,10 @@ EVOLIS_LIB evolis_model_t evolis_get_model(evolis_t* ctx);
 
 /// Get the mark of the current printer
 EVOLIS_LIB evolis_mark_t evolis_get_mark(evolis_t* ctx);
+
+/// Get network interface info
+EVOLIS_WRA int evolis_get_network_interface(_In_ evolis_t* printer, _In_ evolis_network_interface_type_t nit, _Out_ evolis_network_interface_t* info);
+
 
 //
 // ToC/DEVICE STATE
@@ -1067,14 +1119,20 @@ typedef enum evolis_pos_e {
     /// return status is STANDBY. TODO Terminer la doc en fonction du retour de print_exec().
     EVOLIS_CP_REJECT = 4,
     /// Move the card to the smart station.
-    /// The card is inserted if none in the printer.
+    /// The card is inserted if none is present in the printer.
     EVOLIS_CP_CONTACT = 5,
-    /// Move the card to the contact station.
-    /// The card is inserted if none in the printer.
+    /// Move the card to the contactless station.
+    /// The card is inserted if none is present in the printer.
     EVOLIS_CP_CONTACTLESS = 6,
     /// Move the card in order to scan it (below the contact station).
-    /// The card is inserted if none in the printer.
+    /// The card is inserted if none is present in the printer.
     EVOLIS_CP_SCAN = 7,
+    /// Move the card to the mag station.
+    /// The card is inserted if none is present in the printer.
+    EVOLIS_CP_MAG = 8,
+    /// Move the card to the print station.
+    /// The card is inserted if none is present in the printer.
+    EVOLIS_CP_PRINT = 9,
 #ifdef EVOLIS_SP_GWI
     /// Eject the card under the printer throught the bridge.
     EVOLIS_CP_EJECTBRIDGE = 1000,
@@ -1389,6 +1447,9 @@ EVOLIS_LIB bool evolis_print_apply_settings_rules(_In_ evolis_t* printer, _In_ i
 /// Get the list of keys modified by the rules
 EVOLIS_LIB int evolis_print_get_keys_updated_by_rules(_In_ evolis_t* printer, _Out_ evosettings_key_t* keys);
 
+/// Applies a color configuration
+EVOLIS_WRA int evolis_print_apply_color_config(_In_ evolis_t* printer, _In_ evolis_color_config_t cfg, _In_ evolis_face_t face);
+
 /// Removes a setting from the print context
 EVOLIS_WRA bool evolis_print_remove_setting(_In_ evolis_t* printer, _In_ evosettings_key_t key);
 
@@ -1699,6 +1760,21 @@ EVOLIS_WRA int evolis_get_time_to_auto_shutdown(_In_ evolis_t* ctx);
 /// Shutdown the printer.
 EVOLIS_WRA int evolis_shutdown(_In_ evolis_t* ctx);
 
+///
+/// ToC/CLEANING
+/// ----------------
+///
+
+typedef enum evolis_clean_sequence_e {
+    EVOLIS_CS_FULL = 0,      //<! Cleaning with T card and Adhesive card. (Not available on Agilia).
+    EVOLIS_CS_TCARD = 1,     //<! Cleaning with T card.
+    EVOLIS_CS_ADHESIVE = 2,  //<! Cleaning with Adhesive card.
+    EVOLIS_CS_LAMINATOR = 3, //<! Cleaning of laminator.
+    EVOLIS_CS_FEEDER = 4,    //<! Cleaning the feeder motor with swab. (Only on Agilia)
+} evolis_clean_sequence_t;
+
+/// Start cleaning.
+EVOLIS_LIB int evolis_cleaning_sequence(_In_ evolis_t* ctx, _In_ evolis_clean_sequence_t sequence);
 
 #ifdef __ANDROID__
 #  include <jni.h>
