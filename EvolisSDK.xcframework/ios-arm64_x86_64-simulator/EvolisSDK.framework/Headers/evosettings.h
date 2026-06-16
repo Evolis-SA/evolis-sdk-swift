@@ -187,6 +187,8 @@ EVOLIS_LIB bool EvoSettings_SetBoolValue_WithRules(evosettings_t* mgr, evosettin
 EVOLIS_LIB bool EvoSettings_SetIntValue_WithRules(evosettings_t* mgr, evosettings_key_t key, int value);
 /// Apply rules
 EVOLIS_LIB bool EvoSettings_ApplyRules(evosettings_t* mgr);
+/// Apply color config
+EVOLIS_LIB int32_t EvoSettings_ApplyColorConfig(evosettings_t* mgr, evolis_color_config_t cfg, evolis_face_t face);
 
 /// On success, returns the number of elements in 'keys', fill the 'keys' impacted by the execution of rules.
 /// Returns -1 on failure.

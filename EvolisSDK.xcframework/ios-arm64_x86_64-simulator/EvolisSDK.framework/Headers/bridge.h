@@ -17,5 +17,6 @@
 #import "evosettings_keys.h"
 #import "evosettings.h"
 #import "evo-laminator.h"
+#import "evo-pcsc.h"
 
 #endif /* bridge_h */

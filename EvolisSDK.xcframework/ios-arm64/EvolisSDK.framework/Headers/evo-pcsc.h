@@ -48,6 +48,8 @@ typedef enum evolis_pcsc_disposition_e
     EVOLIS_PCSC_DSP_LEAVE = 1,
     /// Reset the card on disconnect
     EVOLIS_PCSC_DSP_RESET = 2,
+    /// Power down the card on disconnect
+    EVOLIS_PCSC_DSP_UNPOWER = 3,
 } evolis_pcsc_disposition_t;
 
 typedef struct evolis_pcsc_encoder_s
@@ -66,10 +68,10 @@ typedef struct evolis_pcsc_status_s
 } evolis_pcsc_status_t;
 
 /// Retrieve a list of available PCSC encoders.
-EVOLIS_WRA int evolis_pcsc_list(_In_ evolis_t* p, _Out_ evolis_pcsc_encoder_t* encoders, _In_ size_t max_size);
+EVOLIS_WRA int evolis_pcsc_list(_In_ evolis_t* p, _Out_ evolis_pcsc_encoder_t encoders[], _In_ size_t max_size);
 
 /// Retrieve status of all available PCSC encoders.
-EVOLIS_WRA int evolis_pcsc_status(_In_ evolis_t* p, _Out_ evolis_pcsc_status_t* status, _In_ size_t max_size);
+EVOLIS_WRA int evolis_pcsc_status(_In_ evolis_t* p, _Out_ evolis_pcsc_status_t status[], _In_ size_t max_size);
 
 /// Retrieve status of specified PCSC encoder.
 EVOLIS_WRA int evolis_pcsc_encoder_status(_In_ evolis_t* p, _In_ evolis_pcsc_uid_t uid, _Out_ evolis_pcsc_status_t* status);
@@ -93,10 +95,10 @@ EVOLIS_WRA int evolis_pcsc_wait_card_absentt(_In_ evolis_t* p, _In_ evolis_pcsc_
 EVOLIS_WRA int evolis_pcsc_connect(_In_ evolis_t* p, _In_ evolis_pcsc_uid_t uid, _In_ evolis_pcsc_protocol_t protocol);
 
 /// Sends an APDU (and receive its response) to the smart card through the PCSC encoder matching the specified uid.
-EVOLIS_WRA int evolis_pcsc_send_apdu(_In_ evolis_t* p, _In_ evobuf* apdu, _In_ size_t apdu_size, _Out_ evobuf* apdu_reply, _In_ size_t reply_max_size);
+EVOLIS_WRA int evolis_pcsc_send_apdu(_In_ evolis_t* p, _In_ evolis_pcsc_uid_t uid, _In_ evobuf* apdu, _In_ size_t apdu_size, _Out_ evobuf* apdu_reply, _In_ size_t reply_max_size);
 
 /// Disconnects from a smart card.
-EVOLIS_WRA int evolis_pcsc_disconnect(_In_ evolis_t* p, _In_ evolis_pcsc_disposition_t disposition);
+EVOLIS_WRA int evolis_pcsc_disconnect(_In_ evolis_t* p, _In_ evolis_pcsc_uid_t uid, _In_ evolis_pcsc_disposition_t disposition);
 
 #ifdef __cplusplus
 }
