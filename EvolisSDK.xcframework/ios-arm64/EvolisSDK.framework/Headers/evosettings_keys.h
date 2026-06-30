@@ -1302,43 +1302,43 @@ typedef enum evolis_color_config_e {
     /**
      * Standard
      * Default configuration
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_STANDARD,
     /**
      * Intense colors
      * Alternative to the standard configuration that provides more intense colors
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_INTENSE_COLORS,
     /**
      * Color harmony
      * Balanced and polyvalent configuration adapted for designs with a mix of elements (photos, solid color areas, gradients)
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_COLOR_HARMONY,
     /**
      * Solid colors
      * Configuration for designs with several solid color areas
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_SOLID_COLORS,
     /**
      * Grey shades
      * Configuration for a better rendering of shades of grey (especially light greys)
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_GREY_SHADES,
     /**
      * ID picture
      * Configuration suitable for printing portraits, based on a custom Evolis profile
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_ID_PICTURE_STD,
     /**
      * ID picture (Adobe)
      * Configuration suitable for printing portraits, based on the Adobe 1998 profile
-     * Available for: Agilia, Avansia2
+     * Available for: Avansia2, Agilia
      */
     EVOLIS_CC_ID_PICTURE_ADOBE,
 
