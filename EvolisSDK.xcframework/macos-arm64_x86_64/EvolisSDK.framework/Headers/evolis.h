@@ -1225,10 +1225,14 @@ EVOLIS_WRA int evolis_bezel_set_offset(_In_ evolis_t* printer, _In_ int mm);
 /// The enumeration is used to configure feeder of KC Max printers.
 typedef enum evolis_feeder_e {
     EVOLIS_FE_UNKNOWN = 0, //!< Unknown feeder.
-    EVOLIS_FE_A = 1, //!< Feeder A, KC Max printers only.
-    EVOLIS_FE_B = 2, //!< Feeder B, KC Max printers only.
-    EVOLIS_FE_C = 3, //!< Feeder C, KC Max printers only.
-    EVOLIS_FE_D = 4, //!< Feeder D, KC Max printers only.
+    EVOLIS_FE_1 = 1, //!< Feeder 1.
+    EVOLIS_FE_2 = 2, //!< Feeder 2.
+    EVOLIS_FE_3 = 3, //!< Feeder 3.
+    EVOLIS_FE_4 = 4, //!< Feeder 4.
+    EVOLIS_FE_A = 5, //!< Feeder A, KC Max printers only.
+    EVOLIS_FE_B = 6, //!< Feeder B, KC Max printers only.
+    EVOLIS_FE_C = 7, //!< Feeder C, KC Max printers only.
+    EVOLIS_FE_D = 8, //!< Feeder D, KC Max printers only.
 } evolis_feeder_t;
 
 /// Get selected feeder for printer (KC Max (aka K24) only).
